@@ -1,0 +1,50 @@
+{
+	"Stages" :
+	[
+		{
+			"id" : 0,
+			"missionNumber" : 1,
+			"brainPlace": null,
+			"exitTime": 10,
+			"subTitleMission" : "ANALISIS DE DATOS",
+			"descriptionMission" : "Para avanzar deberás encontrar el PORTAL, mientras esperas que aparezca no dejes que BORIS te atrape.\nTendrás problemas para ver, deberás buscar un Bonus en el lóbulo Occipital.",
+			"map" : [15,15,15,15,15,15,15,15,15,6,6,15,15,15,15,1,1,1,15,1,1,1,15,15,15,15,5,15,15,15,15,15,15,15,15,15,15,8,7,15,15,15,15,5,6,15,5,15,1,1,15,11,10,15,9,15,15,15,15,15,15,15,15,15,15,2,2,15,1,15,15,9,15,8,7,15,1,1,15,15,15,15,15,15,15,12,15,11,10,15,15,15,15,6,6,6,6,15,15,12,15,5,5,15,1,1,15,15,15,15,15,15,15,12,15,15,15,15,15,15,15,8,7,15,9,15,15,5,15,6,6,6,6,15,1,1,3,15,3,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15]
+		},
+		{
+			"id" : 1,
+			"missionNumber" : 2,
+			"brainPlace": null,
+			"exitTime": 10,
+			"subTitleMission" : "ANALISIS DE DATOS",
+			"descriptionMission" : "Sigue buscando el PORTAL. Cada vez te costará más arrancar de BORIS, debes ir a la corteza pre-motora a buscar el bonus para recuperarte.",
+			"map" : [15,15,15,15,15,15,15,15,15,6,6,15,15,15,15,1,1,1,15,1,1,1,15,15,15,15,5,15,15,15,15,15,15,15,15,15,15,8,7,15,15,15,15,5,6,15,5,15,1,1,15,11,10,15,9,15,15,15,15,15,15,15,15,15,15,2,2,15,1,15,15,9,15,8,7,15,1,1,15,15,15,15,15,15,15,12,15,11,10,15,15,15,15,6,6,6,6,15,15,12,15,5,5,15,1,1,15,15,15,15,15,15,15,12,15,15,15,15,15,15,15,8,7,15,9,15,15,5,15,6,6,6,6,15,1,1,3,15,3,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15]
+		},
+		{
+			"id" : 2,
+			"missionNumber" : 3,
+			"brainPlace": null,
+			"exitTime": 10,
+			"subTitleMission" : "ANALISIS DE DATOS",
+			"descriptionMission" : "La coordinación y la visión serán esenciales para encontrar el PORTAL. Debes ir al cerebelo y al lóbulo occipital. Podrás conectarte a distintas zonas si encuentras el bonus amarillo.",
+			"map" : [15,15,15,15,15,15,15,15,15,6,6,15,15,15,15,1,1,1,15,1,1,1,15,15,15,15,5,15,15,15,15,15,15,15,15,15,15,8,7,15,15,15,15,5,6,15,5,15,1,1,15,11,10,15,9,15,15,15,15,15,15,15,15,15,15,2,2,15,1,15,15,9,15,8,7,15,1,1,15,15,15,15,15,15,15,12,15,11,10,15,15,15,15,6,6,6,6,15,15,12,15,5,5,15,1,1,15,15,15,15,15,15,15,12,15,15,15,15,15,15,15,8,7,15,9,15,15,5,15,6,6,6,6,15,1,1,3,15,3,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15]
+		},
+		{
+			"id" : 3,
+			"missionNumber" : 4,
+			"brainPlace": null,
+			"exitTime": 10,
+			"subTitleMission" : "ANALISIS DE DATOS",
+			"descriptionMission" : "Quedan menos PORTALES para cruzar para salir. Necesitarás moverte rápido y ver bien para lograrlo. Sigue buscando los bonus que necesites.",
+			"map" : [15,15,15,15,15,15,15,15,15,6,6,15,15,15,15,1,1,1,15,1,1,1,15,15,15,15,5,15,15,15,15,15,15,15,15,15,15,8,7,15,15,15,15,5,6,15,5,15,1,1,15,11,10,15,9,15,15,15,15,15,15,15,15,15,15,2,2,15,1,15,15,9,15,8,7,15,1,1,15,15,15,15,15,15,15,12,15,11,10,15,15,15,15,6,6,6,6,15,15,12,15,5,5,15,1,1,15,15,15,15,15,15,15,12,15,15,15,15,15,15,15,8,7,15,9,15,15,5,15,6,6,6,6,15,1,1,3,15,3,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15]
+		},
+		{
+			"id" : 4,
+			"missionNumber" : 5,
+			"brainPlace": null,
+			"exitTime": 10,
+			"subTitleMission" : "ANALISIS DE DATOS",
+			"descriptionMission" : "Sólo queda un PORTAL para salir del cerebro. Con poca movilidad, mala coordinación y a oscuras todo se hace más difícil. Usa tus habilidades intelectuales y busca el PORTAL.",
+			"map" : [15,15,15,15,15,15,15,15,15,6,6,15,15,15,15,1,1,1,15,1,1,1,15,15,15,15,5,15,15,15,15,15,15,15,15,15,15,8,7,15,15,15,15,5,6,15,5,15,1,1,15,11,10,15,9,15,15,15,15,15,15,15,15,15,15,2,2,15,1,15,15,9,15,8,7,15,1,1,15,15,15,15,15,15,15,12,15,11,10,15,15,15,15,6,6,6,6,15,15,12,15,5,5,15,1,1,15,15,15,15,15,15,15,12,15,15,15,15,15,15,15,8,7,15,9,15,15,5,15,6,6,6,6,15,1,1,3,15,3,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15]
+		}
+	]
+}

@@ -1,14 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loligo", "Assembly-CSharp.csproj", "{B019995D-2761-31C1-68C6-4AC6C5BDF31C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loligo", "Assembly-CSharp-Editor.csproj", "{CC2E71FD-4689-FF67-F2AA-4616B127D742}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-
+		{B019995D-2761-31C1-68C6-4AC6C5BDF31C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B019995D-2761-31C1-68C6-4AC6C5BDF31C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B019995D-2761-31C1-68C6-4AC6C5BDF31C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B019995D-2761-31C1-68C6-4AC6C5BDF31C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC2E71FD-4689-FF67-F2AA-4616B127D742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC2E71FD-4689-FF67-F2AA-4616B127D742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC2E71FD-4689-FF67-F2AA-4616B127D742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC2E71FD-4689-FF67-F2AA-4616B127D742}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
