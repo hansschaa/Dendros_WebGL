@@ -257,7 +257,7 @@ public class ViewController : MonoBehaviour
 			updateBonusList();
 			this.gameObject.GetComponent<BonusController>().initializeCorroutines();
 			this._playerInstance = Instantiate(_player, getNewPosition(false) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
-			this._enemyInstance = Instantiate(_enemy, getNewPosition(true) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
+			// this._enemyInstance = Instantiate(_enemy, getNewPosition(true) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
 
 		}
 

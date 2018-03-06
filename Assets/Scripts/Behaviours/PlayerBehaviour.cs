@@ -39,7 +39,7 @@ public class PlayerBehaviour : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void Update () 
 	{
 
 		if(currentMove == Moves.NOTHING)
@@ -49,132 +49,126 @@ public class PlayerBehaviour : MonoBehaviour
 		}
 
 		#region Controls 
-		if(Input.GetKeyDown(KeyCode.S) && !GlobalVariables._changeDirection)
+		if(Input.GetKeyDown(KeyCode.S) && !GlobalVariables._changeDirection || Input.GetKeyDown(KeyCode.W)  && GlobalVariables._changeDirection)
 		{
 			if(canMove(1,0,Moves.DOWN))
-				return;
-			
-			resetValues();
+			{
+				resetValues();
 
-			generatePlayerPath(Moves.DOWN);
+				generatePlayerPath(Moves.DOWN);
 
-			updateValues(1,0,Moves.DOWN);
-
-
-			this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
-			this.gameObject.GetComponent<Animator>().SetFloat("movY",-1);
+				updateValues(1,0,Moves.DOWN);
+				this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
+				this.gameObject.GetComponent<Animator>().SetFloat("movY",-1);
+			}
 		}
 
-		else if(Input.GetKeyDown(KeyCode.W)  && !GlobalVariables._changeDirection)
+		else if(Input.GetKeyDown(KeyCode.W)  && !GlobalVariables._changeDirection || Input.GetKeyDown(KeyCode.S) && GlobalVariables._changeDirection)
 		{
 			if(canMove(-1,0,Moves.UP))
-				return;
-			
-			resetValues();
+			{
+				resetValues();
 
-			generatePlayerPath(Moves.UP);
+				generatePlayerPath(Moves.UP);
 
-			updateValues(-1,0,Moves.UP);
+				updateValues(-1,0,Moves.UP);
 
-			this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
-			this.gameObject.GetComponent<Animator>().SetFloat("movY",1);
+				this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
+				this.gameObject.GetComponent<Animator>().SetFloat("movY",1);
+			}	
 		}
 
-		else if(Input.GetKeyDown(KeyCode.A)  && !GlobalVariables._changeDirection)
+		else if(Input.GetKeyDown(KeyCode.A)  && !GlobalVariables._changeDirection || Input.GetKeyDown(KeyCode.D) && GlobalVariables._changeDirection)
 		{
 			if(canMove(0,-1,Moves.LEFT))
-				return;
-			
-			resetValues();
+			{
+				resetValues();
 
-			generatePlayerPath(Moves.LEFT);
+				generatePlayerPath(Moves.LEFT);
 
-			updateValues(0,-1,Moves.LEFT);
+				updateValues(0,-1,Moves.LEFT);
 
-			this.gameObject.GetComponent<Animator>().SetFloat("movX",-1);
-			this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
+				this.gameObject.GetComponent<Animator>().SetFloat("movX",-1);
+				this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
+			}	
 		}
 
-		else if(Input.GetKeyDown(KeyCode.D)  && !GlobalVariables._changeDirection)
+		else if(Input.GetKeyDown(KeyCode.D)  && !GlobalVariables._changeDirection || Input.GetKeyDown(KeyCode.A)  && GlobalVariables._changeDirection)
 		{
 			if(canMove(0,1,Moves.RIGHT))
-				return;
-			
-			resetValues();
+			{
+				resetValues();
 
-			generatePlayerPath(Moves.RIGHT);
+				generatePlayerPath(Moves.RIGHT);
 
-			updateValues(0,1,Moves.RIGHT);
+				updateValues(0,1,Moves.RIGHT);
 
-			this.gameObject.GetComponent<Animator>().SetFloat("movX",1);
-			this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
+				this.gameObject.GetComponent<Animator>().SetFloat("movX",1);
+				this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
+			}
 		}
 		#endregion
 
-		if(Input.GetKeyDown(KeyCode.S) && GlobalVariables._changeDirection)
-		{
-			if(canMove(-1,0,Moves.UP))
-				return;
+		// if(Input.GetKeyDown(KeyCode.S) && GlobalVariables._changeDirection)
+		// {
+		// 	if(canMove(-1,0,Moves.UP))
+		// 		return;
 			
-			resetValues();
+		// 	resetValues();
 
-			generatePlayerPath(Moves.UP);
+		// 	generatePlayerPath(Moves.UP);
 
-			updateValues(-1,0,Moves.UP);
+		// 	updateValues(-1,0,Moves.UP);
 
-			this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
-			this.gameObject.GetComponent<Animator>().SetFloat("movY",1);
+		// 	this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
+		// 	this.gameObject.GetComponent<Animator>().SetFloat("movY",1);
+		// }
 
-
-
+		// else if(Input.GetKeyDown(KeyCode.W)  && GlobalVariables._changeDirection)
+		// {
+		// 	if(canMove(1,0,Moves.DOWN))
+		// 		return;
 			
-		}
+		// 	resetValues();
 
-		else if(Input.GetKeyDown(KeyCode.W)  && GlobalVariables._changeDirection)
-		{
-			if(canMove(1,0,Moves.DOWN))
-				return;
+		// 	generatePlayerPath(Moves.DOWN);
+
+		// 	updateValues(1,0,Moves.DOWN);
+
+
+		// 	this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
+		// 	this.gameObject.GetComponent<Animator>().SetFloat("movY",-1);
+		// }
+
+		// else if(Input.GetKeyDown(KeyCode.A)  && GlobalVariables._changeDirection)
+		// {
+		// 	if(canMove(0,1,Moves.RIGHT))
+		// 		return;
 			
-			resetValues();
+		// 	resetValues();
 
-			generatePlayerPath(Moves.DOWN);
+		// 	generatePlayerPath(Moves.RIGHT);
 
-			updateValues(1,0,Moves.DOWN);
+		// 	updateValues(0,1,Moves.RIGHT);
 
+		// 	this.gameObject.GetComponent<Animator>().SetFloat("movX",1);
+		// 	this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
+		// }
 
-			this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
-			this.gameObject.GetComponent<Animator>().SetFloat("movY",-1);
-		}
-
-		else if(Input.GetKeyDown(KeyCode.A)  && GlobalVariables._changeDirection)
-		{
-			if(canMove(0,1,Moves.RIGHT))
-				return;
+		// else if(Input.GetKeyDown(KeyCode.D)  && GlobalVariables._changeDirection)
+		// {
+		// 	if(canMove(0,-1,Moves.LEFT))
+		// 		return;
 			
-			resetValues();
+		// 	resetValues();
 
-			generatePlayerPath(Moves.RIGHT);
+		// 	generatePlayerPath(Moves.LEFT);
 
-			updateValues(0,1,Moves.RIGHT);
+		// 	updateValues(0,-1,Moves.LEFT);
 
-			this.gameObject.GetComponent<Animator>().SetFloat("movX",1);
-			this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
-		}
-
-		else if(Input.GetKeyDown(KeyCode.D)  && GlobalVariables._changeDirection)
-		{
-			if(canMove(0,-1,Moves.LEFT))
-				return;
-			
-			resetValues();
-
-			generatePlayerPath(Moves.LEFT);
-
-			updateValues(0,-1,Moves.LEFT);
-
-			this.gameObject.GetComponent<Animator>().SetFloat("movX",-1);
-			this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
-		}
+		// 	this.gameObject.GetComponent<Animator>().SetFloat("movX",-1);
+		// 	this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
+		// }
 	
 
 
@@ -185,19 +179,19 @@ public class PlayerBehaviour : MonoBehaviour
 			moveGameObject(1,0);
 		}
 
-		else if(currentMove == Moves.UP)
+		if(currentMove == Moves.UP)
 		{
 			time = Time.deltaTime * speed;
 			moveGameObject(-1,0);
 		}
 
-		else if(currentMove == Moves.LEFT)
+		if(currentMove == Moves.LEFT)
 		{
 			time = Time.deltaTime * speed;
 			moveGameObject(0,-1);
 		}
 
-		else if(currentMove == Moves.RIGHT)
+		if(currentMove == Moves.RIGHT)
 		{
 			time = Time.deltaTime * speed;
 			moveGameObject(0, 1);
@@ -248,17 +242,20 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void updateValues(int i, int j, Moves mov)
     {
-		currentPositionHolder =new Vector2( ((playerPath[0].y*0.16f)),(playerPath[0].x*-0.16f)) - MapGeneratorController._offsetMap;
+		
+		currentPositionHolder = new Vector2( ((playerPath[0].y*0.16f)),(playerPath[0].x*-0.16f)) - MapGeneratorController._offsetMap;
 		GlobalVariables._xPosPlayer+=j;
 		GlobalVariables._yPosPlayer+=i;
 		currentMove = mov;
+		
+		
     }
 
     private void generatePlayerPath(Moves mov)
     {
 		if(mov == Moves.DOWN)
 		{
-			for(int i = GlobalVariables._yPosPlayer+1 ; i <ViewController._currentGameModel._map.GetLength(0) && ViewController._currentGameModel._map[i,GlobalVariables._xPosPlayer]>14; i++)
+			for(int i = (GlobalVariables._yPosPlayer+1) ; i <ViewController._currentGameModel._map.GetLength(0) && ViewController._currentGameModel._map[i,GlobalVariables._xPosPlayer]==15; i++)
 			{
 				playerPath.Add(new Vector2(i, GlobalVariables._xPosPlayer));
 			}
@@ -266,7 +263,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 		else if(mov == Moves.UP)
 		{
-			for(int i = GlobalVariables._yPosPlayer-1 ; i >=0 && ViewController._currentGameModel._map[i,GlobalVariables._xPosPlayer]>14; i--)
+			for(int i =(GlobalVariables._yPosPlayer-1) ; i >=0 && ViewController._currentGameModel._map[i,GlobalVariables._xPosPlayer]==15; i--)
 			{
 				playerPath.Add(new Vector2(i, GlobalVariables._xPosPlayer));
 			}
@@ -274,7 +271,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 		else if(mov == Moves.LEFT)
 		{
-			for(int i = GlobalVariables._xPosPlayer-1 ; i >=0 && ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i]>14; i--)
+			for(int i = (GlobalVariables._xPosPlayer-1) ; i >=0 && ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i]==15; i--)
 			{
 				playerPath.Add(new Vector2(GlobalVariables._yPosPlayer, i));
 			}
@@ -282,7 +279,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 		else if(mov == Moves.RIGHT)
 		{
-			for(int i = GlobalVariables._xPosPlayer+1 ; i < ViewController._currentGameModel._map.GetLength(1) && ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i]>14; i++)
+			for(int i = (GlobalVariables._xPosPlayer+1) ; i < ViewController._currentGameModel._map.GetLength(1) && ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i]==15; i++)
 			{
 				playerPath.Add(new Vector2(GlobalVariables._yPosPlayer, i));
 			}
@@ -297,8 +294,16 @@ public class PlayerBehaviour : MonoBehaviour
 
     private bool canMove(int x, int y, Moves mov)
     {
+		// print("GlobalVariables._xPosPlayer+y: " + (GlobalVariables._xPosPlayer+y));
+		// print("GlobalVariables._yPosPlayer+x: " + (GlobalVariables._yPosPlayer+x));
+
+
+		if((GlobalVariables._yPosPlayer+x == GlobalVariables._iMaxMatrix || GlobalVariables._yPosPlayer+x < 0) || 
+		(GlobalVariables._xPosPlayer+y == GlobalVariables._jMaxMatrix || GlobalVariables._xPosPlayer+y < 0))
+			return false;
+
 		//14 es el numero max que puede tomar , porque el 15 es suelo , y hasta el 14 son tiles que representan obstaculos
-		return ViewController._currentGameModel._map[GlobalVariables._yPosPlayer+x,GlobalVariables._xPosPlayer+y]<=14 || currentMove == mov;
+		return ViewController._currentGameModel._map[GlobalVariables._yPosPlayer+x,GlobalVariables._xPosPlayer+y]==15 && currentMove != mov;
     }
 
 	/// <summary>
