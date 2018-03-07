@@ -20,7 +20,7 @@ public class ViewController : MonoBehaviour
 
 	[Header("MainScene")]
 	public GameObject _mainSceneCanvas;
-
+	public GameObject _gameObjectsMainScene;
 
 
 	[Header("GarageScene")]
@@ -104,6 +104,8 @@ public class ViewController : MonoBehaviour
 		{
 			ViewController._gameState._state = GameState.States.GARAGE;
 			this._mainSceneCanvas.SetActive(false);
+			this._gameObjectsMainScene.SetActive(false);
+			this.GetComponent<AnimationController>().stopAnimations(GameState.States.MAINSCENE);
 			if(!GlobalVariables._gameComplete && !GlobalVariables._iconStagesAdded)
 			{
 				addIconStagesGroup();

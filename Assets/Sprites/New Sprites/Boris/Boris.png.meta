@@ -1,0 +1,817 @@
+fileFormatVersion: 2
+guid: 378c43a74e9bc8d43a0784b1b340a88a
+timeCreated: 1520446752
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: BorisRunV2_Side0000
+    21300002: BorisRunV2_Side0001
+    21300004: BorisRunV2_Side0002
+    21300006: BorisRunV2_Side0003
+    21300008: BorisRunV2_Side0004
+    21300010: BorisRunV2_Side0005
+    21300012: BorisRunV2_Side0006
+    21300014: BorisRunV2_Side0007
+    21300016: BorisRunV2_Side0008
+    21300018: BorisRunV2_Side0009
+    21300020: BorisRunV2_Side0010
+    21300022: BorisRunV2_Side0011
+    21300024: BorisRunV2_Side0012
+    21300026: BorisRunV2_Side0013
+    21300028: BorisRunV2_Side0014
+    21300030: BorisRunV2_Side0015
+    21300032: BorisRunV2_back0000
+    21300034: BorisRunV2_back0001
+    21300036: BorisRunV2_back0002
+    21300038: BorisRunV2_back0003
+    21300040: BorisRunV2_back0004
+    21300042: BorisRunV2_back0005
+    21300044: BorisRunV2_back0006
+    21300046: BorisRunV2_back0007
+    21300048: BorisRunV2_back0008
+    21300050: BorisRunV2_back0009
+    21300052: BorisRunV2_back0010
+    21300054: BorisRunV2_back0011
+    21300056: BorisRunV2_back0012
+    21300058: BorisRunV2_back0013
+    21300060: BorisRunV2_back0014
+    21300062: BorisRunV2_back0015
+    21300064: BorisRunV2_front0000
+    21300066: BorisRunV2_front0001
+    21300068: BorisRunV2_front0002
+    21300070: BorisRunV2_front0003
+    21300072: BorisRunV2_front0004
+    21300074: BorisRunV2_front0005
+    21300076: BorisRunV2_front0006
+    21300078: BorisRunV2_front0007
+    21300080: BorisRunV2_front0008
+    21300082: BorisRunV2_front0009
+    21300084: BorisRunV2_front0010
+    21300086: BorisRunV2_front0011
+    21300088: BorisRunV2_front0012
+    21300090: BorisRunV2_front0013
+    21300092: BorisRunV2_front0014
+    21300094: BorisRunV2_front0015
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BorisRunV2_Side0000
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 1363
+        width: 295
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0001
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 1363
+        width: 295
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0002
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 1363
+        width: 295
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0003
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 1363
+        width: 295
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0004
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1356
+        width: 366
+        height: 423
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0005
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1356
+        width: 366
+        height: 423
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0006
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1356
+        width: 366
+        height: 423
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0007
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1356
+        width: 366
+        height: 423
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0008
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 947
+        width: 295
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0009
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 947
+        width: 295
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0010
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 947
+        width: 295
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0011
+      rect:
+        serializedVersion: 2
+        x: 717
+        y: 947
+        width: 295
+        height: 416
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0012
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 933
+        width: 334
+        height: 423
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0013
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 933
+        width: 334
+        height: 423
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0014
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 933
+        width: 334
+        height: 423
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_Side0015
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 933
+        width: 334
+        height: 423
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0000
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 944
+        width: 351
+        height: 417
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0001
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 944
+        width: 351
+        height: 417
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0002
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 944
+        width: 351
+        height: 417
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0003
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 944
+        width: 351
+        height: 417
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0004
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 508
+        width: 321
+        height: 436
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0005
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 508
+        width: 321
+        height: 436
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0006
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 508
+        width: 321
+        height: 436
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0007
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 508
+        width: 321
+        height: 436
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0008
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 90
+        width: 325
+        height: 417
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0009
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 90
+        width: 325
+        height: 417
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0010
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 90
+        width: 325
+        height: 417
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0011
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 90
+        width: 325
+        height: 417
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0012
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 511
+        width: 326
+        height: 433
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0013
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 511
+        width: 326
+        height: 433
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0014
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 511
+        width: 326
+        height: 433
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_back0015
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 511
+        width: 326
+        height: 433
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0000
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 1361
+        width: 351
+        height: 418
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0001
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 1361
+        width: 351
+        height: 418
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0002
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 1361
+        width: 351
+        height: 418
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0003
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 1361
+        width: 351
+        height: 418
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0004
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 82
+        width: 321
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0005
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 82
+        width: 321
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0006
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 82
+        width: 321
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0007
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 82
+        width: 321
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0008
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 79
+        width: 319
+        height: 432
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0009
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 79
+        width: 319
+        height: 432
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0010
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 79
+        width: 319
+        height: 432
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0011
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 79
+        width: 319
+        height: 432
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0012
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 507
+        width: 326
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0013
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 507
+        width: 326
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0014
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 507
+        width: 326
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: BorisRunV2_front0015
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 507
+        width: 326
+        height: 426
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

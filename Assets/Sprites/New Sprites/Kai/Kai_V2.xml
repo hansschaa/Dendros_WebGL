@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Kai_V2.png">
+	<SubTexture name="Kai_Back0000" x="451" y="689" width="194" height="353" pivotX="104.9" pivotY="207.3" frameX="-5" frameY="0" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0001" x="451" y="689" width="194" height="353" frameX="-5" frameY="0" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0002" x="451" y="689" width="194" height="353" frameX="-5" frameY="0" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0003" x="451" y="689" width="194" height="353" frameX="-5" frameY="0" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0004" x="186" y="1039" width="182" height="346" frameX="-8" frameY="-7" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0005" x="186" y="1039" width="182" height="346" frameX="-8" frameY="-7" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0006" x="186" y="1039" width="182" height="346" frameX="-8" frameY="-7" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0007" x="0" y="697" width="186" height="352" frameX="0" frameY="-1" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0008" x="0" y="697" width="186" height="352" frameX="0" frameY="-1" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0009" x="0" y="697" width="186" height="352" frameX="0" frameY="-1" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0010" x="0" y="1049" width="178" height="353" frameX="-5" frameY="0" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0011" x="0" y="1049" width="178" height="353" frameX="-5" frameY="0" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0012" x="0" y="1049" width="178" height="353" frameX="-5" frameY="0" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0013" x="0" y="1049" width="178" height="353" frameX="-5" frameY="0" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0014" x="368" y="1042" width="182" height="346" frameX="-8" frameY="-7" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0015" x="368" y="1042" width="182" height="346" frameX="-8" frameY="-7" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0016" x="368" y="1042" width="182" height="346" frameX="-8" frameY="-7" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0017" x="759" y="349" width="202" height="352" frameX="-7" frameY="-1" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0018" x="759" y="349" width="202" height="352" frameX="-7" frameY="-1" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Back0019" x="759" y="349" width="202" height="352" frameX="-7" frameY="-1" frameWidth="209" frameHeight="353"/>
+	<SubTexture name="Kai_Front0000" x="645" y="701" width="183" height="351" pivotX="96.3" pivotY="205.1" frameX="0" frameY="0" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0001" x="645" y="701" width="183" height="351" frameX="0" frameY="0" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0002" x="645" y="701" width="183" height="351" frameX="0" frameY="0" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0003" x="645" y="701" width="183" height="351" frameX="0" frameY="0" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0004" x="550" y="1052" width="180" height="346" frameX="-4" frameY="-5" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0005" x="550" y="1052" width="180" height="346" frameX="-4" frameY="-5" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0006" x="550" y="1052" width="180" height="346" frameX="-4" frameY="-5" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0007" x="828" y="701" width="181" height="350" frameX="-4" frameY="-1" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0008" x="828" y="701" width="181" height="350" frameX="-4" frameY="-1" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0009" x="828" y="701" width="181" height="350" frameX="-4" frameY="-1" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0010" x="255" y="688" width="196" height="351" frameX="-3" frameY="0" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0011" x="255" y="688" width="196" height="351" frameX="-3" frameY="0" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0012" x="255" y="688" width="196" height="351" frameX="-3" frameY="0" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0013" x="255" y="688" width="196" height="351" frameX="-3" frameY="0" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0014" x="833" y="0" width="183" height="346" frameX="-4" frameY="-5" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0015" x="833" y="0" width="183" height="346" frameX="-4" frameY="-5" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0016" x="833" y="0" width="183" height="346" frameX="-4" frameY="-5" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0017" x="828" y="1051" width="178" height="350" frameX="-4" frameY="-1" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0018" x="828" y="1051" width="178" height="350" frameX="-4" frameY="-1" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Front0019" x="828" y="1051" width="178" height="350" frameX="-4" frameY="-1" frameWidth="199" frameHeight="351"/>
+	<SubTexture name="Kai_Hurt0000" x="0" y="1676" width="163" height="201" pivotX="78.9" pivotY="103.35"/>
+	<SubTexture name="Kai_Hurt0001" x="0" y="1676" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0002" x="697" y="1677" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0003" x="697" y="1677" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0004" x="0" y="1676" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0005" x="0" y="1676" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0006" x="697" y="1677" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0007" x="697" y="1677" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0008" x="0" y="1676" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0009" x="0" y="1676" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0010" x="697" y="1677" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0011" x="697" y="1677" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0012" x="0" y="1676" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0013" x="0" y="1676" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0014" x="697" y="1677" width="163" height="201"/>
+	<SubTexture name="Kai_Hurt0015" x="697" y="1677" width="163" height="201"/>
+	<SubTexture name="Kai_Side0000" x="0" y="0" width="293" height="348" pivotX="140.8" pivotY="203.8" frameX="-2" frameY="-1" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0001" x="0" y="0" width="293" height="348" frameX="-2" frameY="-1" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0002" x="0" y="0" width="293" height="348" frameX="-2" frameY="-1" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0003" x="0" y="0" width="293" height="348" frameX="-2" frameY="-1" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0004" x="255" y="348" width="252" height="340" frameX="-3" frameY="-9" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0005" x="255" y="348" width="252" height="340" frameX="-3" frameY="-9" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0006" x="255" y="348" width="252" height="340" frameX="-3" frameY="-9" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0007" x="0" y="348" width="255" height="349" frameX="0" frameY="0" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0008" x="0" y="348" width="255" height="349" frameX="0" frameY="0" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0009" x="0" y="348" width="255" height="349" frameX="0" frameY="0" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0010" x="293" y="0" width="283" height="348" frameX="-2" frameY="-1" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0011" x="293" y="0" width="283" height="348" frameX="-2" frameY="-1" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0012" x="293" y="0" width="283" height="348" frameX="-2" frameY="-1" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0013" x="293" y="0" width="283" height="348" frameX="-2" frameY="-1" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0014" x="507" y="349" width="252" height="340" frameX="-3" frameY="-9" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0015" x="507" y="349" width="252" height="340" frameX="-3" frameY="-9" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0016" x="507" y="349" width="252" height="340" frameX="-3" frameY="-9" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0017" x="576" y="0" width="257" height="349" frameX="0" frameY="0" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0018" x="576" y="0" width="257" height="349" frameX="0" frameY="0" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Side0019" x="576" y="0" width="257" height="349" frameX="0" frameY="0" frameWidth="295" frameHeight="349"/>
+	<SubTexture name="Kai_Win0000" x="878" y="1401" width="131" height="193" pivotX="85.2" pivotY="164.35" frameX="-23" frameY="-90" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0001" x="878" y="1401" width="131" height="193" frameX="-23" frameY="-90" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0002" x="878" y="1594" width="130" height="185" frameX="-24" frameY="-98" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0003" x="878" y="1594" width="130" height="185" frameX="-24" frameY="-98" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0004" x="878" y="1594" width="130" height="185" frameX="-24" frameY="-98" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0005" x="878" y="1594" width="130" height="185" frameX="-24" frameY="-98" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0006" x="878" y="1594" width="130" height="185" frameX="-24" frameY="-98" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0007" x="528" y="1398" width="175" height="276" frameX="-9" frameY="0" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0008" x="703" y="1401" width="175" height="276" frameX="-9" frameY="0" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0009" x="178" y="1385" width="175" height="277" frameX="-9" frameY="0" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0010" x="353" y="1388" width="175" height="277" frameX="-9" frameY="0" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0011" x="174" y="1662" width="174" height="273" frameX="-8" frameY="-5" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0012" x="0" y="1402" width="174" height="274" frameX="-8" frameY="-5" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0013" x="348" y="1665" width="174" height="271" frameX="-5" frameY="-9" frameWidth="184" frameHeight="283"/>
+	<SubTexture name="Kai_Win0014" x="522" y="1674" width="175" height="260" frameX="0" frameY="-22" frameWidth="184" frameHeight="283"/>
+</TextureAtlas>

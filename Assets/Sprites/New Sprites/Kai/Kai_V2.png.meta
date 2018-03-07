@@ -1,0 +1,1442 @@
+fileFormatVersion: 2
+guid: 932e498b7251b8f4cae15aac7aafcf17
+timeCreated: 1520446770
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Kai_Back0000
+    21300002: Kai_Back0001
+    21300004: Kai_Back0002
+    21300006: Kai_Back0003
+    21300008: Kai_Back0004
+    21300010: Kai_Back0005
+    21300012: Kai_Back0006
+    21300014: Kai_Back0007
+    21300016: Kai_Back0008
+    21300018: Kai_Back0009
+    21300020: Kai_Back0010
+    21300022: Kai_Back0011
+    21300024: Kai_Back0012
+    21300026: Kai_Back0013
+    21300028: Kai_Back0014
+    21300030: Kai_Back0015
+    21300032: Kai_Back0016
+    21300034: Kai_Back0017
+    21300036: Kai_Back0018
+    21300038: Kai_Back0019
+    21300040: Kai_Front0000
+    21300042: Kai_Front0001
+    21300044: Kai_Front0002
+    21300046: Kai_Front0003
+    21300048: Kai_Front0004
+    21300050: Kai_Front0005
+    21300052: Kai_Front0006
+    21300054: Kai_Front0007
+    21300056: Kai_Front0008
+    21300058: Kai_Front0009
+    21300060: Kai_Front0010
+    21300062: Kai_Front0011
+    21300064: Kai_Front0012
+    21300066: Kai_Front0013
+    21300068: Kai_Front0014
+    21300070: Kai_Front0015
+    21300072: Kai_Front0016
+    21300074: Kai_Front0017
+    21300076: Kai_Front0018
+    21300078: Kai_Front0019
+    21300080: Kai_Hurt0000
+    21300082: Kai_Hurt0001
+    21300084: Kai_Hurt0002
+    21300086: Kai_Hurt0003
+    21300088: Kai_Hurt0004
+    21300090: Kai_Hurt0005
+    21300092: Kai_Hurt0006
+    21300094: Kai_Hurt0007
+    21300096: Kai_Hurt0008
+    21300098: Kai_Hurt0009
+    21300100: Kai_Hurt0010
+    21300102: Kai_Hurt0011
+    21300104: Kai_Hurt0012
+    21300106: Kai_Hurt0013
+    21300108: Kai_Hurt0014
+    21300110: Kai_Hurt0015
+    21300112: Kai_Side0000
+    21300114: Kai_Side0001
+    21300116: Kai_Side0002
+    21300118: Kai_Side0003
+    21300120: Kai_Side0004
+    21300122: Kai_Side0005
+    21300124: Kai_Side0006
+    21300126: Kai_Side0007
+    21300128: Kai_Side0008
+    21300130: Kai_Side0009
+    21300132: Kai_Side0010
+    21300134: Kai_Side0011
+    21300136: Kai_Side0012
+    21300138: Kai_Side0013
+    21300140: Kai_Side0014
+    21300142: Kai_Side0015
+    21300144: Kai_Side0016
+    21300146: Kai_Side0017
+    21300148: Kai_Side0018
+    21300150: Kai_Side0019
+    21300152: Kai_Win0000
+    21300154: Kai_Win0001
+    21300156: Kai_Win0002
+    21300158: Kai_Win0003
+    21300160: Kai_Win0004
+    21300162: Kai_Win0005
+    21300164: Kai_Win0006
+    21300166: Kai_Win0007
+    21300168: Kai_Win0008
+    21300170: Kai_Win0009
+    21300172: Kai_Win0010
+    21300174: Kai_Win0011
+    21300176: Kai_Win0012
+    21300178: Kai_Win0013
+    21300180: Kai_Win0014
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Kai_Back0000
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 1006
+        width: 194
+        height: 353
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0001
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 1006
+        width: 194
+        height: 353
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0002
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 1006
+        width: 194
+        height: 353
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0003
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 1006
+        width: 194
+        height: 353
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0004
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 663
+        width: 182
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0005
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 663
+        width: 182
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0006
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 663
+        width: 182
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0007
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 999
+        width: 186
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0008
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 999
+        width: 186
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0009
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 999
+        width: 186
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0010
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 646
+        width: 178
+        height: 353
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0011
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 646
+        width: 178
+        height: 353
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0012
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 646
+        width: 178
+        height: 353
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0013
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 646
+        width: 178
+        height: 353
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0014
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 660
+        width: 182
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0015
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 660
+        width: 182
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0016
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 660
+        width: 182
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0017
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 1347
+        width: 202
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0018
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 1347
+        width: 202
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Back0019
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 1347
+        width: 202
+        height: 352
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0000
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 996
+        width: 183
+        height: 351
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0001
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 996
+        width: 183
+        height: 351
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0002
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 996
+        width: 183
+        height: 351
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0003
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 996
+        width: 183
+        height: 351
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0004
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 650
+        width: 180
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0005
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 650
+        width: 180
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0006
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 650
+        width: 180
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0007
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 997
+        width: 181
+        height: 350
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0008
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 997
+        width: 181
+        height: 350
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0009
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 997
+        width: 181
+        height: 350
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0010
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 1009
+        width: 196
+        height: 351
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0011
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 1009
+        width: 196
+        height: 351
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0012
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 1009
+        width: 196
+        height: 351
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0013
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 1009
+        width: 196
+        height: 351
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0014
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 1702
+        width: 183
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0015
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 1702
+        width: 183
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0016
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 1702
+        width: 183
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0017
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 647
+        width: 178
+        height: 350
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0018
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 647
+        width: 178
+        height: 350
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Front0019
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 647
+        width: 178
+        height: 350
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0000
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0001
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0002
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 170
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0003
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 170
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0004
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0005
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0006
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 170
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0007
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 170
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0008
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0009
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0010
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 170
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0011
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 170
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0012
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0013
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 171
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0014
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 170
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Hurt0015
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 170
+        width: 163
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0000
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1700
+        width: 293
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0001
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1700
+        width: 293
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0002
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1700
+        width: 293
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0003
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1700
+        width: 293
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0004
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 1360
+        width: 252
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0005
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 1360
+        width: 252
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0006
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 1360
+        width: 252
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0007
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1351
+        width: 255
+        height: 349
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0008
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1351
+        width: 255
+        height: 349
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0009
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1351
+        width: 255
+        height: 349
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0010
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 1700
+        width: 283
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0011
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 1700
+        width: 283
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0012
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 1700
+        width: 283
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0013
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 1700
+        width: 283
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0014
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 1359
+        width: 252
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0015
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 1359
+        width: 252
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0016
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 1359
+        width: 252
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0017
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 1699
+        width: 257
+        height: 349
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0018
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 1699
+        width: 257
+        height: 349
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Side0019
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 1699
+        width: 257
+        height: 349
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0000
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 454
+        width: 131
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0001
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 454
+        width: 131
+        height: 193
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0002
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 269
+        width: 130
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0003
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 269
+        width: 130
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0004
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 269
+        width: 130
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0005
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 269
+        width: 130
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0006
+      rect:
+        serializedVersion: 2
+        x: 878
+        y: 269
+        width: 130
+        height: 185
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0007
+      rect:
+        serializedVersion: 2
+        x: 528
+        y: 374
+        width: 175
+        height: 276
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0008
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 371
+        width: 175
+        height: 276
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0009
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 386
+        width: 175
+        height: 277
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0010
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 383
+        width: 175
+        height: 277
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0011
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 113
+        width: 174
+        height: 273
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0012
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 372
+        width: 174
+        height: 274
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0013
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 112
+        width: 174
+        height: 271
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    - serializedVersion: 2
+      name: Kai_Win0014
+      rect:
+        serializedVersion: 2
+        x: 522
+        y: 114
+        width: 175
+        height: 260
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

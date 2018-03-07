@@ -9,6 +9,7 @@ public class JsonController : MonoBehaviour
 {
 	[Header("Views")]
 	public GameObject _mainSceneCanvas;
+	public GameObject _gameObjectsMainScene;
 	public GameObject _loadingSceneCanvas;
 	private string jsonString;
 	public static JsonData jsonDataStages;
@@ -31,6 +32,8 @@ public class JsonController : MonoBehaviour
 			loadGlobalVariablesFromJson();
 			yield return new WaitForSeconds(1f);
 			this._mainSceneCanvas.SetActive(true);
+			this._gameObjectsMainScene.SetActive(true);
+			this.GetComponent<AnimationController>().playAnimations(GameState.States.MAINSCENE);
 			this._loadingSceneCanvas.SetActive(false);
 		}
 

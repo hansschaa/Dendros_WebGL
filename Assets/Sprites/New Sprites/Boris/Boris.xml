@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Boris.png">
+	<SubTexture name="BorisRunV2_Side0000" x="717" y="0" width="295" height="416" pivotX="199.25" pivotY="270.6" frameX="-46" frameY="-7" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0001" x="717" y="0" width="295" height="416" frameX="-46" frameY="-7" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0002" x="717" y="0" width="295" height="416" frameX="-46" frameY="-7" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0003" x="717" y="0" width="295" height="416" frameX="-46" frameY="-7" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0004" x="0" y="0" width="366" height="423"/>
+	<SubTexture name="BorisRunV2_Side0005" x="0" y="0" width="366" height="423"/>
+	<SubTexture name="BorisRunV2_Side0006" x="0" y="0" width="366" height="423"/>
+	<SubTexture name="BorisRunV2_Side0007" x="0" y="0" width="366" height="423"/>
+	<SubTexture name="BorisRunV2_Side0008" x="717" y="416" width="295" height="416" frameX="-46" frameY="-7" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0009" x="717" y="416" width="295" height="416" frameX="-46" frameY="-7" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0010" x="717" y="416" width="295" height="416" frameX="-46" frameY="-7" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0011" x="717" y="416" width="295" height="416" frameX="-46" frameY="-7" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0012" x="0" y="423" width="334" height="423" frameX="-16" frameY="0" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0013" x="0" y="423" width="334" height="423" frameX="-16" frameY="0" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0014" x="0" y="423" width="334" height="423" frameX="-16" frameY="0" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_Side0015" x="0" y="423" width="334" height="423" frameX="-16" frameY="0" frameWidth="366" frameHeight="423"/>
+	<SubTexture name="BorisRunV2_back0000" x="366" y="418" width="351" height="417" pivotX="186.2" pivotY="270.65" frameX="0" frameY="-16" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0001" x="366" y="418" width="351" height="417" frameX="0" frameY="-16" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0002" x="366" y="418" width="351" height="417" frameX="0" frameY="-16" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0003" x="366" y="418" width="351" height="417" frameX="0" frameY="-16" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0004" x="660" y="835" width="321" height="436" frameX="-28" frameY="0" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0005" x="660" y="835" width="321" height="436" frameX="-28" frameY="0" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0006" x="660" y="835" width="321" height="436" frameX="-28" frameY="0" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0007" x="660" y="835" width="321" height="436" frameX="-28" frameY="0" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0008" x="0" y="1272" width="325" height="417" frameX="-26" frameY="-16" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0009" x="0" y="1272" width="325" height="417" frameX="-26" frameY="-16" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0010" x="0" y="1272" width="325" height="417" frameX="-26" frameY="-16" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0011" x="0" y="1272" width="325" height="417" frameX="-26" frameY="-16" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0012" x="334" y="835" width="326" height="433" frameX="-22" frameY="0" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0013" x="334" y="835" width="326" height="433" frameX="-22" frameY="0" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0014" x="334" y="835" width="326" height="433" frameX="-22" frameY="0" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_back0015" x="334" y="835" width="326" height="433" frameX="-22" frameY="0" frameWidth="351" frameHeight="436"/>
+	<SubTexture name="BorisRunV2_front0000" x="366" y="0" width="351" height="418" pivotX="186.2" pivotY="263.85" frameX="0" frameY="-9" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0001" x="366" y="0" width="351" height="418" frameX="0" frameY="-9" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0002" x="366" y="0" width="351" height="418" frameX="0" frameY="-9" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0003" x="366" y="0" width="351" height="418" frameX="0" frameY="-9" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0004" x="645" y="1271" width="321" height="426" frameX="-28" frameY="0" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0005" x="645" y="1271" width="321" height="426" frameX="-28" frameY="0" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0006" x="645" y="1271" width="321" height="426" frameX="-28" frameY="0" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0007" x="645" y="1271" width="321" height="426" frameX="-28" frameY="0" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0008" x="326" y="1268" width="319" height="432" frameX="-31" frameY="-9" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0009" x="326" y="1268" width="319" height="432" frameX="-31" frameY="-9" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0010" x="326" y="1268" width="319" height="432" frameX="-31" frameY="-9" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0011" x="326" y="1268" width="319" height="432" frameX="-31" frameY="-9" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0012" x="0" y="846" width="326" height="426" frameX="-22" frameY="0" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0013" x="0" y="846" width="326" height="426" frameX="-22" frameY="0" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0014" x="0" y="846" width="326" height="426" frameX="-22" frameY="0" frameWidth="351" frameHeight="441"/>
+	<SubTexture name="BorisRunV2_front0015" x="0" y="846" width="326" height="426" frameX="-22" frameY="0" frameWidth="351" frameHeight="441"/>
+</TextureAtlas>
