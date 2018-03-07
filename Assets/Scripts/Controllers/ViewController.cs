@@ -109,10 +109,8 @@ public class ViewController : MonoBehaviour
 				addIconStagesGroup();
 				GlobalVariables._iconStagesAdded= true;
 			}
-				
 
 			this.gameObject.GetComponent<CountGarageController>().resetCoroutine();
-
 		}
 
 		else if(ViewController._gameState._state == GameState.States.GARAGE)
@@ -125,7 +123,7 @@ public class ViewController : MonoBehaviour
 		else if(ViewController._gameState._state == GameState.States.GAMESCENE)
 		{
 			this.gameObject.GetComponent<CountGarageController>().resetCoroutine();
-			setColorIconStageGroup();
+			// setColorIconStageGroup();
 			this._gameSceneCanvas.SetActive(false);
 			this._gameObjectsGameScene.SetActive(false);
 			
@@ -143,6 +141,7 @@ public class ViewController : MonoBehaviour
 				
 				resetGameInstances();
 				ViewController._gameState._state = GameState.States.GARAGE;
+				updateIconStageGroup();
 			}
 
 			
@@ -180,15 +179,20 @@ public class ViewController : MonoBehaviour
 		GlobalVariables._currentLevel = 0;
 		if(GlobalVariables._gameComplete)
 		{
-			for(int i = 0 ; i < GlobalVariables._totallyStages ; i++)
-				this._iconStageGroup.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._stageCompleted;
+			for(int i = 0 ; i < 5 ; i++)
+			{
+				updateIcon(1,i+1,_iconStageGroup.GetChild(i).gameObject);
+				// this._iconStageGroup.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._stageCompleted;
+			}
+				
 
 		}
 
 		else
 		{
-			for(int i = 0 ; i < GlobalVariables._totallyStages ; i++)
-				this._iconStageGroup.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._stageNotComplete;
+			//Mejor borrarlas y crearlas nuevamente hasta la etapa 5
+			for(int i = 0 ; i < 5 ; i++)
+				updateIcon(3,i+1,_iconStageGroup.GetChild(i).gameObject);
 		}
 
 		
@@ -209,33 +213,18 @@ public class ViewController : MonoBehaviour
         Destroy(_enemyInstance);
 		Destroy(_playerInstance);
 		Destroy(_portalInstance);
-		// Transform map = this._gameObjectsGameScene.transform.GetChild(0);
 
 		//erase map
 		eraseChildGameObjects(this._gameObjectsGameScene.transform.GetChild(0));
 
-		//erase hearts
-		// eraseChildGameObjects(this.gameObject.GetComponent<MechanicController>()._heartLifesList.transform);
-
-		// eraseChildGameObjects(this._bonusList.transform);
 		eraseChildGameObjects(this._bonusGroup);
 		eraseChildGameObjects(this.GetComponent<BonusController>()._portalGroupGameObject);
-
-		// foreach(Transform go in map.transform)
-		// 	Destroy(go.gameObject);
-		
 
 		foreach(Transform go in this.gameObject.GetComponent<MechanicController>()._heartLifesList.transform)
 			go.gameObject.SetActive(true);
 
 		foreach(Transform go in this._bonusList.transform)
 			go.gameObject.SetActive(false);
-
-		// foreach(Transform tr in _bonusGroup)
-		// 		Destroy(tr.gameObject);
-		
-		// foreach(Transform tr in _bonusGroup)
-		// 		Destroy(tr.gameObject);
     }
 
 	public void eraseChildGameObjects(Transform parent)
@@ -264,8 +253,9 @@ public class ViewController : MonoBehaviour
 		else if(ViewController._gameState._state == GameState.States.GARAGE)
 		{
 			updateGameModel();
+			updateIconStageGroup();
 			changeGarageTexts();
-			setColorIconStageGroup();
+			// setColorIconStageGroup();
 			this._garageSceneCanvas.SetActive(true);
 			
 		}
@@ -350,23 +340,104 @@ public class ViewController : MonoBehaviour
     private void addIconStagesGroup()
     {
 		GameObject iconStage;
-        for(int i = 0 ; i < GlobalVariables._totallyStages ; i++)
+        for(int i = 0 ; i < GlobalVariables._totallyStages && i < 5 ; i++)
 		{
 			iconStage = Instantiate(_iconStagePrefab, _iconStageGroup);
 			iconStage.transform.GetChild(1).gameObject.GetComponent<Text>().text = (i + 1).ToString();
 		}
     }
 
-	private void setColorIconStageGroup()
+	private void updateIconStageGroup()
 	{
-		//For stages Completed
-		for (int i = 0 ; i < GlobalVariables._currentLevel; i++)
+		if(GlobalVariables._totallyStages < 6)
 		{
-			this._iconStageGroup.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._stageCompleted;
+			for (int i = 0 ; i < GlobalVariables._currentLevel; i++)
+			{
+				
+				this._iconStageGroup.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._stageCompleted;
+			}
+
+			this._iconStageGroup.GetChild(GlobalVariables._currentLevel).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._currentStageColor;
 		}
 
-		this._iconStageGroup.GetChild(GlobalVariables._currentLevel).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._currentStageColor;
+		else if(GlobalVariables._totallyStages >= 6)
+		{
+			if(GlobalVariables._currentLevel<3)
+			{
+				for (int i = 0 ; i < GlobalVariables._currentLevel; i++)
+				{
+					updateIcon(1,i+1,_iconStageGroup.GetChild(i).gameObject);
+				}
+
+				updateIcon(2,GlobalVariables._currentLevel+1,_iconStageGroup.GetChild(GlobalVariables._currentLevel).gameObject);
+
+			}
+
+			else if(GlobalVariables._currentLevel>=3 && GlobalVariables._currentLevel < GlobalVariables._totallyStages-2)
+			{
+				updateIcon(1,GlobalVariables._currentLevel-1,_iconStageGroup.GetChild(0).gameObject);
+				updateIcon(1,GlobalVariables._currentLevel,_iconStageGroup.GetChild(1).gameObject);
+				updateIcon(2,GlobalVariables._currentLevel+1,_iconStageGroup.GetChild(2).gameObject);
+				if(GlobalVariables._gameComplete)
+				{
+					updateIcon(1,GlobalVariables._currentLevel+2,_iconStageGroup.GetChild(3).gameObject);
+					updateIcon(1,GlobalVariables._currentLevel+3,_iconStageGroup.GetChild(4).gameObject);
+
+				}
+
+				else
+				{
+					updateIcon(3,GlobalVariables._currentLevel+2,_iconStageGroup.GetChild(3).gameObject);
+					updateIcon(3,GlobalVariables._currentLevel+3,_iconStageGroup.GetChild(4).gameObject);
+				}
+				
+			}
+
+			else if(GlobalVariables._currentLevel == GlobalVariables._totallyStages-2)
+			{
+				updateIcon(1,GlobalVariables._currentLevel,_iconStageGroup.GetChild(2).gameObject);
+				updateIcon(2,GlobalVariables._currentLevel+1,_iconStageGroup.GetChild(3).gameObject);
+			}
+
+			else if(GlobalVariables._currentLevel == GlobalVariables._totallyStages-1)
+			{
+				updateIcon(1,GlobalVariables._currentLevel,_iconStageGroup.GetChild(3).gameObject);
+				updateIcon(2,GlobalVariables._currentLevel+1,_iconStageGroup.GetChild(4).gameObject);
+			}
+
+		}
+
 	}
+
+	public void updateIcon(int iconType,int stageNumber,GameObject go)
+	{
+		switch(iconType)
+		{
+			case 1:
+				go.transform.GetChild(0).GetComponent<Image>().color = this._stageCompleted;
+				go.transform.GetChild(1).GetComponent<Text>().text = stageNumber.ToString();
+				break;
+			case 2:
+				go.transform.GetChild(0).GetComponent<Image>().color = this._currentStageColor;
+				go.transform.GetChild(1).GetComponent<Text>().text = stageNumber.ToString();
+				break;
+			case 3:
+				go.transform.GetChild(0).GetComponent<Image>().color = this._stageNotComplete;
+				go.transform.GetChild(1).GetComponent<Text>().text = stageNumber.ToString();
+				break;
+		}
+	}
+
+	// private void setColorIconStageGroup()
+	// {
+	// 	//For stages Completed
+	// 	for (int i = 0 ; i < GlobalVariables._currentLevel; i++)
+	// 	{
+	// 		this._iconStageGroup.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._stageCompleted;
+	// 	}
+
+	// 	this._iconStageGroup.GetChild(GlobalVariables._currentLevel).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._currentStageColor;
+	// }
 
     private void changeGarageTexts()
     {

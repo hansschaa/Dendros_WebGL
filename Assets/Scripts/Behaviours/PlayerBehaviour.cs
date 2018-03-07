@@ -15,6 +15,9 @@ public class PlayerBehaviour : MonoBehaviour
 	public int currentNode;
 
 	private GameObject _gameController;
+
+	public float _pixelsBeforeMove;
+	private Vector2 _nextNodeCheckMove;
 	
 
 	public enum Moves
@@ -36,6 +39,7 @@ public class PlayerBehaviour : MonoBehaviour
 		playerPath = new List<Vector2>();
 		currentMove = Moves.NOTHING;
 		speed = GlobalVariables._playerVelocity;
+		this._nextNodeCheckMove = Vector2.zero;
 	}
 	
 	// Update is called once per frame
@@ -108,70 +112,6 @@ public class PlayerBehaviour : MonoBehaviour
 			}
 		}
 		#endregion
-
-		// if(Input.GetKeyDown(KeyCode.S) && GlobalVariables._changeDirection)
-		// {
-		// 	if(canMove(-1,0,Moves.UP))
-		// 		return;
-			
-		// 	resetValues();
-
-		// 	generatePlayerPath(Moves.UP);
-
-		// 	updateValues(-1,0,Moves.UP);
-
-		// 	this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
-		// 	this.gameObject.GetComponent<Animator>().SetFloat("movY",1);
-		// }
-
-		// else if(Input.GetKeyDown(KeyCode.W)  && GlobalVariables._changeDirection)
-		// {
-		// 	if(canMove(1,0,Moves.DOWN))
-		// 		return;
-			
-		// 	resetValues();
-
-		// 	generatePlayerPath(Moves.DOWN);
-
-		// 	updateValues(1,0,Moves.DOWN);
-
-
-		// 	this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
-		// 	this.gameObject.GetComponent<Animator>().SetFloat("movY",-1);
-		// }
-
-		// else if(Input.GetKeyDown(KeyCode.A)  && GlobalVariables._changeDirection)
-		// {
-		// 	if(canMove(0,1,Moves.RIGHT))
-		// 		return;
-			
-		// 	resetValues();
-
-		// 	generatePlayerPath(Moves.RIGHT);
-
-		// 	updateValues(0,1,Moves.RIGHT);
-
-		// 	this.gameObject.GetComponent<Animator>().SetFloat("movX",1);
-		// 	this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
-		// }
-
-		// else if(Input.GetKeyDown(KeyCode.D)  && GlobalVariables._changeDirection)
-		// {
-		// 	if(canMove(0,-1,Moves.LEFT))
-		// 		return;
-			
-		// 	resetValues();
-
-		// 	generatePlayerPath(Moves.LEFT);
-
-		// 	updateValues(0,-1,Moves.LEFT);
-
-		// 	this.gameObject.GetComponent<Animator>().SetFloat("movX",-1);
-		// 	this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
-		// }
-	
-
-
 		#region Move
 		if(currentMove == Moves.DOWN)
 		{
@@ -205,6 +145,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if((Vector2)this.transform.position != currentPositionHolder)
 		{
+			
 			this.transform.position = Vector2.MoveTowards(this.transform.position, currentPositionHolder, time);
 		}
 
@@ -223,6 +164,8 @@ public class PlayerBehaviour : MonoBehaviour
 				time = 0;
 				if(playerPath.Count>0)
 				{
+					// print("Posicion X: " + GlobalVariables._xPosPlayer);
+					// print("Posicion Y: " + GlobalVariables._yPosPlayer);
 					GlobalVariables._xPosPlayer+=j;
 					GlobalVariables._yPosPlayer+=i;
 					currentPositionHolder = new Vector2( ((playerPath[currentNode].y*0.16f)),(playerPath[currentNode].x*-0.16f)) - MapGeneratorController._offsetMap;
@@ -303,15 +246,97 @@ public class PlayerBehaviour : MonoBehaviour
 			return false;
 
 		//14 es el numero max que puede tomar , porque el 15 es suelo , y hasta el 14 son tiles que representan obstaculos
-		return ViewController._currentGameModel._map[GlobalVariables._yPosPlayer+x,GlobalVariables._xPosPlayer+y]==15 && currentMove != mov;
+		if(ViewController._currentGameModel._map[GlobalVariables._yPosPlayer+x,GlobalVariables._xPosPlayer+y]==15 && currentMove != mov)
+		{
+			print("Entra");
+			this._nextNodeCheckMove.x = (GlobalVariables._xPosPlayer+y) * 0.16f - MapGeneratorController._offsetMap.x;
+			this._nextNodeCheckMove.y= (GlobalVariables._yPosPlayer+x)*-0.16f - MapGeneratorController._offsetMap.y;
+			return checkRange(mov);
+		}
+
+		print("Retorno false");
+		return false;
     }
 
-	/// <summary>
-	/// Sent when another object enters a trigger collider attached to this
-	/// object (2D physics only).
-	/// </summary>
-	/// <param name="other">The other Collider2D involved in this collision.</param>
-	void OnTriggerEnter2D(Collider2D other)
+    private bool checkRange(Moves mov)
+    {
+		if(currentMove != Moves.NOTHING)
+		{
+			print("Entro al check range");
+			print("x: " + this._nextNodeCheckMove.x);
+			print("y: " + this._nextNodeCheckMove.y);
+			print("x Player: " + this.gameObject.transform.position.x);
+			print("y Player: " + this.gameObject.transform.position.y);
+			print("Resultado X: " + (this.transform.position.x-_nextNodeCheckMove.x));
+			print("Resultado Y: " + (this.transform.position.y-_nextNodeCheckMove.y));
+
+		}
+		
+		//Comparando X Cuando hay un cambio de direccion
+		if( currentMove == Moves.LEFT && (mov == Moves.UP || mov == Moves.DOWN) || currentMove == Moves.RIGHT && (mov == Moves.UP || mov == Moves.DOWN))
+		{
+			print("Entro al primero");
+			if(Math.Abs(this.transform.position.x-_nextNodeCheckMove.x) <= this._pixelsBeforeMove)
+			{
+				print("Retorno true");
+				return true;
+			}
+		}
+
+		else if( currentMove == Moves.DOWN && (mov == Moves.RIGHT || mov == Moves.LEFT) || currentMove == Moves.UP && (mov == Moves.RIGHT || mov == Moves.LEFT))
+		{
+			print("Entro al primero");
+			if(Math.Abs(this.transform.position.y-_nextNodeCheckMove.y) <= this._pixelsBeforeMove)
+			{
+				print("Retorno true");
+				return true;
+			}
+		}
+			
+		
+		else if(currentMove == Moves.NOTHING || (currentMove == Moves.DOWN && mov == Moves.UP) || (currentMove == Moves.UP && mov == Moves.DOWN) ||
+		(currentMove == Moves.LEFT && mov == Moves.RIGHT) || (currentMove == Moves.RIGHT && mov == Moves.LEFT))
+		{
+			print("nothig");
+			return true;
+		}
+			
+		
+		//Comparando Y Cuando hay un cambio de direccion
+		// if( currentMove == Moves.LEFT && (mov == Moves.UP || mov == Moves.UP) || currentMove == Moves.RIGHT && (mov == Moves.UP || mov == Moves.DOWN))
+		// 	if(Math.Abs(this.transform.position.x-_nextNodeCheckMove.x) <= this._pixelsBeforeMove || currentMove == Moves.NOTHING)
+		// 	{
+		// 		print("Retorno true");
+		// 		return true;
+		// 	}
+
+		return false;
+		
+        // switch(mov)
+		// {
+		// 	case Moves.LEFT:
+		// 		if(this.)
+				
+
+		// 	break;
+
+		// 	case Moves.RIGHT:
+		// 	break;
+
+		// 	case Moves.DOWN:
+		// 	break;
+
+		// 	case Moves.UP:
+		// 	break;
+		// }
+    }
+
+    /// <summary>
+    /// Sent when another object enters a trigger collider attached to this
+    /// object (2D physics only).
+    /// </summary>
+    /// <param name="other">The other Collider2D involved in this collision.</param>
+    void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.gameObject.tag.Equals("Enemy"))
 		{

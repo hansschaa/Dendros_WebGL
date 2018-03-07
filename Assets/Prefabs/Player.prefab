@@ -121,8 +121,9 @@ MonoBehaviour:
   playerPath: []
   currentMove: 4
   time: 0
-  speed: 0.5
+  speed: 0.1
   currentNode: 0
+  _pixelsBeforeMove: 0.0425
 --- !u!212 &212065336751753216
 SpriteRenderer:
   m_ObjectHideFlags: 1
