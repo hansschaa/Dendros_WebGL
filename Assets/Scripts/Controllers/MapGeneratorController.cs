@@ -17,7 +17,7 @@ public class MapGeneratorController : MonoBehaviour
 	/// </summary>
 	void Start()
 	{
-		MapGeneratorController._offsetMap = new Vector2((GlobalVariables._iMaxMatrix* GlobalVariables._widthTile)/2 + GlobalVariables._widthTile,(GlobalVariables._jMaxMatrix*-GlobalVariables._widthTile)/2 +GlobalVariables._widthTile + _marginBottom);
+		MapGeneratorController._offsetMap = new Vector2((GlobalVariables._iMaxMatrix* GlobalVariables._widthTile)/2 + GlobalVariables._widthTile,(GlobalVariables._jMaxMatrix*-GlobalVariables._widthTile)/2 + GlobalVariables._widthTile + _marginBottom);
 	}
 
 	public void drawMap()
@@ -28,7 +28,7 @@ public class MapGeneratorController : MonoBehaviour
 			for(int j = 0 ; j < GlobalVariables._jMaxMatrix; j++)
 			{
 				int valor = ViewController._currentGameModel._map[i,j];
-				currentTile = Instantiate(_tile,(new Vector2(j*0.16f, - i* 0.16f)- _offsetMap), Quaternion.identity, _gameObjectMap) as GameObject;  
+				currentTile = Instantiate(_tile,(new Vector2(j*GlobalVariables._widthTile, - i*GlobalVariables._widthTile)- _offsetMap), Quaternion.identity, _gameObjectMap) as GameObject;  
 				currentTile.GetComponent<SpriteRenderer>().sprite = tilesGameObjects[valor];
 
 				

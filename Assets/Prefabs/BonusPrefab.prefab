@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212114082349477726}
   - component: {fileID: 114590299697245118}
   - component: {fileID: 61179305796904382}
+  - component: {fileID: 95035811111472176}
   m_Layer: 0
   m_Name: BonusPrefab
   m_TagString: Bonus
@@ -67,6 +68,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.22708055, y: 0.5360265}
   m_EdgeRadius: 0
+--- !u!95 &95035811111472176
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1740866735249686}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b4429fb41c6a9f949868340a3e9d87b5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114590299697245118
 MonoBehaviour:
   m_ObjectHideFlags: 1

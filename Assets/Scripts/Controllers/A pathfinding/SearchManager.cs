@@ -86,7 +86,7 @@ public class SearchManager
 		List<Node> nodosAdyacentes = new List<Node>();
 		int J = nodoActual._grillaX;
 		int I = nodoActual._grillaY;
-		// Debug.Log("	i: " + I + " , " + "j: " + J);
+		Debug.Log("	i: " + I + " , " + "j: " + J);
 		
 	
 

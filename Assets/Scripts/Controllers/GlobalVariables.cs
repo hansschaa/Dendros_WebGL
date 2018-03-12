@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GlobalVariables 
 {
@@ -27,5 +28,13 @@ public class GlobalVariables
 
 	public static float _playerVelocity = 0.5f;
 	public static List<int> _walkablesTiles = new List<int>();
-  
+	public static bool _followPlayer = true;
+
+
+	//Keys
+	public static KeyCode _enter = KeyCode.Return;
+	public static KeyCode _left = KeyCode.A;
+	public static KeyCode _right = KeyCode.D;
+	public static KeyCode _down = KeyCode.S;
+	public static KeyCode _up = KeyCode.W;
 }

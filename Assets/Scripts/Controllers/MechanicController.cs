@@ -40,10 +40,10 @@ public class MechanicController : MonoBehaviour
 
 	public void updateLifes()
 	{
-		GlobalVariables._currentLifes-= 1;
-		this._heartLifesList.transform.GetChild(GlobalVariables._currentLifes).gameObject.SetActive(false);
-		if(GlobalVariables._currentLifes == 0)
-			this.gameObject.GetComponent<ViewController>().pressSpace();
+		// GlobalVariables._currentLifes-= 1;
+		// this._heartLifesList.transform.GetChild(GlobalVariables._currentLifes).gameObject.SetActive(false);
+		// if(GlobalVariables._currentLifes == 0)
+		// 	this.gameObject.GetComponent<ViewController>().pressSpace();
 	}
 
 	public void initializatePortalCoroutine(int time)

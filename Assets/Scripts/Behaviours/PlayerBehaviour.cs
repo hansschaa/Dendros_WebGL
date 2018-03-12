@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour 
 {
 
-	public Vector2 currentPositionHolder;
+	public Vector2 _nextPosition;
+	public Vector2 _nextPositionToChange;
 	public List<Vector2> playerPath;
 	public Moves currentMove;
 	public float time;
@@ -17,7 +18,10 @@ public class PlayerBehaviour : MonoBehaviour
 	private GameObject _gameController;
 
 	public float _pixelsBeforeMove;
-	private Vector2 _nextNodeCheckMove;
+	public Vector2 _nextNodeCheckMove;
+	private Animator _kaiAnimator;
+	private bool _entry;
+	
 	
 
 	public enum Moves
@@ -36,6 +40,8 @@ public class PlayerBehaviour : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		this._entry = false;
+		this._kaiAnimator = this.transform.GetChild(0).gameObject.GetComponent<Animator>();
 		playerPath = new List<Vector2>();
 		currentMove = Moves.NOTHING;
 		speed = GlobalVariables._playerVelocity;
@@ -45,16 +51,22 @@ public class PlayerBehaviour : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-
+		if(Input.GetKeyDown(KeyCode.X))
+		{
+			print("X position Global: " + GlobalVariables._xPosPlayer);
+			print("Y position Global: " + GlobalVariables._yPosPlayer );
+		}
+		
 		if(currentMove == Moves.NOTHING)
 		{
-			this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
-			this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
+			_kaiAnimator.SetFloat("movX",0);
+			_kaiAnimator.SetFloat("movY",0);
 		}
 
 		#region Controls 
-		if(Input.GetKeyDown(KeyCode.S) && !GlobalVariables._changeDirection || Input.GetKeyDown(KeyCode.W)  && GlobalVariables._changeDirection)
+		if(Input.GetKeyDown(GlobalVariables._down) && !GlobalVariables._changeDirection || Input.GetKeyDown(GlobalVariables._up)  && GlobalVariables._changeDirection)
 		{
+			
 			if(canMove(1,0,Moves.DOWN))
 			{
 				resetValues();
@@ -62,12 +74,12 @@ public class PlayerBehaviour : MonoBehaviour
 				generatePlayerPath(Moves.DOWN);
 
 				updateValues(1,0,Moves.DOWN);
-				this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
-				this.gameObject.GetComponent<Animator>().SetFloat("movY",-1);
+				_kaiAnimator.SetFloat("movX",0);
+				_kaiAnimator.SetFloat("movY",-1);
 			}
 		}
 
-		else if(Input.GetKeyDown(KeyCode.W)  && !GlobalVariables._changeDirection || Input.GetKeyDown(KeyCode.S) && GlobalVariables._changeDirection)
+		else if(Input.GetKeyDown(GlobalVariables._up)  && !GlobalVariables._changeDirection || Input.GetKeyDown(GlobalVariables._down) && GlobalVariables._changeDirection)
 		{
 			if(canMove(-1,0,Moves.UP))
 			{
@@ -77,12 +89,12 @@ public class PlayerBehaviour : MonoBehaviour
 
 				updateValues(-1,0,Moves.UP);
 
-				this.gameObject.GetComponent<Animator>().SetFloat("movX",0);
-				this.gameObject.GetComponent<Animator>().SetFloat("movY",1);
+				_kaiAnimator.SetFloat("movX",0);
+				_kaiAnimator.SetFloat("movY",1);
 			}	
 		}
 
-		else if(Input.GetKeyDown(KeyCode.A)  && !GlobalVariables._changeDirection || Input.GetKeyDown(KeyCode.D) && GlobalVariables._changeDirection)
+		else if(Input.GetKeyDown(GlobalVariables._left)  && !GlobalVariables._changeDirection || Input.GetKeyDown(GlobalVariables._right) && GlobalVariables._changeDirection)
 		{
 			if(canMove(0,-1,Moves.LEFT))
 			{
@@ -92,12 +104,12 @@ public class PlayerBehaviour : MonoBehaviour
 
 				updateValues(0,-1,Moves.LEFT);
 
-				this.gameObject.GetComponent<Animator>().SetFloat("movX",-1);
-				this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
+				_kaiAnimator.SetFloat("movX",-1);
+				_kaiAnimator.SetFloat("movY",0);
 			}	
 		}
 
-		else if(Input.GetKeyDown(KeyCode.D)  && !GlobalVariables._changeDirection || Input.GetKeyDown(KeyCode.A)  && GlobalVariables._changeDirection)
+		else if(Input.GetKeyDown(GlobalVariables._right)  && !GlobalVariables._changeDirection || Input.GetKeyDown(GlobalVariables._left)  && GlobalVariables._changeDirection)
 		{
 			if(canMove(0,1,Moves.RIGHT))
 			{
@@ -107,50 +119,91 @@ public class PlayerBehaviour : MonoBehaviour
 
 				updateValues(0,1,Moves.RIGHT);
 
-				this.gameObject.GetComponent<Animator>().SetFloat("movX",1);
-				this.gameObject.GetComponent<Animator>().SetFloat("movY",0);
+				_kaiAnimator.SetFloat("movX",1);
+				_kaiAnimator.SetFloat("movY",0);
 			}
 		}
 		#endregion
 		#region Move
-		if(currentMove == Moves.DOWN)
+		switch(currentMove)
 		{
-			time = Time.deltaTime * speed;
-			moveGameObject(1,0);
-		}
+			case Moves.DOWN:
+				time = Time.deltaTime * speed;
+				moveGameObject(1,0);
+				break;
+			
+			case Moves.UP:
+				time = Time.deltaTime * speed;
+				moveGameObject(-1,0);
+				break;
+			
+			case Moves.RIGHT:
+				time = Time.deltaTime * speed;
+				moveGameObject(0, 1);
+				break;
+			
+			case Moves.LEFT:
+				time = Time.deltaTime * speed;
+				moveGameObject(0,-1);
+				break;
 
-		if(currentMove == Moves.UP)
-		{
-			time = Time.deltaTime * speed;
-			moveGameObject(-1,0);
-		}
-
-		if(currentMove == Moves.LEFT)
-		{
-			time = Time.deltaTime * speed;
-			moveGameObject(0,-1);
-		}
-
-		if(currentMove == Moves.RIGHT)
-		{
-			time = Time.deltaTime * speed;
-			moveGameObject(0, 1);
 		}
 		#endregion moving
-
 
 	}
 
     private void moveGameObject(int i, int j)
     {
-        if((Vector2)this.transform.position != currentPositionHolder)
-		{
+        if((Vector2)this.transform.position != _nextPosition)
+		{	
+			this.transform.position = Vector2.MoveTowards(this.transform.position, this._nextPosition, time);
+			if(i==0)
+			{
+				if(Math.Abs(this.transform.position.x - _nextPositionToChange.x) <=0.03f && !_entry)
+				{
+					_entry = true;
+						GlobalVariables._xPosPlayer+=j;
+						GlobalVariables._yPosPlayer+=i;
+						// print("Posicion X: " + GlobalVariables._xPosPlayer);
+						// print("Posicion Y: " + GlobalVariables._yPosPlayer);
+						print("Llegó de la nueva forma");
+
+				}
+
+			}
+
+			else {
+
+				if(Math.Abs(this.transform.position.y - _nextPositionToChange.y) <=0.03f && !_entry)
+				{
+					_entry = true;
+						GlobalVariables._xPosPlayer+=j;
+						GlobalVariables._yPosPlayer+=i;
+						// print("Posicion X: " + GlobalVariables._xPosPlayer);
+						// print("Posicion Y: " + GlobalVariables._yPosPlayer);
+						print("Llegó de la nueva forma pero en y");
+
+				}
+
+
+				// if(Vector2.Distance(this.transform.position ,_nextPositionToChange) <= 0.03f && !_entry)
+				// {
+					
+				// 		_entry = true;
+				// 		GlobalVariables._xPosPlayer+=j;
+				// 		GlobalVariables._yPosPlayer+=i;
+				// 		// print("Posicion X: " + GlobalVariables._xPosPlayer);
+				// 		// print("Posicion Y: " + GlobalVariables._yPosPlayer);
+				// 		print("Llegó de la otra forma");
+
+				// }
+			}
 			
-			this.transform.position = Vector2.MoveTowards(this.transform.position, currentPositionHolder, time);
 		}
 
 		else
 		{
+			_entry = false;
 			currentNode++;
 			if(currentNode == playerPath.Count)
 			{
@@ -164,11 +217,17 @@ public class PlayerBehaviour : MonoBehaviour
 				time = 0;
 				if(playerPath.Count>0)
 				{
-					// print("Posicion X: " + GlobalVariables._xPosPlayer);
-					// print("Posicion Y: " + GlobalVariables._yPosPlayer);
-					GlobalVariables._xPosPlayer+=j;
-					GlobalVariables._yPosPlayer+=i;
-					currentPositionHolder = new Vector2( ((playerPath[currentNode].y*0.16f)),(playerPath[currentNode].x*-0.16f)) - MapGeneratorController._offsetMap;
+					
+					this._nextPositionToChange = new Vector2( playerPath[currentNode].y* GlobalVariables._widthTile-(j*GlobalVariables._widthTile/2), playerPath[currentNode].x*-GlobalVariables._widthTile +(i*GlobalVariables._widthTile/2)) - MapGeneratorController._offsetMap;
+					
+					this._nextPosition = new Vector2( playerPath[currentNode].y* GlobalVariables._widthTile, playerPath[currentNode].x*-GlobalVariables._widthTile) - MapGeneratorController._offsetMap;
+
+					// this._nextPosition = new Vector2( playerPath[currentNode].y* GlobalVariables._widthTile + (i * GlobalVariables._widthTile), playerPath[currentNode].x*-GlobalVariables._widthTile + j*GlobalVariables._widthTile - GlobalVariables._widthTile/2) - MapGeneratorController._offsetMap;
+
+					// GlobalVariables._xPosPlayer+=j;
+					// GlobalVariables._yPosPlayer+=i;
+					// getNextPosition(2,i,j);
+					
 				}
 				
 			}
@@ -185,14 +244,29 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void updateValues(int i, int j, Moves mov)
     {
+		// print("Posicion X en update value: " + GlobalVariables._xPosPlayer);
+		// 		print("Posicion Y en update value: " + GlobalVariables._yPosPlayer);
+				_entry = false;
 		
-		currentPositionHolder = new Vector2( ((playerPath[0].y*0.16f)),(playerPath[0].x*-0.16f)) - MapGeneratorController._offsetMap;
-		GlobalVariables._xPosPlayer+=j;
-		GlobalVariables._yPosPlayer+=i;
+		currentNode=0;
+		this._nextPosition = new Vector2( playerPath[currentNode].y* GlobalVariables._widthTile, playerPath[currentNode].x*-GlobalVariables._widthTile) - MapGeneratorController._offsetMap;
+		this._nextPositionToChange = new Vector2( playerPath[currentNode].y* GlobalVariables._widthTile-(j*GlobalVariables._widthTile/2), playerPath[currentNode].x*-GlobalVariables._widthTile +(i*GlobalVariables._widthTile/2)) - MapGeneratorController._offsetMap;
+		// print(_nextPosition);
+		// getNextPosition(i,j);
+		// GlobalVariables._xPosPlayer+=j;
+		// GlobalVariables._yPosPlayer+=i;
+		
 		currentMove = mov;
-		
-		
     }
+
+	// public void getNextPosition(int i,int j)
+	// {
+	// 	// this._nextPosition = new Vector2( ((playerPath[currentNode].y* GlobalVariables._widthTile)),(playerPath[currentNode].x*-GlobalVariables._widthTile)) - MapGeneratorController._offsetMap;
+	// 	this._nextPosition = new Vector2( ((playerPath[currentNode].y* GlobalVariables._widthTile)),(playerPath[currentNode].x*-GlobalVariables._widthTile)) - MapGeneratorController._offsetMap;
+		
+		
+			
+	// }
 
     private void generatePlayerPath(Moves mov)
     {
@@ -235,26 +309,27 @@ public class PlayerBehaviour : MonoBehaviour
 		currentNode = 0;
     }
 
-    private bool canMove(int x, int y, Moves mov)
+    private bool canMove(int j, int i, Moves mov)
     {
-		// print("GlobalVariables._xPosPlayer+y: " + (GlobalVariables._xPosPlayer+y));
-		// print("GlobalVariables._yPosPlayer+x: " + (GlobalVariables._yPosPlayer+x));
+		// print("GlobalVariables._xPosPlayer+y: " + (GlobalVariables._xPosPlayer+i));
+		// print("GlobalVariables._yPosPlayer+x: " + (GlobalVariables._yPosPlayer+j));
 
 
-		if((GlobalVariables._yPosPlayer+x == GlobalVariables._iMaxMatrix || GlobalVariables._yPosPlayer+x < 0) || 
-		(GlobalVariables._xPosPlayer+y == GlobalVariables._jMaxMatrix || GlobalVariables._xPosPlayer+y < 0))
+		if((GlobalVariables._yPosPlayer+j == GlobalVariables._iMaxMatrix || GlobalVariables._yPosPlayer+j < 0) || 
+		(GlobalVariables._xPosPlayer+i == GlobalVariables._jMaxMatrix || GlobalVariables._xPosPlayer+i < 0))
 			return false;
 
 		//14 es el numero max que puede tomar , porque el 15 es suelo , y hasta el 14 son tiles que representan obstaculos
-		if(ViewController._currentGameModel._map[GlobalVariables._yPosPlayer+x,GlobalVariables._xPosPlayer+y]==15 && currentMove != mov)
+		if(ViewController._currentGameModel._map[GlobalVariables._yPosPlayer+j,GlobalVariables._xPosPlayer+i]==15 && currentMove != mov)
 		{
-			print("Entra");
-			this._nextNodeCheckMove.x = (GlobalVariables._xPosPlayer+y) * 0.16f - MapGeneratorController._offsetMap.x;
-			this._nextNodeCheckMove.y= (GlobalVariables._yPosPlayer+x)*-0.16f - MapGeneratorController._offsetMap.y;
+			
+			// print("Entra");
+			this._nextNodeCheckMove.x = (GlobalVariables._xPosPlayer* GlobalVariables._widthTile)- MapGeneratorController._offsetMap.x;
+			this._nextNodeCheckMove.y = (GlobalVariables._yPosPlayer*-GlobalVariables._widthTile)- MapGeneratorController._offsetMap.y;
 			return checkRange(mov);
 		}
 
-		print("Retorno false");
+		// print("Retorno false");
 		return false;
     }
 
@@ -262,33 +337,33 @@ public class PlayerBehaviour : MonoBehaviour
     {
 		if(currentMove != Moves.NOTHING)
 		{
-			print("Entro al check range");
-			print("x: " + this._nextNodeCheckMove.x);
-			print("y: " + this._nextNodeCheckMove.y);
-			print("x Player: " + this.gameObject.transform.position.x);
-			print("y Player: " + this.gameObject.transform.position.y);
-			print("Resultado X: " + (this.transform.position.x-_nextNodeCheckMove.x));
-			print("Resultado Y: " + (this.transform.position.y-_nextNodeCheckMove.y));
+			// print("Entro al check range");
+			// print("x: " + this._nextNodeCheckMove.x);
+			// print("y: " + this._nextNodeCheckMove.y);
+			// print("x Player: " + this.gameObject.transform.position.x);
+			// print("y Player: " + this.gameObject.transform.position.y);
+			// print("Resultado X: " + (this.transform.position.x-_nextNodeCheckMove.x));
+			// print("Resultado Y: " + (this.transform.position.y-_nextNodeCheckMove.y));
 
 		}
 		
 		//Comparando X Cuando hay un cambio de direccion
 		if( currentMove == Moves.LEFT && (mov == Moves.UP || mov == Moves.DOWN) || currentMove == Moves.RIGHT && (mov == Moves.UP || mov == Moves.DOWN))
 		{
-			print("Entro al primero");
+			
 			if(Math.Abs(this.transform.position.x-_nextNodeCheckMove.x) <= this._pixelsBeforeMove)
 			{
-				print("Retorno true");
+				// print("Entro al de la X");
 				return true;
 			}
 		}
 
 		else if( currentMove == Moves.DOWN && (mov == Moves.RIGHT || mov == Moves.LEFT) || currentMove == Moves.UP && (mov == Moves.RIGHT || mov == Moves.LEFT))
 		{
-			print("Entro al primero");
+	
 			if(Math.Abs(this.transform.position.y-_nextNodeCheckMove.y) <= this._pixelsBeforeMove)
 			{
-				print("Retorno true");
+				// print("Entro al de la y");
 				return true;
 			}
 		}
@@ -297,7 +372,7 @@ public class PlayerBehaviour : MonoBehaviour
 		else if(currentMove == Moves.NOTHING || (currentMove == Moves.DOWN && mov == Moves.UP) || (currentMove == Moves.UP && mov == Moves.DOWN) ||
 		(currentMove == Moves.LEFT && mov == Moves.RIGHT) || (currentMove == Moves.RIGHT && mov == Moves.LEFT))
 		{
-			print("nothig");
+			// print("nothig");
 			return true;
 		}
 			
@@ -340,18 +415,27 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		if(other.gameObject.tag.Equals("Enemy"))
 		{
+			
+			// _kaiAnimator.SetFloat("movX",0);
+			// _kaiAnimator.SetFloat("movY",0.5f);
+			_kaiAnimator.SetBool("damage",true);
+		
+			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(4);
+			
 			this._gameController.GetComponent<MechanicController>().resetPlayerPosition();
+			GlobalVariables._followPlayer=false;
 		}
 
 		else if(other.gameObject.tag.Equals("Portal"))
 		{
 			this._gameController.GetComponent<ViewController>().pressEnter();
 			Destroy(other.gameObject);
-			print("Toco portal");
+			// print("Toco portal");
 		}
 
 		else if(other.gameObject.tag.Equals("Bonus"))
 		{ 
+			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(1);
 			this._gameController.GetComponent<BonusController>().bonusCollision(other.GetComponent<Bonus>()._myType, other.GetComponent<Bonus>()._position);
 			// other.GetComponent<BoxCollider2D>().enabled = false;
 			Destroy(other.gameObject);

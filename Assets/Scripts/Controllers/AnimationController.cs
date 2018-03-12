@@ -23,7 +23,7 @@ public class AnimationController : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-		this._titleScreenAnimationCoroutine = StartCoroutine(titleScreenAnimation());
+		
 		
 	}
 	
@@ -45,6 +45,7 @@ public class AnimationController : MonoBehaviour
 			playTitleScreenAnimation(4);
 			yield return new WaitForSeconds(this._fourthAnimationTime);
 		}
+
 	}
 
 	public void playTitleScreenAnimation(int idAnimation)
@@ -84,6 +85,9 @@ public class AnimationController : MonoBehaviour
 		switch(state)
 		{
 			case GameState.States.MAINSCENE:
+				this._kaiTextAnimation_2.SetActive(false);
+				this._reimiTextAnimation_3.SetActive(false);
+				this.titleGameImage.SetActive(false);
 				this._titleScreenAnimationCoroutine = StartCoroutine(titleScreenAnimation());
 			break;
 		}
@@ -94,6 +98,7 @@ public class AnimationController : MonoBehaviour
 		switch(state)
 		{
 			case GameState.States.MAINSCENE:
+				print("parar coroutine");
 				StopCoroutine(this._titleScreenAnimationCoroutine);
 				// this._titleScreenAnimationCoroutine = StartCoroutine(titleScreenAnimation());
 			break;
