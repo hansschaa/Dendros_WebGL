@@ -28,17 +28,14 @@ public class EnemyBehaviour : MonoBehaviour
 		this._currentPath = new List<Vector2>();
 
 		this._gestorBusqueda = new SearchManager();
-		
 	}
 	
 
 	void Start()
 	{
-		
-		
+		GlobalVariables._followPlayer = true;
+		GlobalVariables._stageComplete = false;
 		StartCoroutine(search());
-		
-		
 	}
 
 	void Update()
@@ -64,7 +61,7 @@ public class EnemyBehaviour : MonoBehaviour
 				{
 					this._time = 0;
 					if(this._currentPath.Count>0)
-						_currentPositionHolder = new Vector2( _currentPath[this._currentNode].x*0.16f,_currentPath[this._currentNode].y*-0.16f) - MapGeneratorController._offsetMap;
+						_currentPositionHolder = new Vector2( _currentPath[this._currentNode].x*GlobalVariables._widthTile,_currentPath[this._currentNode].y*-GlobalVariables._widthTile) - MapGeneratorController._offsetMap;
 
 					else
 						return;
@@ -107,7 +104,7 @@ public class EnemyBehaviour : MonoBehaviour
 					//ABAJO
 					else if  (_currentPath[_currentNode-1].y< _currentPath[_currentNode].y)
 					{
-						if(GlobalVariables._yPosEnemy < 10)
+						if(GlobalVariables._yPosEnemy < 13)
 							GlobalVariables._yPosEnemy+=1;  
 						
 						// print("Abajo: " + GlobalVariables._yPosEnemy);
@@ -118,23 +115,29 @@ public class EnemyBehaviour : MonoBehaviour
 			}
 		}
 	
-		else if(!GlobalVariables._followPlayer)
+		else if(!GlobalVariables._followPlayer && !GlobalVariables._stageComplete)
 		{
 			this._currentPath.Clear();
 			GlobalVariables._followPlayer = true;
+		}
+
+		else if(!GlobalVariables._followPlayer && GlobalVariables._stageComplete)
+		{
+			this._currentPath.Clear();
 		}
 	}
 
 	IEnumerator search()
 	{
-		while(true)
+		while(GlobalVariables._followPlayer)
 		{
 			this._currentNode = 0;
 			// _currentPath.Clear();
 			_currentPath = this._gestorBusqueda.encontrarCamino(new Vector2(GlobalVariables._xPosEnemy,GlobalVariables._yPosEnemy), new Vector2(GlobalVariables._xPosPlayer,GlobalVariables._yPosPlayer));
-			if(_currentPath!= null){
+			if(_currentPath!= null)
+			{
 				if(_currentPath.Count>0)
-					_currentPositionHolder = new Vector2( ((_currentPath[this._currentNode].x*0.16f)),(_currentPath[this._currentNode].y*-0.16f))- MapGeneratorController._offsetMap;
+					_currentPositionHolder = new Vector2( ((_currentPath[this._currentNode].x*GlobalVariables._widthTile)),(_currentPath[this._currentNode].y*-GlobalVariables._widthTile))- MapGeneratorController._offsetMap;
 			}
 			yield return new WaitForSeconds(_frecuency);
 		}

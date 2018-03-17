@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Escritor.png">
+	<SubTexture name="Symbol 290000" x="0" y="0" width="413" height="485" pivotX="227.35" pivotY="234.5"/>
+	<SubTexture name="Symbol 300000" x="0" y="485" width="277" height="85" pivotX="168.95" pivotY="-131.75"/>
+	<SubTexture name="Symbol 330000" x="0" y="797" width="275" height="72" pivotX="169.45" pivotY="-129"/>
+	<SubTexture name="Symbol 340000" x="0" y="570" width="276" height="76" pivotX="170.45" pivotY="-126.55"/>
+	<SubTexture name="Symbol 380000" x="0" y="869" width="275" height="72" pivotX="169.45" pivotY="-129"/>
+	<SubTexture name="Symbol 410000" x="0" y="646" width="276" height="76" pivotX="170.45" pivotY="-126.55"/>
+	<SubTexture name="Symbol 420000" x="0" y="722" width="276" height="75" pivotX="167.45" pivotY="-135.75"/>
+</TextureAtlas>

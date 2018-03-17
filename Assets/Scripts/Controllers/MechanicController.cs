@@ -13,6 +13,8 @@ public class MechanicController : MonoBehaviour
 	public GameObject _heartLifesList;
 	public Text _timeCountText;
 
+	public SoundController _soundController;
+
 
 	public Coroutine _portalTimeCoroutine;
 
@@ -24,7 +26,7 @@ public class MechanicController : MonoBehaviour
 		{
 			iReset = UnityEngine.Random.Range(0, GlobalVariables._iMaxMatrix); 
 			jReset = UnityEngine.Random.Range(0, GlobalVariables._jMaxMatrix); 
-		} while(ViewController._currentGameModel._map[iReset,jReset] != 15);
+		} while(ViewController._currentGameModel._map[iReset,jReset] == -1);
 
 		GlobalVariables._xPosPlayer = jReset;
 		GlobalVariables._yPosPlayer = iReset;
@@ -40,10 +42,23 @@ public class MechanicController : MonoBehaviour
 
 	public void updateLifes()
 	{
-		// GlobalVariables._currentLifes-= 1;
-		// this._heartLifesList.transform.GetChild(GlobalVariables._currentLifes).gameObject.SetActive(false);
-		// if(GlobalVariables._currentLifes == 0)
-		// 	this.gameObject.GetComponent<ViewController>().pressSpace();
+		GlobalVariables._currentLifes-= 1;
+		
+		this._heartLifesList.transform.GetChild(GlobalVariables._currentLifes).gameObject.SetActive(false);
+		if(GlobalVariables._currentLifes == 0)
+		{
+			this.GetComponent<AudioSource>().enabled = false;
+			_soundController.playSound(5);
+			GlobalVariables._globalLifes -= 1;
+			GlobalVariables._followPlayer = false;
+			GlobalVariables._stageComplete = true;
+			Invoke("partialGameOverMethod",3f);
+		}
+
+		else
+		{
+			this.GetComponent<BonusController>().resetStats();
+		}	
 	}
 
 	public void initializatePortalCoroutine(int time)
@@ -54,7 +69,6 @@ public class MechanicController : MonoBehaviour
 	public void stopPortalCoroutine()
 	{
 		StopCoroutine(this._portalTimeCoroutine);
-		
 	}
 
 	IEnumerator portalCoroutine()
@@ -67,8 +81,6 @@ public class MechanicController : MonoBehaviour
 			_timeCountText.text = contador.ToString();
 			yield return new WaitForSeconds(1f);
 		}
-
-		
 
 		while(true)
 		{
@@ -104,9 +116,15 @@ public class MechanicController : MonoBehaviour
 		{
 			iReset = UnityEngine.Random.Range(0, GlobalVariables._iMaxMatrix); 
 			jReset = UnityEngine.Random.Range(0, GlobalVariables._jMaxMatrix); 
-		} while(ViewController._currentGameModel._map[iReset,jReset] != 15);
+		} while(ViewController._currentGameModel._map[iReset,jReset] == -1);
 
 		
 		this.gameObject.GetComponent<ViewController>().createPortal(iReset, jReset);
+	}
+
+	public void partialGameOverMethod()
+	{
+		GlobalVariables._followPlayer = true;
+		this.GetComponent<ViewController>().pressEnter();
 	}
 }

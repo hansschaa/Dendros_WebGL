@@ -34,6 +34,7 @@ public class AnimationController : MonoBehaviour
 
 	IEnumerator titleScreenAnimation()
 	{
+		this._kaiAnimator.SetBool("walk",true);
 		while(true)
 		{
 			playTitleScreenAnimation(1);
@@ -50,9 +51,11 @@ public class AnimationController : MonoBehaviour
 
 	public void playTitleScreenAnimation(int idAnimation)
 	{
+		
 		switch(idAnimation)
 		{
 			case 1 :
+
 				this.titleGameImage.SetActive(false);
 				this._borisAnimator.SetFloat("movX",-1);
 				this._borisAnimator.SetFloat("movY",0);

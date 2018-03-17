@@ -86,32 +86,42 @@ public class SearchManager
 		List<Node> nodosAdyacentes = new List<Node>();
 		int J = nodoActual._grillaX;
 		int I = nodoActual._grillaY;
-		Debug.Log("	i: " + I + " , " + "j: " + J);
+		int valor = ViewController._currentGameModel._map[I,J];
+		// if(valor > 14)
+		// {
+		// 	do
+		// 	{
+		// 		valor-=15;
+		// 	}while(valor > 14);
+			
+		// }
+
+		// Debug.Log("	i: " + I + " , " + "j: " + J);
 		
 	
 
-		//Izquierda
-		if ((J > 0) && ViewController._currentGameModel._map[I,J-1]==15)
+		// Izquierda
+		if ((J > 0) && GlobalVariables._allowedMovements[valor,3]==1)
 		{
 			nodosAdyacentes.Add(new Node(nodoActual, nodoFinal, new Vector2(J-1,I), costoIrDerecho + nodoActual._costoG));
 		}
 		
 
 		//Derecha
-		if ((J < ViewController._currentGameModel._map.GetLength(1)-1 && ViewController._currentGameModel._map[I,J+1]==15))
+		if ((J < ViewController._currentGameModel._map.GetLength(1)-1 && GlobalVariables._allowedMovements[valor,1]==1))
 		{
 			nodosAdyacentes.Add(new Node(nodoActual, nodoFinal,new Vector2(J+1, I), costoIrDerecho + nodoActual._costoG));
 		}
 		
 
 		//Arriba
-		if ((I > 0) && ViewController._currentGameModel._map[I-1,J]==15)
+		if ((I > 0) && GlobalVariables._allowedMovements[valor,0]==1)
 		{
 			nodosAdyacentes.Add(new Node(nodoActual, nodoFinal, new Vector2(J, I-1), costoIrDerecho + nodoActual._costoG));
 		}
 
 		// Abajo
-		if (I < ViewController._currentGameModel._map.GetLength(0)-1 && ViewController._currentGameModel._map[I+1,J]==15)
+		if (I < ViewController._currentGameModel._map.GetLength(0)-1 && GlobalVariables._allowedMovements[valor,2]==1)
 		{
 			nodosAdyacentes.Add(new Node(nodoActual, nodoFinal, new Vector2(J, I+1 ), costoIrDerecho + nodoActual._costoG));
 		}

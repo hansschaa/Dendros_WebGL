@@ -61,6 +61,8 @@ public class ViewController : MonoBehaviour
 
 	[Header("FinalScene")]
 	public GameObject _finalSceneCanvas;
+	public GameObject _gameObjectsFinalView;
+	// public Transform _camera;
 
 
 	[Header("GameOverScene")]
@@ -143,21 +145,34 @@ public class ViewController : MonoBehaviour
 			this._gameSceneCanvas.SetActive(false);
 			this._gameObjectsGameScene.SetActive(false);
 			
-
-			GlobalVariables._currentLevel++;
-			
-
-			if(GlobalVariables._currentLevel == GlobalVariables._totallyStages)
+			if(GlobalVariables._currentLifes==0 && GlobalVariables._globalLifes==0)
 			{
-				ViewController._gameState._state = GameState.States.FINALSCENE;
+				resetGameInstances();
+				ViewController._gameState._state = GameState.States.GAMEOVER;
+			}
+
+			else if(GlobalVariables._currentLifes==0 && GlobalVariables._globalLifes!=0)
+			{
+				resetGameInstances();
+				ViewController._gameState._state = GameState.States.GARAGE;
 			}
 
 			else
 			{
-				
-				resetGameInstances();
-				ViewController._gameState._state = GameState.States.GARAGE;
-				updateIconStageGroup();
+				GlobalVariables._currentLevel++;
+				if(GlobalVariables._currentLevel == GlobalVariables._totallyStages)
+				{
+					GlobalVariables._currentLevel = 0;
+					ViewController._gameState._state = GameState.States.FINALSCENE;
+				}
+
+				else
+				{
+					resetGameInstances();
+					ViewController._gameState._state = GameState.States.GARAGE;
+					updateIconStageGroup();
+
+				}
 			}
 
 			updateView();
@@ -166,26 +181,34 @@ public class ViewController : MonoBehaviour
 		else if(ViewController._gameState._state == GameState.States.FINALSCENE)
 		{
 			this._finalSceneCanvas.SetActive(false);
+			this._gameObjectsFinalView.SetActive(false);
+			// this._camera.position = new Vector3(0,0,-10);
+
 			ViewController._gameState._state = GameState.States.MAINSCENE;
 			GlobalVariables._gameComplete = true;
+			this._gameObjectsFinalView.GetComponent<Animator>().SetBool("fade",false); 
 			resetGame();
 			updateView();
 		}
 
 		else if(ViewController._gameState._state == GameState.States.GAMEOVER)
 		{
+			// this.GetComponent<AudioSource>().enabled = false;
+			
 			this._gameOverSceneCanvas.SetActive(false);
 			ViewController._gameState._state = GameState.States.MAINSCENE;
 			GlobalVariables._gameComplete = false;
 			resetGame();
+			// Invoke("updateView",f);
 			updateView();
+
 		}
     }
 
     internal void createPortal(int iReset, int jReset)
     {
 		Vector2 vector = new Vector2(jReset,iReset);
-		this._portalInstance = Instantiate(_portalPrefab, new Vector2((jReset*0.16f), (iReset * -0.16f)) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
+		this._portalInstance = Instantiate(_portalPrefab, new Vector2((jReset*GlobalVariables._widthTile), (iReset * -GlobalVariables._widthTile)) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
 		_portalInstance.GetComponent<Bonus>()._position = vector;
 		Destroy(_portalInstance,10f);
     }
@@ -193,6 +216,8 @@ public class ViewController : MonoBehaviour
     private void resetGame()
     {
 		GlobalVariables._currentLevel = 0;
+		GlobalVariables._globalLifes = 3;
+		GlobalVariables._currentLifes = 3;
 		if(GlobalVariables._gameComplete)
 		{
 			for(int i = 0 ; i < 5 ; i++)
@@ -211,21 +236,21 @@ public class ViewController : MonoBehaviour
 				updateIcon(3,i+1,_iconStageGroup.GetChild(i).gameObject);
 		}
 
-		
-		
 		resetGameInstances();
     }
 
-    private void resetGameInstances()
+    public void resetGameInstances()
     {
 		this.gameObject.GetComponent<MechanicController>().stopPortalCoroutine();
 		this.gameObject.GetComponent<BonusController>().stopCoroutine();
 		this.gameObject.GetComponent<MechanicController>()._timeCountText.color = new Color32(0,255,0,255);
-		GlobalVariables._playerVelocity = 0.5f;
+		// GlobalVariables._playerVelocity = GlobalVariables._playerVelocity;
 		GlobalVariables._currentLifes = 3;
 		GlobalVariables._yellowBonus = false;
 		GlobalVariables._purpleBonus = false;
 		GlobalVariables._changeDirection = false;
+		GlobalVariables._followPlayer = true;
+		GlobalVariables._stageComplete = false;
 		this._canPressEnter = true;
         Destroy(_enemyInstance);
 		Destroy(_playerInstance);
@@ -252,10 +277,12 @@ public class ViewController : MonoBehaviour
 
 	
 
-    private void updateView()
+    public void updateView()
     {
 		if(ViewController._gameState._state == GameState.States.GAMESCENE)
 		{
+			
+
 			this._canPressEnter = true;
 			this.gameObject.GetComponent<MechanicController>().initializatePortalCoroutine(20);
 			this.gameObject.GetComponent<MapGeneratorController>().drawMap();
@@ -265,11 +292,13 @@ public class ViewController : MonoBehaviour
 			this.gameObject.GetComponent<BonusController>().initializeCorroutines();
 			this._playerInstance = Instantiate(_player, getNewPosition(false) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
 			this._enemyInstance = Instantiate(_enemy, getNewPosition(true) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
-
 		}
 
 		else if(ViewController._gameState._state == GameState.States.GARAGE)
 		{
+			if(!this.GetComponent<AudioSource>().enabled)
+				this.GetComponent<AudioSource>().enabled = true;
+				
 			this._canPressEnter = true;
 			this.gameObject.GetComponent<CountGarageController>().resetCoroutine();
 			this._gameObjectsMainScene.SetActive(false);
@@ -284,6 +313,9 @@ public class ViewController : MonoBehaviour
 
 		else if(ViewController._gameState._state == GameState.States.MAINSCENE)
 		{		
+			if(!this.GetComponent<AudioSource>().enabled)
+				this.GetComponent<AudioSource>().enabled = true;
+
 			this._mainSceneCanvas.SetActive(true);
 			this._gameObjectsMainScene.SetActive(true);
 			//resetearcoroutina de los personajes
@@ -292,11 +324,18 @@ public class ViewController : MonoBehaviour
 
 		else if(ViewController._gameState._state == GameState.States.FINALSCENE)
 		{		
+			this._soundController.playSound(4);
+			this._gameObjectsFinalView.SetActive(true);
 			this._finalSceneCanvas.SetActive(true);
+		
+		
+			// StartCoroutine(waitThenCallback(2.45f, () => 
+        //  { this._gameObjectsFinalView.transform.GetChild(1).gameObject.GetComponent<Animator>().SetBool("fade",true); }));
 		}
 		
 		else if(ViewController._gameState._state == GameState.States.GAMEOVER)
 		{		
+			_soundController.playSound(5);
 			this._gameOverSceneCanvas.SetActive(true);
 		}
 
@@ -317,10 +356,7 @@ public class ViewController : MonoBehaviour
 					this._bonusList.transform.GetChild(1).gameObject.SetActive(true);
 				break;
 
-				case "Brain":
-					this._bonusList.transform.GetChild(0).gameObject.SetActive(true);
-					this._bonusList.transform.GetChild(1).gameObject.SetActive(true);
-					this._bonusList.transform.GetChild(2).gameObject.SetActive(true);
+				case "Frontal":
 					GlobalVariables._purpleBonus = true;
 				break;
 
@@ -328,7 +364,7 @@ public class ViewController : MonoBehaviour
 					this._bonusList.transform.GetChild(2).gameObject.SetActive(true);
 				break;
 
-				case "Teleport":
+				case "Parietal":
 					GlobalVariables._yellowBonus = true;
 				break;
 			}
@@ -343,13 +379,13 @@ public class ViewController : MonoBehaviour
 		{
 			iReset = UnityEngine.Random.Range(0, GlobalVariables._iMaxMatrix); 
 			jReset = UnityEngine.Random.Range(0, GlobalVariables._jMaxMatrix); 
-		} while(ViewController._currentGameModel._map[iReset,jReset] != 15);
+		} while(ViewController._currentGameModel._map[iReset,jReset] == -1);
 
 		if(isForEnemy)
 		{
 			GlobalVariables._xPosEnemy = jReset;
 			GlobalVariables._yPosEnemy = iReset;
-			return new Vector2((GlobalVariables._xPosEnemy*GlobalVariables._widthTile), (- GlobalVariables._yPosEnemy * GlobalVariables._widthTile));
+			return new Vector2((GlobalVariables._xPosEnemy*GlobalVariables._widthTile), (- GlobalVariables._yPosEnemy* GlobalVariables._widthTile));
 		}
 			
 		
@@ -357,10 +393,10 @@ public class ViewController : MonoBehaviour
 		{
 			GlobalVariables._xPosPlayer = jReset;
 			GlobalVariables._yPosPlayer = iReset;
-			// GlobalVariables._xPosPlayer = 0;
-			// GlobalVariables._yPosPlayer = 0;
+			// GlobalVariables._xPosPlayer = 2;
+			// GlobalVariables._yPosPlayer = 2;
 			return new Vector2((GlobalVariables._xPosPlayer*GlobalVariables._widthTile), (GlobalVariables._yPosPlayer * -GlobalVariables._widthTile));
-			// return new Vector2((0*GlobalVariables._widthTile), (0 * -GlobalVariables._widthTile));
+			// return new Vector2((2*GlobalVariables._widthTile), (2 * -GlobalVariables._widthTile));
 		}
 			
     }
@@ -468,7 +504,7 @@ public class ViewController : MonoBehaviour
 
     private void changeGarageTexts()
     {
-		this._lifesCountText.text = GlobalVariables._currentLifes.ToString();
+		this._lifesCountText.text = GlobalVariables._globalLifes.ToString();
 		this._missionNumberDescriptionText.text = ViewController._currentGameModel._missionNumber;
 		this._descriptionMissionText.text = ViewController._currentGameModel._descriptionMission;
     }
@@ -531,5 +567,12 @@ public class ViewController : MonoBehaviour
     {
         Destroy(this._playerInstance);
 		this._playerInstance = Instantiate(_player, this.getNewPosition(false)- MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
+		_playerInstance.transform.GetChild(0).gameObject.GetComponent<Animator>().SetBool("isDeath",true);
     }
+
+	private IEnumerator waitThenCallback(float time, Action callback)
+	{
+	yield return new WaitForSeconds(time);
+	callback();
+	}
 }

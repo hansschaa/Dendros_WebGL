@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour 
 {
 
@@ -57,98 +57,117 @@ public class PlayerBehaviour : MonoBehaviour
 			print("Y position Global: " + GlobalVariables._yPosPlayer );
 		}
 		
-		if(currentMove == Moves.NOTHING)
-		{
-			_kaiAnimator.SetFloat("movX",0);
-			_kaiAnimator.SetFloat("movY",0);
-		}
+		// if(currentMove == Moves.NOTHING)
+		// {
+		// 	// _kaiAnimator.SetBool("walk",false);
+		// 	// _kaiAnimator.SetFloat("movX",0);
+		// 	// _kaiAnimator.SetFloat("movY",0);
+		// }
 
 		#region Controls 
-		if(Input.GetKeyDown(GlobalVariables._down) && !GlobalVariables._changeDirection || Input.GetKeyDown(GlobalVariables._up)  && GlobalVariables._changeDirection)
+		if(!GlobalVariables._stageComplete)
 		{
-			
-			if(canMove(1,0,Moves.DOWN))
+			if(Input.GetKey(GlobalVariables._down) && !GlobalVariables._changeDirection || Input.GetKey(GlobalVariables._up)  && GlobalVariables._changeDirection)
 			{
-				resetValues();
+				
+				if(canMove(1,0,Moves.DOWN))
+				{
+					_kaiAnimator.SetBool("walk",true);
+					_kaiAnimator.SetBool("isDeath", false);
+					_kaiAnimator.SetFloat("movX",0);
+					_kaiAnimator.SetFloat("movY",-1);
+					resetValues();
 
-				generatePlayerPath(Moves.DOWN);
+					generatePlayerPath(Moves.DOWN);
 
-				updateValues(1,0,Moves.DOWN);
-				_kaiAnimator.SetFloat("movX",0);
-				_kaiAnimator.SetFloat("movY",-1);
+					updateValues(1,0,Moves.DOWN);
+					
+				}
 			}
-		}
 
-		else if(Input.GetKeyDown(GlobalVariables._up)  && !GlobalVariables._changeDirection || Input.GetKeyDown(GlobalVariables._down) && GlobalVariables._changeDirection)
-		{
-			if(canMove(-1,0,Moves.UP))
+			else if(Input.GetKey(GlobalVariables._up)  && !GlobalVariables._changeDirection || Input.GetKey(GlobalVariables._down) && GlobalVariables._changeDirection)
 			{
-				resetValues();
+				if(canMove(-1,0,Moves.UP))
+				{
+					_kaiAnimator.SetBool("walk",true);
+					_kaiAnimator.SetBool("isDeath", false);
+					_kaiAnimator.SetFloat("movX",0);
+					_kaiAnimator.SetFloat("movY",1);
 
-				generatePlayerPath(Moves.UP);
+					resetValues();
 
-				updateValues(-1,0,Moves.UP);
+					generatePlayerPath(Moves.UP);
 
-				_kaiAnimator.SetFloat("movX",0);
-				_kaiAnimator.SetFloat("movY",1);
-			}	
-		}
-
-		else if(Input.GetKeyDown(GlobalVariables._left)  && !GlobalVariables._changeDirection || Input.GetKeyDown(GlobalVariables._right) && GlobalVariables._changeDirection)
-		{
-			if(canMove(0,-1,Moves.LEFT))
-			{
-				resetValues();
-
-				generatePlayerPath(Moves.LEFT);
-
-				updateValues(0,-1,Moves.LEFT);
-
-				_kaiAnimator.SetFloat("movX",-1);
-				_kaiAnimator.SetFloat("movY",0);
-			}	
-		}
-
-		else if(Input.GetKeyDown(GlobalVariables._right)  && !GlobalVariables._changeDirection || Input.GetKeyDown(GlobalVariables._left)  && GlobalVariables._changeDirection)
-		{
-			if(canMove(0,1,Moves.RIGHT))
-			{
-				resetValues();
-
-				generatePlayerPath(Moves.RIGHT);
-
-				updateValues(0,1,Moves.RIGHT);
-
-				_kaiAnimator.SetFloat("movX",1);
-				_kaiAnimator.SetFloat("movY",0);
+					updateValues(-1,0,Moves.UP);
+					
+				}	
 			}
-		}
-		#endregion
-		#region Move
-		switch(currentMove)
-		{
-			case Moves.DOWN:
-				time = Time.deltaTime * speed;
-				moveGameObject(1,0);
-				break;
-			
-			case Moves.UP:
-				time = Time.deltaTime * speed;
-				moveGameObject(-1,0);
-				break;
-			
-			case Moves.RIGHT:
-				time = Time.deltaTime * speed;
-				moveGameObject(0, 1);
-				break;
-			
-			case Moves.LEFT:
-				time = Time.deltaTime * speed;
-				moveGameObject(0,-1);
-				break;
+
+			else if(Input.GetKey(GlobalVariables._left)  && !GlobalVariables._changeDirection || Input.GetKey(GlobalVariables._right) && GlobalVariables._changeDirection)
+			{
+				if(canMove(0,-1,Moves.LEFT))
+				{
+					_kaiAnimator.SetBool("walk",true);
+					_kaiAnimator.SetBool("isDeath", false);
+					_kaiAnimator.SetFloat("movX",-1);
+					_kaiAnimator.SetFloat("movY",0);
+					resetValues();
+
+					generatePlayerPath(Moves.LEFT);
+
+					updateValues(0,-1,Moves.LEFT);
+					_kaiAnimator.SetBool("walk",true);
+					_kaiAnimator.SetBool("isDeath", false);
+					_kaiAnimator.SetFloat("movX",-1);
+					_kaiAnimator.SetFloat("movY",0);
+				}	
+			}
+
+			else if(Input.GetKey(GlobalVariables._right)  && !GlobalVariables._changeDirection || Input.GetKey(GlobalVariables._left)  && GlobalVariables._changeDirection)
+			{
+				if(canMove(0,1,Moves.RIGHT))
+				{
+					_kaiAnimator.SetBool("walk",true);
+					_kaiAnimator.SetBool("isDeath", false);
+					_kaiAnimator.SetFloat("movX",1);
+					_kaiAnimator.SetFloat("movY",0);
+					resetValues();
+
+					generatePlayerPath(Moves.RIGHT);
+
+					updateValues(0,1,Moves.RIGHT);
+					
+				}
+			}
+			#endregion
+			#region Move
+			switch(currentMove)
+			{
+				case Moves.DOWN:
+					time = Time.deltaTime * speed;
+					moveGameObject(1,0);
+					break;
+				
+				case Moves.UP:
+					time = Time.deltaTime * speed;
+					moveGameObject(-1,0);
+					break;
+				
+				case Moves.RIGHT:
+					time = Time.deltaTime * speed;
+					moveGameObject(0, 1);
+					break;
+				
+				case Moves.LEFT:
+					time = Time.deltaTime * speed;
+					moveGameObject(0,-1);
+					break;
+
+			}
+			#endregion moving
 
 		}
-		#endregion moving
+		
 
 	}
 
@@ -159,14 +178,14 @@ public class PlayerBehaviour : MonoBehaviour
 			this.transform.position = Vector2.MoveTowards(this.transform.position, this._nextPosition, time);
 			if(i==0)
 			{
-				if(Math.Abs(this.transform.position.x - _nextPositionToChange.x) <=0.03f && !_entry)
+				if(Math.Abs(this.transform.position.x - _nextPositionToChange.x) <=0.04f && !_entry)
 				{
 					_entry = true;
 						GlobalVariables._xPosPlayer+=j;
 						GlobalVariables._yPosPlayer+=i;
 						// print("Posicion X: " + GlobalVariables._xPosPlayer);
 						// print("Posicion Y: " + GlobalVariables._yPosPlayer);
-						print("Llegó de la nueva forma");
+						// print("Llegó de la nueva forma");
 
 				}
 
@@ -174,14 +193,14 @@ public class PlayerBehaviour : MonoBehaviour
 
 			else {
 
-				if(Math.Abs(this.transform.position.y - _nextPositionToChange.y) <=0.03f && !_entry)
+				if(Math.Abs(this.transform.position.y - _nextPositionToChange.y) <=0.04f && !_entry)
 				{
 					_entry = true;
 						GlobalVariables._xPosPlayer+=j;
 						GlobalVariables._yPosPlayer+=i;
 						// print("Posicion X: " + GlobalVariables._xPosPlayer);
 						// print("Posicion Y: " + GlobalVariables._yPosPlayer);
-						print("Llegó de la nueva forma pero en y");
+						// print("Llegó de la nueva forma pero en y");
 
 				}
 
@@ -270,37 +289,116 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void generatePlayerPath(Moves mov)
     {
-		if(mov == Moves.DOWN)
+		// if(mov == Moves.DOWN)
+		// {
+			// for(int i = (GlobalVariables._yPosPlayer+1) ; i <ViewController._currentGameModel._map.GetLength(0) && ViewController._currentGameModel._map[i,GlobalVariables._xPosPlayer]!=30; i++)
+			// {
+			// 	playerPath.Add(new Vector2(i, GlobalVariables._xPosPlayer));
+			// }
+			// for(int i = Glo)
+			// {
+
+			// }
+		// }
+		int valor = ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,GlobalVariables._xPosPlayer];
+		
+		// if(valor > 14)
+		// {
+		// 	do
+		// 	{
+		// 		valor-=15;
+			
+		// 	}while(valor > 14);
+		// }
+
+		print("Este es el valor que buscas?: " + valor);
+
+		if(mov == Moves.UP)
 		{
-			for(int i = (GlobalVariables._yPosPlayer+1) ; i <ViewController._currentGameModel._map.GetLength(0) && ViewController._currentGameModel._map[i,GlobalVariables._xPosPlayer]==15; i++)
+			for(int i =GlobalVariables._yPosPlayer -1; i >=0 && GlobalVariables._allowedMovements[valor,0]==1; i--)
 			{
 				playerPath.Add(new Vector2(i, GlobalVariables._xPosPlayer));
-			}
-		}
-
-		else if(mov == Moves.UP)
-		{
-			for(int i =(GlobalVariables._yPosPlayer-1) ; i >=0 && ViewController._currentGameModel._map[i,GlobalVariables._xPosPlayer]==15; i--)
-			{
-				playerPath.Add(new Vector2(i, GlobalVariables._xPosPlayer));
-			}
-		}	
-
-		else if(mov == Moves.LEFT)
-		{
-			for(int i = (GlobalVariables._xPosPlayer-1) ; i >=0 && ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i]==15; i--)
-			{
-				playerPath.Add(new Vector2(GlobalVariables._yPosPlayer, i));
+				valor = ViewController._currentGameModel._map[i,GlobalVariables._xPosPlayer];
+				// if(valor > 14)
+				// {
+				// 	do
+				// 	{
+				// 		valor-=15;
+					
+				// 	}while(valor > 14);
+				// }
 			}
 		}	
 
 		else if(mov == Moves.RIGHT)
 		{
-			for(int i = (GlobalVariables._xPosPlayer+1) ; i < ViewController._currentGameModel._map.GetLength(1) && ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i]==15; i++)
+			for(int i =GlobalVariables._xPosPlayer +1; i < ViewController._currentGameModel._map.GetLength(1) && GlobalVariables._allowedMovements[valor,1]==1 ; i++)
 			{
 				playerPath.Add(new Vector2(GlobalVariables._yPosPlayer, i));
+				valor = ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i];
+				// if(valor > 14)
+				// {
+				// 	do
+				// 	{
+				// 		valor-=15;
+					
+				// 	}while(valor > 14);
+				// }
 			}
-		}	
+			// for(int i = (GlobalVariables._xPosPlayer+1) ; i < ViewController._currentGameModel._map.GetLength(1) && ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i]!=30; i++)
+			// {
+			// 	playerPath.Add(new Vector2(GlobalVariables._yPosPlayer, i));
+			// }
+		}
+
+		else if(mov == Moves.DOWN)
+		{
+			for(int i =GlobalVariables._yPosPlayer +1; i <ViewController._currentGameModel._map.GetLength(0) && GlobalVariables._allowedMovements[valor,2]==1; i++)
+			{
+				playerPath.Add(new Vector2(i, GlobalVariables._xPosPlayer));
+				valor = ViewController._currentGameModel._map[i,GlobalVariables._xPosPlayer];
+				// if(valor > 14)
+				// {
+				// 	do
+				// 	{
+				// 		valor-=15;
+					
+				// 	}while(valor > 14);
+				// }
+			}
+		}
+
+		else if(mov == Moves.LEFT)
+		{
+
+			for(int i =GlobalVariables._xPosPlayer- 1; i >=0 && GlobalVariables._allowedMovements[valor,3]==1 ; i--)
+			{
+				playerPath.Add(new Vector2(GlobalVariables._yPosPlayer, i));
+				valor = ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i];
+				// if(valor > 14)
+				// {
+				// 	do
+				// 	{
+				// 		valor-=15;
+					
+				// 	}while(valor > 14);
+				// }
+			}
+			// for(int i = (GlobalVariables._xPosPlayer+1) ; i < ViewController._currentGameModel._map.GetLength(1) && ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i]!=30; i++)
+			// {
+			// 	playerPath.Add(new Vector2(GlobalVariables._yPosPlayer, i));
+			// }
+		}
+
+		// else if(mov == Moves.LEFT)
+		// {
+		// 	for(int i = (GlobalVariables._xPosPlayer-1) ; i >=0 && ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,i]!=30; i--)
+		// 	{
+		// 		playerPath.Add(new Vector2(GlobalVariables._yPosPlayer, i));
+		// 	}
+		// }	
+
+			
     }
 
     private void resetValues()
@@ -313,21 +411,68 @@ public class PlayerBehaviour : MonoBehaviour
     {
 		// print("GlobalVariables._xPosPlayer+y: " + (GlobalVariables._xPosPlayer+i));
 		// print("GlobalVariables._yPosPlayer+x: " + (GlobalVariables._yPosPlayer+j));
-
-
-		if((GlobalVariables._yPosPlayer+j == GlobalVariables._iMaxMatrix || GlobalVariables._yPosPlayer+j < 0) || 
-		(GlobalVariables._xPosPlayer+i == GlobalVariables._jMaxMatrix || GlobalVariables._xPosPlayer+i < 0))
+		if(this.currentMove == mov)
 			return false;
+			
 
-		//14 es el numero max que puede tomar , porque el 15 es suelo , y hasta el 14 son tiles que representan obstaculos
-		if(ViewController._currentGameModel._map[GlobalVariables._yPosPlayer+j,GlobalVariables._xPosPlayer+i]==15 && currentMove != mov)
+		// if((GlobalVariables._yPosPlayer+j == GlobalVariables._iMaxMatrix || GlobalVariables._yPosPlayer+j < 0) || 
+		// (GlobalVariables._xPosPlayer+i == GlobalVariables._jMaxMatrix || GlobalVariables._xPosPlayer+i < 0))
+		// 	return false;
+
+		int valor = ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,GlobalVariables._xPosPlayer];
+		this._nextNodeCheckMove.x = (GlobalVariables._xPosPlayer* GlobalVariables._widthTile)- MapGeneratorController._offsetMap.x;
+		this._nextNodeCheckMove.y = (GlobalVariables._yPosPlayer*-GlobalVariables._widthTile)- MapGeneratorController._offsetMap.y;
+		print("Valor: " + valor);
+		// if(valor > 14)
+		// {
+		// 	do
+		// 	{
+		// 		valor-=15;
+		// 	}while(valor > 14);
+			
+		// }
+
+		switch(mov)
 		{
 			
-			// print("Entra");
-			this._nextNodeCheckMove.x = (GlobalVariables._xPosPlayer* GlobalVariables._widthTile)- MapGeneratorController._offsetMap.x;
-			this._nextNodeCheckMove.y = (GlobalVariables._yPosPlayer*-GlobalVariables._widthTile)- MapGeneratorController._offsetMap.y;
-			return checkRange(mov);
+			case(Moves.UP):
+				if(GlobalVariables._allowedMovements[valor,0]==1)
+				{
+					
+					return checkRange(mov);
+				}
+				break;
+			case(Moves.RIGHT):
+				if(GlobalVariables._allowedMovements[valor,1]==1)
+				{
+					
+					return checkRange(mov);
+				}
+				break;
+			case(Moves.DOWN):
+				if(GlobalVariables._allowedMovements[valor,2]==1)
+				{
+					return checkRange(mov);
+				}
+				break;
+			case(Moves.LEFT):
+				if(GlobalVariables._allowedMovements[valor,3]==1)
+				{
+					return checkRange(mov);
+				}
+				break;
 		}
+
+		//14 es el numero max que puede tomar , porque el 15 es suelo , y hasta el 14 son tiles que representan obstaculos
+		// if(ViewController._currentGameModel._map[GlobalVariables._yPosPlayer+j,GlobalVariables._xPosPlayer+i]!=30)
+		// {
+			
+		// 	// print("Entra");
+		// 	this._nextNodeCheckMove.x = (GlobalVariables._xPosPlayer* GlobalVariables._widthTile)- MapGeneratorController._offsetMap.x;
+		// 	this._nextNodeCheckMove.y = (GlobalVariables._yPosPlayer*-GlobalVariables._widthTile)- MapGeneratorController._offsetMap.y;
+		// 	// return checkRange(mov);
+		// 	return true;
+		// }
 
 		// print("Retorno false");
 		return false;
@@ -335,17 +480,17 @@ public class PlayerBehaviour : MonoBehaviour
 
     private bool checkRange(Moves mov)
     {
-		if(currentMove != Moves.NOTHING)
-		{
-			// print("Entro al check range");
-			// print("x: " + this._nextNodeCheckMove.x);
-			// print("y: " + this._nextNodeCheckMove.y);
-			// print("x Player: " + this.gameObject.transform.position.x);
-			// print("y Player: " + this.gameObject.transform.position.y);
-			// print("Resultado X: " + (this.transform.position.x-_nextNodeCheckMove.x));
-			// print("Resultado Y: " + (this.transform.position.y-_nextNodeCheckMove.y));
+		// if(currentMove != Moves.NOTHING)
+		// {
+		// 	// print("Entro al check range");
+		// 	// print("x: " + this._nextNodeCheckMove.x);
+		// 	// print("y: " + this._nextNodeCheckMove.y);
+		// 	// print("x Player: " + this.gameObject.transform.position.x);
+		// 	// print("y Player: " + this.gameObject.transform.position.y);
+		// 	// print("Resultado X: " + (this.transform.position.x-_nextNodeCheckMove.x));
+		// 	// print("Resultado Y: " + (this.transform.position.y-_nextNodeCheckMove.y));
 
-		}
+		// }
 		
 		//Comparando X Cuando hay un cambio de direccion
 		if( currentMove == Moves.LEFT && (mov == Moves.UP || mov == Moves.DOWN) || currentMove == Moves.RIGHT && (mov == Moves.UP || mov == Moves.DOWN))
@@ -376,34 +521,9 @@ public class PlayerBehaviour : MonoBehaviour
 			return true;
 		}
 			
-		
-		//Comparando Y Cuando hay un cambio de direccion
-		// if( currentMove == Moves.LEFT && (mov == Moves.UP || mov == Moves.UP) || currentMove == Moves.RIGHT && (mov == Moves.UP || mov == Moves.DOWN))
-		// 	if(Math.Abs(this.transform.position.x-_nextNodeCheckMove.x) <= this._pixelsBeforeMove || currentMove == Moves.NOTHING)
-		// 	{
-		// 		print("Retorno true");
-		// 		return true;
-		// 	}
 
 		return false;
-		
-        // switch(mov)
-		// {
-		// 	case Moves.LEFT:
-		// 		if(this.)
-				
 
-		// 	break;
-
-		// 	case Moves.RIGHT:
-		// 	break;
-
-		// 	case Moves.DOWN:
-		// 	break;
-
-		// 	case Moves.UP:
-		// 	break;
-		// }
     }
 
     /// <summary>
@@ -418,28 +538,54 @@ public class PlayerBehaviour : MonoBehaviour
 			
 			// _kaiAnimator.SetFloat("movX",0);
 			// _kaiAnimator.SetFloat("movY",0.5f);
-			_kaiAnimator.SetBool("damage",true);
-		
+			// _kaiAnimator.SetFloat("movX",0);
+			_kaiAnimator.SetTrigger("isDeath");
 			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(4);
-			
 			this._gameController.GetComponent<MechanicController>().resetPlayerPosition();
 			GlobalVariables._followPlayer=false;
 		}
 
-		else if(other.gameObject.tag.Equals("Portal"))
+		if(other.gameObject.tag.Equals("Portal"))
 		{
-			this._gameController.GetComponent<ViewController>().pressEnter();
-			Destroy(other.gameObject);
+			_kaiAnimator.SetBool("isWin",true);
+			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(3);
+			_gameController.GetComponent<AudioSource>().enabled = false;
+			GameObject.Find("exitDone").GetComponent<Text>().enabled = false;
+
+			
+			other.gameObject.GetComponent<Collider2D>().enabled = false;
+			GameObject.Find("Fade").GetComponent<SpriteRenderer>().enabled = true;
+			
+			GlobalVariables._stageComplete = true;
+			GlobalVariables._followPlayer = false;
+			Destroy(other.gameObject,3.5f);
+			
+			 Invoke("stageCompleteEvent",3.5f);
 			// print("Toco portal");
 		}
 
 		else if(other.gameObject.tag.Equals("Bonus"))
 		{ 
+			GlobalVariables._followPlayer = false;
 			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(1);
 			this._gameController.GetComponent<BonusController>().bonusCollision(other.GetComponent<Bonus>()._myType, other.GetComponent<Bonus>()._position);
 			// other.GetComponent<BoxCollider2D>().enabled = false;
 			Destroy(other.gameObject);
 		}
+	}
+
+	public void stageCompleteEvent()
+	{
+		GameObject.Find("Fade").GetComponent<SpriteRenderer>().enabled = false;
+		GameObject.Find("exitDone").GetComponent<Text>().enabled = false;
+		
+
+
+		_kaiAnimator.SetBool("isWin",false);
+		GlobalVariables._stageComplete = false;
+		GlobalVariables._followPlayer = true;
+		this._gameController.GetComponent<ViewController>().pressEnter();
+		
 	}
 
 	

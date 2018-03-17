@@ -53,10 +53,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Behaviours\EnemyBehaviour.cs" />
      <Compile Include="Assets\Scripts\Behaviours\PlayerBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Bonus\BonusController.cs" />
      <Compile Include="Assets\Scripts\Controllers\A pathfinding\Node.cs" />
      <Compile Include="Assets\Scripts\Controllers\A pathfinding\SearchManager.cs" />
      <Compile Include="Assets\Scripts\Controllers\AnimationController.cs" />
+     <Compile Include="Assets\Scripts\Controllers\Bonus\BonusController.cs" />
      <Compile Include="Assets\Scripts\Controllers\GameState.cs" />
      <Compile Include="Assets\Scripts\Controllers\GlobalVariables.cs" />
      <Compile Include="Assets\Scripts\Controllers\JsonController.cs" />
@@ -84,16 +84,20 @@
      <Compile Include="Assets\Scripts\Utility\TransitionKit\transitions\VerticalSlicesTransition.cs" />
      <Compile Include="Assets\Scripts\Utility\TransitionKit\transitions\WindTransition.cs" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\TextureWithAlpha.shader" />
+     <None Include="Assets\Sprites\New Sprites\Sprites Varios\NewUnlitShader.shader" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\Pixelate.shader" />
      <None Include="Assets\Sprites\New Sprites\Boris\Boris.xml" />
+     <None Include="Assets\Sprites\New Sprites\Sprites Varios\Escritor.xml" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\Fader.shader" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\Wind.shader" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\CurvedWind.shader" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\Blur.shader" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\FishEye.shader" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\Mask.shader" />
+     <None Include="Assets\Sprites\New Sprites\Sprites Varios\Vidas.xml" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\Doorway.shader" />
      <None Include="Assets\Sprites\New Sprites\Kai\Kai_V2.xml" />
+     <None Include="Assets\Sprites\New Sprites\Win Animation\Animación Final.xml" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\Ripple.shader" />
      <None Include="Assets\Scripts\Utility\TransitionKit\transitions\shaders\Squares.shader" />
  <Reference Include="UnityEngine.UI">

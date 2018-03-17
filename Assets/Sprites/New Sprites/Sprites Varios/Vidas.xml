@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Vidas.png">
+	<SubTexture name="Símbolo 1 instancia 10000" x="62" y="0" width="62" height="67" pivotX="0" pivotY="0"/>
+	<SubTexture name="Símbolo 3 instancia 10000" x="0" y="0" width="62" height="67" pivotX="0" pivotY="0"/>
+</TextureAtlas>
