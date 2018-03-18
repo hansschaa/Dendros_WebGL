@@ -12,10 +12,10 @@ public class MechanicController : MonoBehaviour
 	[Header("Game Scene UI")]
 	public GameObject _heartLifesList;
 	public Text _timeCountText;
+	public Sprite _redKai;
+	public Sprite _greenKai;
 
 	public SoundController _soundController;
-
-
 	public Coroutine _portalTimeCoroutine;
 
 	public void resetPlayerPosition()
@@ -42,9 +42,10 @@ public class MechanicController : MonoBehaviour
 
 	public void updateLifes()
 	{
+		this._heartLifesList.transform.GetChild(GlobalVariables._currentLifes-1).gameObject.GetComponent<Image>().sprite = this._redKai;
 		GlobalVariables._currentLifes-= 1;
 		
-		this._heartLifesList.transform.GetChild(GlobalVariables._currentLifes).gameObject.SetActive(false);
+		// this._heartLifesList.transform.GetChild(GlobalVariables._currentLifes).gameObject.SetActive(false);
 		if(GlobalVariables._currentLifes == 0)
 		{
 			this.GetComponent<AudioSource>().enabled = false;
@@ -57,6 +58,7 @@ public class MechanicController : MonoBehaviour
 
 		else
 		{
+		
 			this.GetComponent<BonusController>().resetStats();
 		}	
 	}
@@ -68,6 +70,11 @@ public class MechanicController : MonoBehaviour
 
 	public void stopPortalCoroutine()
 	{
+
+		this._heartLifesList.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = this._greenKai;
+		this._heartLifesList.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = this._greenKai;
+		this._heartLifesList.transform.GetChild(2).gameObject.GetComponent<Image>().sprite = this._greenKai;
+
 		StopCoroutine(this._portalTimeCoroutine);
 	}
 

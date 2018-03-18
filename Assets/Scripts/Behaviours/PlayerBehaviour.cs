@@ -176,9 +176,62 @@ public class PlayerBehaviour : MonoBehaviour
         if((Vector2)this.transform.position != _nextPosition)
 		{	
 			this.transform.position = Vector2.MoveTowards(this.transform.position, this._nextPosition, time);
+			// if(i==0)
+			// {
+			// 	if(Math.Abs(this.transform.position.x - _nextPositionToChange.x) <=0.04f && !_entry)
+			// 	{
+			// 		_entry = true;
+			// 			GlobalVariables._xPosPlayer+=j;
+			// 			GlobalVariables._yPosPlayer+=i;
+			// 			// print("Posicion X: " + GlobalVariables._xPosPlayer);
+			// 			// print("Posicion Y: " + GlobalVariables._yPosPlayer);
+			// 			// print("Llegó de la nueva forma");
+
+			// 	}
+
+			// }
+
+			// else {
+
+			// 	if(Math.Abs(this.transform.position.y - _nextPositionToChange.y) <=0.04f && !_entry)
+			// 	{
+			// 		_entry = true;
+			// 			GlobalVariables._xPosPlayer+=j;
+			// 			GlobalVariables._yPosPlayer+=i;
+			// 			// print("Posicion X: " + GlobalVariables._xPosPlayer);
+			// 			// print("Posicion Y: " + GlobalVariables._yPosPlayer);
+			// 			// print("Llegó de la nueva forma pero en y");
+
+			// 	}
+
+
+			// 	// if(Vector2.Distance(this.transform.position ,_nextPositionToChange) <= 0.03f && !_entry)
+			// 	// {
+					
+			// 	// 		_entry = true;
+			// 	// 		GlobalVariables._xPosPlayer+=j;
+			// 	// 		GlobalVariables._yPosPlayer+=i;
+			// 	// 		// print("Posicion X: " + GlobalVariables._xPosPlayer);
+			// 	// 		// print("Posicion Y: " + GlobalVariables._yPosPlayer);
+			// 	// 		print("Llegó de la otra forma");
+
+			// 	// }
+			// }
+
 			if(i==0)
 			{
-				if(Math.Abs(this.transform.position.x - _nextPositionToChange.x) <=0.04f && !_entry)
+				if(j==1 && this.transform.position.x >= _nextPositionToChange.x && !_entry)
+				{
+					_entry = true;
+						GlobalVariables._xPosPlayer+=j;
+						GlobalVariables._yPosPlayer+=i;
+						// print("Posicion X: " + GlobalVariables._xPosPlayer);
+						// print("Posicion Y: " + GlobalVariables._yPosPlayer);
+						// print("Llegó de la nueva forma");
+
+				}
+
+				else if(j==-1 && this.transform.position.x <= _nextPositionToChange.x && !_entry)
 				{
 					_entry = true;
 						GlobalVariables._xPosPlayer+=j;
@@ -193,7 +246,18 @@ public class PlayerBehaviour : MonoBehaviour
 
 			else {
 
-				if(Math.Abs(this.transform.position.y - _nextPositionToChange.y) <=0.04f && !_entry)
+				if(i == 1 && this.transform.position.y <= _nextPositionToChange.y && !_entry)
+				{
+					_entry = true;
+						GlobalVariables._xPosPlayer+=j;
+						GlobalVariables._yPosPlayer+=i;
+						// print("Posicion X: " + GlobalVariables._xPosPlayer);
+						// print("Posicion Y: " + GlobalVariables._yPosPlayer);
+						// print("Llegó de la nueva forma pero en y");
+
+				}
+
+				else if(i == -1 && this.transform.position.y >= _nextPositionToChange.y && !_entry)
 				{
 					_entry = true;
 						GlobalVariables._xPosPlayer+=j;
@@ -547,6 +611,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 		if(other.gameObject.tag.Equals("Portal"))
 		{
+			_gameController.GetComponent<ViewController>()._leaveText.SetActive(true);
 			_kaiAnimator.SetBool("isWin",true);
 			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(3);
 			_gameController.GetComponent<AudioSource>().enabled = false;
@@ -578,6 +643,8 @@ public class PlayerBehaviour : MonoBehaviour
 	{
 		GameObject.Find("Fade").GetComponent<SpriteRenderer>().enabled = false;
 		GameObject.Find("exitDone").GetComponent<Text>().enabled = false;
+		_gameController.GetComponent<ViewController>()._leaveText.SetActive(false);
+
 		
 
 

@@ -39,6 +39,13 @@ public class BonusController : MonoBehaviour
 	[HideInInspector]
 	public Vector2 _bar;
 
+	//SEARCH FOR POSITION VARIABLES
+	int max;
+	int min;
+	int iReset;
+	int jReset;
+
+
 	public int _idActiveChildLight;
 	public int _idActiveChildVelocity;
 	public int _idActiveChildCoordination;
@@ -254,7 +261,7 @@ public class BonusController : MonoBehaviour
 
     private void createBonus(BonusTypes.Types type)
 	{
-		Vector2 position = searchForPosition();
+		Vector2 position = searchForPosition(type);
 		position.x = (position.x *  GlobalVariables._widthTile) - MapGeneratorController._offsetMap.x;
 		position.y = (position.y *  -GlobalVariables._widthTile) - MapGeneratorController._offsetMap.y;
 		
@@ -295,15 +302,43 @@ public class BonusController : MonoBehaviour
 		
     }
 
-    private Vector2 searchForPosition()
+    private Vector2 searchForPosition(BonusTypes.Types type)
     {
-		int iReset=0;
-		int jReset=0;
+		
+
+		switch(type)
+		{
+			case BonusTypes.Types.LIGHT:
+				min=0;
+				max=14;
+			break;
+
+			case BonusTypes.Types.VELOCITY:
+				min=75;
+				max=89;
+			break;
+
+			case BonusTypes.Types.COORDINATION:
+				min=30;
+				max=44;
+			break;
+
+			case BonusTypes.Types.TELEPORT:
+				min=15;
+				max=29;
+			break;
+
+			case BonusTypes.Types.PORTAL:
+				min=90;
+				max=104;
+			break;
+		}
+
 		do
 		{
 			iReset = UnityEngine.Random.Range(0, GlobalVariables._iMaxMatrix); 
 			jReset = UnityEngine.Random.Range(0, GlobalVariables._jMaxMatrix); 
-		} while(ViewController._currentGameModel._map[iReset,jReset] == -1);
+		} while(ViewController._currentGameModel._map[iReset,jReset] < min || ViewController._currentGameModel._map[iReset,jReset] > max);
 
 		return new Vector2(jReset,iReset);
     }

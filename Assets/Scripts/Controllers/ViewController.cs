@@ -50,6 +50,7 @@ public class ViewController : MonoBehaviour
 	public Image _brainImage;
 	public Material _lightSensitiveMaterial;
 	public Transform _bonusGroup;
+	public GameObject _leaveText;
 
 	[HideInInspector]
 	public GameObject _playerInstance;
@@ -243,6 +244,7 @@ public class ViewController : MonoBehaviour
     {
 		this.gameObject.GetComponent<MechanicController>().stopPortalCoroutine();
 		this.gameObject.GetComponent<BonusController>().stopCoroutine();
+		
 		this.gameObject.GetComponent<MechanicController>()._timeCountText.color = new Color32(0,255,0,255);
 		// GlobalVariables._playerVelocity = GlobalVariables._playerVelocity;
 		GlobalVariables._currentLifes = 3;
