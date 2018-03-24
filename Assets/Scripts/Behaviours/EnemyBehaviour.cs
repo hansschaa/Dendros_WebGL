@@ -28,6 +28,8 @@ public class EnemyBehaviour : MonoBehaviour
 		this._currentPath = new List<Vector2>();
 
 		this._gestorBusqueda = new SearchManager();
+
+		GlobalVariables._enemy = this.gameObject;
 	}
 	
 

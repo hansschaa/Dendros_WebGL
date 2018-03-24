@@ -47,7 +47,7 @@ public class ViewController : MonoBehaviour
 	public GameObject _gameSceneCanvas;
     public GameObject _gameObjectsGameScene;
 	public GameObject _bonusList;
-	public Image _brainImage;
+	public Transform _brain;
 	public Material _lightSensitiveMaterial;
 	public Transform _bonusGroup;
 	public GameObject _leaveText;
@@ -84,10 +84,15 @@ public class ViewController : MonoBehaviour
 	/// </summary>
 	void Update()
 	{
-		if(Input.GetKeyDown(GlobalVariables._enter))
+		if(Input.GetButtonDown("Fire1"))
 		{
-			if(!_loadingSceneCanvas.activeInHierarchy)
+			if(!_loadingSceneCanvas.activeInHierarchy && !this._gameSceneCanvas.activeInHierarchy)
 				pressEnter();
+		}
+
+		else if(Input.GetButtonDown("Fire2"))
+		{
+			Application.Quit();
 		}
 
 		// if(Input.GetKeyDown(KeyCode.Space))
@@ -181,13 +186,14 @@ public class ViewController : MonoBehaviour
 
 		else if(ViewController._gameState._state == GameState.States.FINALSCENE)
 		{
+			this._soundController.GetComponent<AudioSource>().Stop();
 			this._finalSceneCanvas.SetActive(false);
 			this._gameObjectsFinalView.SetActive(false);
 			// this._camera.position = new Vector3(0,0,-10);
 
 			ViewController._gameState._state = GameState.States.MAINSCENE;
-			GlobalVariables._gameComplete = true;
-			this._gameObjectsFinalView.GetComponent<Animator>().SetBool("fade",false); 
+			GlobalVariables._gameComplete = false;
+			// this._gameObjectsFinalView.GetComponent<Animator>().SetBool("fade",false); 
 			resetGame();
 			updateView();
 		}
@@ -209,9 +215,10 @@ public class ViewController : MonoBehaviour
     internal void createPortal(int iReset, int jReset)
     {
 		Vector2 vector = new Vector2(jReset,iReset);
-		this._portalInstance = Instantiate(_portalPrefab, new Vector2((jReset*GlobalVariables._widthTile), (iReset * -GlobalVariables._widthTile)) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
+		this._portalInstance = Instantiate(_portalPrefab, new Vector2((jReset*GlobalVariables._widthTile), (iReset * -GlobalVariables._widthTile)+ GlobalVariables._widthTile) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
 		_portalInstance.GetComponent<Bonus>()._position = vector;
-		Destroy(_portalInstance,10f);
+		try{ Destroy(_portalInstance,10f); }catch(Exception e){}
+		
     }
 
     private void resetGame()
@@ -221,7 +228,7 @@ public class ViewController : MonoBehaviour
 		GlobalVariables._currentLifes = 3;
 		if(GlobalVariables._gameComplete)
 		{
-			for(int i = 0 ; i < 5 ; i++)
+			for(int i = 0 ; i < GlobalVariables._totallyStages ; i++)
 			{
 				updateIcon(1,i+1,_iconStageGroup.GetChild(i).gameObject);
 				// this._iconStageGroup.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._stageCompleted;
@@ -233,7 +240,7 @@ public class ViewController : MonoBehaviour
 		else
 		{
 			//Mejor borrarlas y crearlas nuevamente hasta la etapa 5
-			for(int i = 0 ; i < 5 ; i++)
+			for(int i = 0 ; i < GlobalVariables._totallyStages ; i++)
 				updateIcon(3,i+1,_iconStageGroup.GetChild(i).gameObject);
 		}
 
@@ -242,6 +249,7 @@ public class ViewController : MonoBehaviour
 
     public void resetGameInstances()
     {
+		this._leaveText.SetActive(false);
 		this.gameObject.GetComponent<MechanicController>().stopPortalCoroutine();
 		this.gameObject.GetComponent<BonusController>().stopCoroutine();
 		
@@ -253,7 +261,9 @@ public class ViewController : MonoBehaviour
 		GlobalVariables._changeDirection = false;
 		GlobalVariables._followPlayer = true;
 		GlobalVariables._stageComplete = false;
+		GlobalVariables._allowPurpleBonus= false;
 		this._canPressEnter = true;
+
         Destroy(_enemyInstance);
 		Destroy(_playerInstance);
 		Destroy(_portalInstance);
@@ -291,6 +301,7 @@ public class ViewController : MonoBehaviour
 			this._gameSceneCanvas.SetActive(true);
 			this._gameObjectsGameScene.SetActive(true);
 			updateBonusList();
+			updateBrainZone();
 			this.gameObject.GetComponent<BonusController>().initializeCorroutines();
 			this._playerInstance = Instantiate(_player, getNewPosition(false) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
 			this._enemyInstance = Instantiate(_enemy, getNewPosition(true) - MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
@@ -326,7 +337,7 @@ public class ViewController : MonoBehaviour
 
 		else if(ViewController._gameState._state == GameState.States.FINALSCENE)
 		{		
-			this._soundController.playSound(4);
+			this._soundController.playSound(3);
 			this._gameObjectsFinalView.SetActive(true);
 			this._finalSceneCanvas.SetActive(true);
 		
@@ -344,29 +355,85 @@ public class ViewController : MonoBehaviour
 		this.gameObject.GetComponent<MusicController>().updateMusic();
     }
 
+    private void updateBrainZone()
+    {
+
+		foreach(Transform tr in _brain)
+			tr.gameObject.SetActive(false);
+
+        if(ViewController._currentGameModel._bonusList.Count==1)
+		{
+			if(ViewController._currentGameModel._bonusList.Contains("green"))
+			{
+				_brain.GetChild(0).gameObject.SetActive(true);
+
+			}
+
+			if(ViewController._currentGameModel._bonusList.Contains("orange"))
+			{
+				_brain.GetChild(1).gameObject.SetActive(true);
+			}
+
+			if(ViewController._currentGameModel._bonusList.Contains("gray"))
+			{
+				_brain.GetChild(2).gameObject.SetActive(true);
+			}
+
+		}
+
+		else if(ViewController._currentGameModel._bonusList.Count==2)
+		{
+			
+
+		}
+
+		else if(ViewController._currentGameModel._bonusList.Count==3)
+		{
+			if(ViewController._currentGameModel._bonusList.Contains("green") && ViewController._currentGameModel._bonusList.Contains("yellow") && ViewController._currentGameModel._bonusList.Contains("gray"))
+			{
+				_brain.GetChild(3).gameObject.SetActive(true);
+			}
+
+			else if(ViewController._currentGameModel._bonusList.Contains("green") && ViewController._currentGameModel._bonusList.Contains("orange") && ViewController._currentGameModel._bonusList.Contains("yellow"))
+			{
+				_brain.GetChild(4).gameObject.SetActive(true);
+				
+			}
+
+		}
+
+    }
+
     private void updateBonusList()
     {
-        for(int i = 0 ; i < ViewController._currentGameModel._zones.Length; i++)
+        for(int i = 0 ; i < ViewController._currentGameModel._bonusList.Count; i++)
 		{
-			switch(ViewController._currentGameModel._zones[i])
+			switch(ViewController._currentGameModel._bonusList[i])
 			{
-				case "Occipital":
+				case "all":
+					this._bonusList.transform.GetChild(0).gameObject.SetActive(true);
+					this._bonusList.transform.GetChild(1).gameObject.SetActive(true);
+					this._bonusList.transform.GetChild(2).gameObject.SetActive(true);
+					GlobalVariables._yellowBonus = true;
+					GlobalVariables._purpleBonus = true;
+				break;
+				case "green":
 					this._bonusList.transform.GetChild(0).gameObject.SetActive(true);
 				break;
 
-				case "Premotora":
+				case "orange":
 					this._bonusList.transform.GetChild(1).gameObject.SetActive(true);
 				break;
 
-				case "Frontal":
+				case "purple":
 					GlobalVariables._purpleBonus = true;
 				break;
 
-				case "Cerebelo":
+				case "gray":
 					this._bonusList.transform.GetChild(2).gameObject.SetActive(true);
 				break;
 
-				case "Parietal":
+				case "yellow":
 					GlobalVariables._yellowBonus = true;
 				break;
 			}
@@ -517,19 +584,19 @@ public class ViewController : MonoBehaviour
 		string descriptionMission = JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["descriptionMission"].ToString();
 		int entryTime = (int)JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["entryTime"];
 		int postEntryTime = (int)JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["postEntryTime"];
-		string[] zones = addBonusToArray();
+		List<string> _bonusList = addBonusToArray();
 		int[,] map = generateMap();
 
-        ViewController._currentGameModel = new Game(missionNumber, descriptionMission,entryTime, postEntryTime,zones,map);
+        ViewController._currentGameModel = new Game(missionNumber, descriptionMission,entryTime, postEntryTime,_bonusList,map);
     }
 
-    private string[] addBonusToArray()
+    private List<string> addBonusToArray()
     {
-		string[] zones = new string[JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["brainZone"].Count];
-		for(int i = 0 ; i < JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["brainZone"].Count; i++)
-			zones[i] = JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["brainZone"][i].ToString();
+		List<String> _bonusList = new List<string>();
+		for(int i = 0 ; i < JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["bonus"].Count; i++)
+			_bonusList.Add(JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["bonus"][i].ToString());
 
-		return zones;
+		return _bonusList;
     }
 
     private int[,] generateMap()
@@ -565,11 +632,13 @@ public class ViewController : MonoBehaviour
 		}		
 	}	
 
-	public void createPlayer()
+	public void createPlayer(bool borisHit)
     {
+		
         Destroy(this._playerInstance);
 		this._playerInstance = Instantiate(_player, this.getNewPosition(false)- MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
-		_playerInstance.transform.GetChild(0).gameObject.GetComponent<Animator>().SetBool("isDeath",true);
+		if(borisHit)
+			_playerInstance.transform.GetChild(0).gameObject.GetComponent<Animator>().SetBool("isDeath",true);
     }
 
 	private IEnumerator waitThenCallback(float time, Action callback)

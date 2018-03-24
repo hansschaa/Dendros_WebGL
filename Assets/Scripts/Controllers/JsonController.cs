@@ -17,34 +17,38 @@ public class JsonController : MonoBehaviour
 	public string _stageUrl;
 
 	private WWW _www;
+	
 
 
-	IEnumerator Start()
+
+	void Start()
 	{
-		_www = new WWW(_stageUrl);
+		// _www = new WWW(_stageUrl);
 
-		yield return _www;
+		// yield return _www;
 
-		if (_www.error == null)
-		{
-			print(_www.text);
-			jsonDataStages = JsonMapper.ToObject(_www.text.Trim());
+		// if (_www.error == null)
+		// {
+			// print(_www.text);
+			jsonDataStages = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/GameData.txt").Trim());
+			// jsonDataStages = JsonMapper.ToObject(_www.text.Trim());
 			loadGlobalVariablesFromJson();
-			yield return new WaitForSeconds(1f);
+			// yield return new WaitForSeconds(1f);
 			this._mainSceneCanvas.SetActive(true);
 			this._gameObjectsMainScene.SetActive(true);
 			this.GetComponent<AnimationController>().playAnimations(GameState.States.MAINSCENE);
 			this._loadingSceneCanvas.SetActive(false);
-		}
+		// }
 
-		else
-		{
-			Debug.Log("ERROR: " +  _www.error);
-		}        
+		// else
+		// {
+		// 	Debug.Log("ERROR: " +  _www.error);
+		// }        
 	}
 
     private void loadGlobalVariablesFromJson()
     {
         GlobalVariables._totallyStages = jsonDataStages["Stages"].Count;
+		// GlobalVariables._totallyStages = 3;
     }
 }

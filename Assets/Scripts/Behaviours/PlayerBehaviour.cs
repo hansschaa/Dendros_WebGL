@@ -5,24 +5,25 @@ using UnityEngine;
 using UnityEngine.UI;
 public class PlayerBehaviour : MonoBehaviour 
 {
-
+	//Path
 	public Vector2 _nextPosition;
 	public Vector2 _nextPositionToChange;
 	public List<Vector2> playerPath;
 	public Moves currentMove;
 	public float time;
 	public float speed;
-
 	public int currentNode;
 
+	//References
 	private GameObject _gameController;
+	// public GameObject _enemy;
+	float deltaTime;
+
 
 	public float _pixelsBeforeMove;
 	public Vector2 _nextNodeCheckMove;
 	private Animator _kaiAnimator;
 	private bool _entry;
-	
-	
 
 	public enum Moves
 	{
@@ -35,6 +36,7 @@ public class PlayerBehaviour : MonoBehaviour
 	void Awake()
 	{
 		this._gameController = GameObject.Find("GameController").gameObject;
+		
 	}
 
 	// Use this for initialization
@@ -46,11 +48,33 @@ public class PlayerBehaviour : MonoBehaviour
 		currentMove = Moves.NOTHING;
 		speed = GlobalVariables._playerVelocity;
 		this._nextNodeCheckMove = Vector2.zero;
+		// this._enemy = GameObject.Find("BorisEnemy(Clone)").gameObject;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+		deltaTime += Time.deltaTime;
+		if(deltaTime>2)
+		{
+			if(this.transform.position.y > GlobalVariables._enemy.transform.position.y)
+			{
+				this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -2;
+				GlobalVariables._enemy.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
+			}
+
+			else
+			{
+				this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
+				GlobalVariables._enemy.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -2;
+				
+
+			}
+			
+			deltaTime = 0;
+		}
+
+
 		if(Input.GetKeyDown(KeyCode.X))
 		{
 			print("X position Global: " + GlobalVariables._xPosPlayer);
@@ -64,10 +88,13 @@ public class PlayerBehaviour : MonoBehaviour
 		// 	// _kaiAnimator.SetFloat("movY",0);
 		// }
 
+		float x = Input.GetAxis("Horizontal");
+		float y = Input.GetAxis("Vertical");
+
 		#region Controls 
 		if(!GlobalVariables._stageComplete)
 		{
-			if(Input.GetKey(GlobalVariables._down) && !GlobalVariables._changeDirection || Input.GetKey(GlobalVariables._up)  && GlobalVariables._changeDirection)
+			if(y<0 && !GlobalVariables._changeDirection || y>0  && GlobalVariables._changeDirection)
 			{
 				
 				if(canMove(1,0,Moves.DOWN))
@@ -85,7 +112,7 @@ public class PlayerBehaviour : MonoBehaviour
 				}
 			}
 
-			else if(Input.GetKey(GlobalVariables._up)  && !GlobalVariables._changeDirection || Input.GetKey(GlobalVariables._down) && GlobalVariables._changeDirection)
+			else if(y>0  && !GlobalVariables._changeDirection || y<0 && GlobalVariables._changeDirection)
 			{
 				if(canMove(-1,0,Moves.UP))
 				{
@@ -103,7 +130,7 @@ public class PlayerBehaviour : MonoBehaviour
 				}	
 			}
 
-			else if(Input.GetKey(GlobalVariables._left)  && !GlobalVariables._changeDirection || Input.GetKey(GlobalVariables._right) && GlobalVariables._changeDirection)
+			else if(x<0  && !GlobalVariables._changeDirection || x>0 && GlobalVariables._changeDirection)
 			{
 				if(canMove(0,-1,Moves.LEFT))
 				{
@@ -116,14 +143,10 @@ public class PlayerBehaviour : MonoBehaviour
 					generatePlayerPath(Moves.LEFT);
 
 					updateValues(0,-1,Moves.LEFT);
-					_kaiAnimator.SetBool("walk",true);
-					_kaiAnimator.SetBool("isDeath", false);
-					_kaiAnimator.SetFloat("movX",-1);
-					_kaiAnimator.SetFloat("movY",0);
 				}	
 			}
 
-			else if(Input.GetKey(GlobalVariables._right)  && !GlobalVariables._changeDirection || Input.GetKey(GlobalVariables._left)  && GlobalVariables._changeDirection)
+			else if(x>0  && !GlobalVariables._changeDirection || x<0 && GlobalVariables._changeDirection)
 			{
 				if(canMove(0,1,Moves.RIGHT))
 				{
@@ -375,7 +398,7 @@ public class PlayerBehaviour : MonoBehaviour
 		// 	}while(valor > 14);
 		// }
 
-		print("Este es el valor que buscas?: " + valor);
+		// print("Este es el valor que buscas?: " + valor);
 
 		if(mov == Moves.UP)
 		{
@@ -486,7 +509,7 @@ public class PlayerBehaviour : MonoBehaviour
 		int valor = ViewController._currentGameModel._map[GlobalVariables._yPosPlayer,GlobalVariables._xPosPlayer];
 		this._nextNodeCheckMove.x = (GlobalVariables._xPosPlayer* GlobalVariables._widthTile)- MapGeneratorController._offsetMap.x;
 		this._nextNodeCheckMove.y = (GlobalVariables._yPosPlayer*-GlobalVariables._widthTile)- MapGeneratorController._offsetMap.y;
-		print("Valor: " + valor);
+		// print("Valor: " + valor);
 		// if(valor > 14)
 		// {
 		// 	do
@@ -603,7 +626,7 @@ public class PlayerBehaviour : MonoBehaviour
 			// _kaiAnimator.SetFloat("movX",0);
 			// _kaiAnimator.SetFloat("movY",0.5f);
 			// _kaiAnimator.SetFloat("movX",0);
-			_kaiAnimator.SetTrigger("isDeath");
+			_kaiAnimator.SetBool("isDeath",true);
 			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(4);
 			this._gameController.GetComponent<MechanicController>().resetPlayerPosition();
 			GlobalVariables._followPlayer=false;

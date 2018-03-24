@@ -14,6 +14,8 @@ public class MechanicController : MonoBehaviour
 	public Text _timeCountText;
 	public Sprite _redKai;
 	public Sprite _greenKai;
+	public GameObject _fade;
+	public GameObject _gameOverText;
 
 	public SoundController _soundController;
 	public Coroutine _portalTimeCoroutine;
@@ -34,7 +36,7 @@ public class MechanicController : MonoBehaviour
 
 		if(GlobalVariables._currentLifes>1)
 		{
-			this.gameObject.GetComponent<ViewController>().createPlayer();
+			this.gameObject.GetComponent<ViewController>().createPlayer(true);
 		}
 
 		updateLifes();
@@ -53,6 +55,8 @@ public class MechanicController : MonoBehaviour
 			GlobalVariables._globalLifes -= 1;
 			GlobalVariables._followPlayer = false;
 			GlobalVariables._stageComplete = true;
+			this._fade.GetComponent<SpriteRenderer>().enabled = true;
+			this._gameOverText.SetActive(true);
 			Invoke("partialGameOverMethod",3f);
 		}
 
@@ -99,7 +103,10 @@ public class MechanicController : MonoBehaviour
 				yield return new WaitForSeconds(1f);
 			}
 
-			putPortal();
+			if(this.GetComponent<ViewController>()._portalInstance == null)
+				putPortal();
+
+			GlobalVariables._allowPurpleBonus = true;
 			_timeCountText.color = new Color(255,0,0,255);
 
 			contador = 10;
@@ -110,7 +117,8 @@ public class MechanicController : MonoBehaviour
 				yield return new WaitForSeconds(1f);
 			}
 			_timeCountText.color = new Color(0,255,0,255);
-			Destroy(this.gameObject.GetComponent<ViewController>()._portalInstance); 
+
+			// Destroy(this.gameObject.GetComponent<ViewController>()._portalInstance); 
 
 		}
 	}
@@ -131,6 +139,8 @@ public class MechanicController : MonoBehaviour
 
 	public void partialGameOverMethod()
 	{
+		this._gameOverText.SetActive(false);
+		this._fade.GetComponent<SpriteRenderer>().enabled = false;
 		GlobalVariables._followPlayer = true;
 		this.GetComponent<ViewController>().pressEnter();
 	}

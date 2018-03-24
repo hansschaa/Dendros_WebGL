@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Animacion Final.png">
+	<SubTexture name="Kai end0000" x="580" y="636" width="120" height="218" pivotX="173.8" pivotY="216.6" frameX="-2" frameY="-100" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0004" x="0" y="632" width="121" height="219" frameX="-2" frameY="-99" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0038" x="863" y="440" width="154" height="197" frameX="-4" frameY="-122" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0040" x="700" y="636" width="138" height="175" frameX="-1" frameY="-142" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0042" x="838" y="637" width="131" height="173" frameX="0" frameY="-144" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0044" x="408" y="615" width="172" height="211" frameX="-11" frameY="-45" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0045" x="214" y="447" width="194" height="201" frameX="-55" frameY="-17" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0046" x="661" y="440" width="202" height="196" frameX="-76" frameY="-6" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0047" x="712" y="247" width="206" height="193" frameX="-85" frameY="-1" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0048" x="246" y="254" width="206" height="193" frameX="-88" frameY="0" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0049" x="0" y="255" width="207" height="192" frameX="-90" frameY="-1" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0050" x="452" y="425" width="209" height="190" frameX="-98" frameY="-7" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0051" x="0" y="447" width="214" height="185" frameX="-116" frameY="-19" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0052" x="490" y="244" width="222" height="181" frameX="-156" frameY="-41" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0053" x="490" y="0" width="249" height="244" frameX="-201" frameY="-79" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0055" x="0" y="0" width="246" height="255" frameX="-193" frameY="-69" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0057" x="246" y="0" width="244" height="254" frameX="-189" frameY="-70" frameWidth="450" frameHeight="324"/>
+	<SubTexture name="Kai end0059" x="739" y="0" width="241" height="247" frameX="-186" frameY="-77" frameWidth="450" frameHeight="324"/>
+</TextureAtlas>

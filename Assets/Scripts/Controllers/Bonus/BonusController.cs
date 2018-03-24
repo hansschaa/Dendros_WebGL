@@ -29,15 +29,19 @@ public class BonusController : MonoBehaviour
 	public Transform _portalGroupGameObject;
 
 	public GameObject[] _bonusList;
+
+	public GameObject[] _portalPathTiles;
 	public Material _material;
 
 	[Header("Parameters")]
 	public float _decreaseValue;
 	public float _initializeChangeParametersDelay;
 	public float _respawnDelay;
-	private float _playerVelocity; 
+	
 	[HideInInspector]
 	public Vector2 _bar;
+
+
 
 	//SEARCH FOR POSITION VARIABLES
 	int max;
@@ -68,7 +72,7 @@ public class BonusController : MonoBehaviour
 			for(int i = 0 ; i < 3;i++)
 				this._velocityBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
 
-			this._playerVelocity = GlobalVariables._playerVelocity;
+			// this._playerVelocity = GlobalVariables._playerVelocity;
 			GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity;
 			this._idActiveChildVelocity = 0;
 
@@ -95,7 +99,7 @@ public class BonusController : MonoBehaviour
 		this._searchManager = new SearchManager();
 		this._decreaseValue = this._lightBonus.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta.x/10;
 		this._bar = this._lightBonus.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta;
-		this._playerVelocity = GlobalVariables._playerVelocity;
+		// this._playerVelocity = GlobalVariables._playerVelocity;
 		this._material.color = new Color32(255,255,255,255);
 	}
 
@@ -148,16 +152,16 @@ public class BonusController : MonoBehaviour
 					switch(this._idActiveChildLight)
 					{
 						case 2:
-						GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity-0.6f;
+						GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity-0.3f;
 						_reimiText.text = "KAI vas a perder tu movimiento ¡Busca el bonus NARANJO!";
 						break;
 						case 1:
-						GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity-0.4f;
+						GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity-0.2f;
 						_reimiText.text = "KAI vas a perder tu movimiento ¡Busca el bonus NARANJO!";
 						break;
 						case 0:
 						
-						GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity-0.2f;
+						GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity-0.1f;
 						_reimiText.text = "KAI vas a perder tu movimiento ¡Busca el bonus NARANJO!";
 						break;
 					}
@@ -230,13 +234,12 @@ public class BonusController : MonoBehaviour
 			if(this._lightBonus.gameObject.activeInHierarchy)
 			{
 				createBonus(BonusTypes.Types.LIGHT);
-				print("Creando bonus de luz");
+
 			}
 			
 			if(this._velocityBonus.gameObject.activeInHierarchy)
 			{
 				createBonus(BonusTypes.Types.VELOCITY);
-				print("Creando bonus de velocidad");
 			}
 
 			if(this._coordinationBonus.gameObject.activeInHierarchy)
@@ -262,6 +265,7 @@ public class BonusController : MonoBehaviour
     private void createBonus(BonusTypes.Types type)
 	{
 		Vector2 position = searchForPosition(type);
+		Vector2 bonusMatrixPosition = new Vector2(position.x,position.y);
 		position.x = (position.x *  GlobalVariables._widthTile) - MapGeneratorController._offsetMap.x;
 		position.y = (position.y *  -GlobalVariables._widthTile) - MapGeneratorController._offsetMap.y;
 		
@@ -293,11 +297,11 @@ public class BonusController : MonoBehaviour
 			_teleportBonusInstance.GetComponent<Bonus>()._position = position;
 		}
 
-		else if(type == BonusTypes.Types.PORTAL && _portalBonusInstance == null && this.GetComponent<ViewController>()._portalInstance == null)
+		else if(type == BonusTypes.Types.PORTAL && _portalBonusInstance == null && GlobalVariables._allowPurpleBonus )
 		{
 			_reimiText.text = "KAI resuelve la salida ¡Busca el bonus MORADO!";
 			_portalBonusInstance = Instantiate(_bonusList[4], position, Quaternion.identity, this.gameObject.GetComponent<ViewController>()._bonusGroup) as GameObject;
-			_portalBonusInstance.GetComponent<Bonus>()._position = position;
+			_portalBonusInstance.GetComponent<Bonus>()._position = bonusMatrixPosition;
 		}
 		
     }
@@ -350,7 +354,7 @@ public class BonusController : MonoBehaviour
 		_coordinationBonusInstance = null;
 		_teleportBonusInstance = null;
 		_portalBonusInstance = null;
-		this._playerVelocity = GlobalVariables._playerVelocity;
+		// GlobalVariables._playerVelocity = this._playerVelocity;
 	}
 
 	public void bonusCollision(BonusTypes.Types type, Vector2 position)
@@ -372,7 +376,7 @@ public class BonusController : MonoBehaviour
 		for(int i = 0 ; i < 3;i++)
 			this._velocityBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
 
-			this._playerVelocity = GlobalVariables._playerVelocity;
+			// GlobalVariables._playerVelocity = this._playerVelocity;
 			GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity;
 
 			this._idActiveChildVelocity = 0;
@@ -392,18 +396,28 @@ public class BonusController : MonoBehaviour
 
 		else if(type == BonusTypes.Types.TELEPORT)
 		{
-			this.GetComponent<ViewController>().createPlayer();
+			this.GetComponent<ViewController>().createPlayer(false);
 		}
 
 		else if(type == BonusTypes.Types.PORTAL)
-		{
-			
+		{	
+			if(GetComponent<ViewController>()._portalInstance!= null)
+			{
+				Destroy(GetComponent<ViewController>()._portalInstance);
+				foreach(Transform tr in _portalGroupGameObject)
+				{
+					Destroy(tr.gameObject);
+				}
+
+			}
+				
+
 			this._portalPath.Clear();
-			GetComponent<MechanicController>().stopPortalCoroutine();
+			// GetComponent<MechanicController>().stopPortalCoroutine();
 			GetComponent<MechanicController>().putPortal();
 			Vector2 portalPosition = GetComponent<ViewController>()._portalInstance.GetComponent<Bonus>()._position;
 			this._portalPath = _searchManager.encontrarCamino(position, portalPosition);
-			imprimir();
+			// imprimir();
 			drawShapePath();
 		}
 
@@ -411,8 +425,38 @@ public class BonusController : MonoBehaviour
 
     private void drawShapePath()
     {
-        for(int i = 0 ; i < this._portalPath.Count ; i++)
-			Destroy(Instantiate(_shape,new Vector2(_portalPath[i].x * GlobalVariables._widthTile,_portalPath[i].y*-GlobalVariables._widthTile) - MapGeneratorController._offsetMap, Quaternion.identity,this._portalGroupGameObject) as GameObject,10f);
+		try{
+			for(int i = 0 ; i < this._portalPath.Count-1; i++)
+			{
+				//Move to Up
+				if(this._portalPath[i].y < this._portalPath[i+1].y)
+				{
+					Destroy(Instantiate(_portalPathTiles[0],new Vector2(_portalPath[i].x * GlobalVariables._widthTile,(_portalPath[i].y*-GlobalVariables._widthTile)-GlobalVariables._widthTile/2) - MapGeneratorController._offsetMap, Quaternion.identity,this._portalGroupGameObject) as GameObject,10f);
+				}
+
+				//Move to right
+				else if(this._portalPath[i].x<this._portalPath[i+1].x)
+				{
+					Destroy(Instantiate(_portalPathTiles[1],new Vector2((_portalPath[i].x * GlobalVariables._widthTile) + GlobalVariables._widthTile/2,_portalPath[i].y*-GlobalVariables._widthTile) - MapGeneratorController._offsetMap, Quaternion.identity,this._portalGroupGameObject) as GameObject,10f);
+				}
+
+				//Move to Down
+				else if(this._portalPath[i].y>this._portalPath[i+1].y)
+				{
+					Destroy(Instantiate(_portalPathTiles[0],new Vector2(_portalPath[i].x * GlobalVariables._widthTile,(_portalPath[i].y*-GlobalVariables._widthTile) + GlobalVariables._widthTile/2) - MapGeneratorController._offsetMap, Quaternion.identity,this._portalGroupGameObject) as GameObject,10f);
+				}
+
+				//Move to left
+				else if(this._portalPath[i].x>this._portalPath[i+1].x)
+				{
+					Destroy(Instantiate(_portalPathTiles[1],new Vector2((_portalPath[i].x * GlobalVariables._widthTile)- GlobalVariables._widthTile/2,_portalPath[i].y*-GlobalVariables._widthTile) - MapGeneratorController._offsetMap, Quaternion.identity,this._portalGroupGameObject) as GameObject,10f);
+				}
+			}
+		}
+
+		catch(Exception e){}
+
+		
     }
 
 	public void imprimir()

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 163b91969d154f2458bf4b27d96423e6
-timeCreated: 1521243829
+timeCreated: 1521603571
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,7 @@ TextureImporter:
     21300002: Elementos_1
     21300004: Elementos_2
     21300006: Elementos_3
+    21300008: Elementos_4
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -144,7 +145,21 @@ TextureImporter:
         width: 36
         height: 70
       alignment: 9
-      pivot: {x: 0.5, y: 0.012541498}
+      pivot: {x: 0.5095257, y: 0.010091809}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Elementos_4
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 15
+        width: 22
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

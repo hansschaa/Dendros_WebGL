@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Animación Final.png">
+	<SubTexture name="Symbol 1050000" x="150" y="485" width="154" height="197" pivotX="169.1" pivotY="94.75"/>
+	<SubTexture name="Symbol 1060000" x="304" y="485" width="138" height="175" pivotX="172.05" pivotY="74.75"/>
+	<SubTexture name="Symbol 1090000" x="0" y="424" width="150" height="240" pivotX="-67.6" pivotY="132.55"/>
+	<SubTexture name="Symbol 1100000" x="249" y="0" width="150" height="240" pivotX="-67.65" pivotY="132.55"/>
+	<SubTexture name="Symbol 1120000" x="222" y="244" width="150" height="241" pivotX="-67.65" pivotY="133.95"/>
+	<SubTexture name="Symbol 1140000" x="0" y="244" width="222" height="180" pivotX="152.3" pivotY="174.5"/>
+	<SubTexture name="Symbol 1160000" x="0" y="0" width="249" height="244" pivotX="-28.5" pivotY="137.6"/>
+</TextureAtlas>

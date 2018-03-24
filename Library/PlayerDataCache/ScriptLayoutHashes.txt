@@ -1,8 +1,8 @@
-WebGL
+WindowsStandalone
 SceneListBegin?
 Assets/Scenes/MainScene.unity
 SceneListEnd?
-a46cbd80e3bb8abc2ded3faea426368e Assembly-CSharp.dll:.ViewController
+de0e7046fad31910993f7ce7c1871e88 Assembly-CSharp.dll:.ViewController
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 970a95104359198fe1a98ef48655de8c UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 8144169769d51429c4aedc8b0f92d47b UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -94,7 +94,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.GroupTrack
 6af7378a45ad6da4992a71ef50ddc2eb UnityEngine.Timeline.dll:UnityEngine.Timeline.PlayableTrack
 9ca6347af5ceb6b0d1c105af31b6722e UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
-5a05e737bf2d40de99ea7dc920c65d9f Assembly-CSharp.dll:.MechanicController
+47af8fa1a637447c0a2a2f30af5ce866 Assembly-CSharp.dll:.MechanicController
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
 60b2bb652410a5867a5ab9a01cd38461 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkDiscovery
@@ -152,5 +152,5 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 edf68129793cf144f50bb4f377ab73ee Assembly-CSharp.dll:.JsonController
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Helper
-f6ee75b33c52cc0254497a4036590c1d Assembly-CSharp.dll:.BonusController
+fc04ac950e65f54d51773f81761f88b8 Assembly-CSharp.dll:.BonusController
 bcd1352e069039403daa7aee9578a05e Assembly-CSharp.dll:.SoundController
