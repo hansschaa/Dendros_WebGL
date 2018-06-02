@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentPath: []
-  _speed: 0.9
+  _speed: 0.85
   _time: 0
   _frecuency: 0.25
 --- !u!212 &212535107055523030

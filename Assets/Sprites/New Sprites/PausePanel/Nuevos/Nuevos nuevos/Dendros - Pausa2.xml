@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Dendros - Pausa2.png">
+	<SubTexture name="Music instancia 10000" x="4" y="4" width="72" height="90" pivotX="35.7" pivotY="45.2"/>
+	<SubTexture name="X instancia 10000" x="86" y="4" width="56" height="55" pivotX="27.4" pivotY="27.4"/>
+	<SubTexture name="X instancia 10001" x="86" y="69" width="56" height="55"/>
+</TextureAtlas>

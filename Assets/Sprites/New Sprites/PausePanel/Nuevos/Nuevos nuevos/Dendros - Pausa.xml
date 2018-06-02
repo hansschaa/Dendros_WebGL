@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Dendros - Pausa.png">
+	<SubTexture name="box instancia 10000" x="4" y="4" width="106" height="98" pivotX="52.45" pivotY="48.7"/>
+	<SubTexture name="menu instancia 10000" x="118" y="70" width="118" height="52" pivotX="58.5" pivotY="26.9"/>
+	<SubTexture name="menu instancia 10001" x="244" y="70" width="118" height="52"/>
+	<SubTexture name="slide instancia 10000" x="118" y="4" width="120" height="58" pivotX="59.8" pivotY="28.55" frameX="0" frameY="0" frameWidth="120" frameHeight="59"/>
+	<SubTexture name="slide instancia 10001" x="246" y="4" width="120" height="58" frameX="0" frameY="-1" frameWidth="120" frameHeight="59"/>
+	<SubTexture name="sound instancia 10000" x="4" y="110" width="88" height="74" pivotX="43.3" pivotY="36.75"/>
+	<SubTexture name="yes_no instancia 10000" x="100" y="130" width="118" height="52" pivotX="58.5" pivotY="25.5"/>
+	<SubTexture name="yes_no instancia 10001" x="226" y="130" width="118" height="52"/>
+</TextureAtlas>

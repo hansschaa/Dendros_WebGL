@@ -46,8 +46,7 @@ public class MechanicController : MonoBehaviour
 	{
 		this._heartLifesList.transform.GetChild(GlobalVariables._currentLifes-1).gameObject.GetComponent<Image>().sprite = this._redKai;
 		GlobalVariables._currentLifes-= 1;
-		
-		// this._heartLifesList.transform.GetChild(GlobalVariables._currentLifes).gameObject.SetActive(false);
+
 		if(GlobalVariables._currentLifes == 0)
 		{
 			this.GetComponent<AudioSource>().enabled = false;
@@ -117,8 +116,6 @@ public class MechanicController : MonoBehaviour
 				yield return new WaitForSeconds(1f);
 			}
 			_timeCountText.color = new Color(0,255,0,255);
-
-			// Destroy(this.gameObject.GetComponent<ViewController>()._portalInstance); 
 
 		}
 	}

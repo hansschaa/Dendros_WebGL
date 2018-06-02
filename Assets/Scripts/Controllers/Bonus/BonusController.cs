@@ -149,7 +149,7 @@ public class BonusController : MonoBehaviour
 				else
 				{
 					this._soundController.playSound(2);
-					switch(this._idActiveChildLight)
+					switch(this._idActiveChildVelocity)
 					{
 						case 2:
 						GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity-0.3f;
@@ -373,20 +373,16 @@ public class BonusController : MonoBehaviour
 		{
 			
 			
-		for(int i = 0 ; i < 3;i++)
-			this._velocityBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
-
-			// GlobalVariables._playerVelocity = this._playerVelocity;
-			GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity;
-
-			this._idActiveChildVelocity = 0;
-			// this._velocityBonus.sizeDelta = _bar;
+			for(int i = 0 ; i < 3;i++)
+				this._velocityBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
+				GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity;
+				this._idActiveChildVelocity = 0;
 		}
 
 		else if(type == BonusTypes.Types.COORDINATION)
 		{
 			for(int i = 0 ; i < 3;i++)
-			this._coordinationBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
+				this._coordinationBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
 
 			GlobalVariables._changeDirection= false;
 

@@ -75,7 +75,6 @@ public class EnemyBehaviour : MonoBehaviour
 						if(GlobalVariables._xPosEnemy > 0)
 							GlobalVariables._xPosEnemy-=1;
 				
-						// print("Izquierda: " + GlobalVariables._xPosEnemy);
 						this._borisAnimator.SetFloat("movX",-1);
 						this._borisAnimator.SetFloat("movY",0);
 					}
@@ -87,7 +86,6 @@ public class EnemyBehaviour : MonoBehaviour
 						if(GlobalVariables._xPosEnemy < 13)
 							GlobalVariables._xPosEnemy+=1;
 						
-						// print("derecha: " + GlobalVariables._xPosEnemy);
 						this._borisAnimator.SetFloat("movX",1);
 						this._borisAnimator.SetFloat("movY",0);
 					}
@@ -98,7 +96,6 @@ public class EnemyBehaviour : MonoBehaviour
 						if(GlobalVariables._yPosEnemy > 0)
 							GlobalVariables._yPosEnemy-=1; 
 							
-						// print("arriba: " + GlobalVariables._yPosEnemy);
 						this._borisAnimator.SetFloat("movX",0);
 						this._borisAnimator.SetFloat("movY",1);
 					}
@@ -108,8 +105,7 @@ public class EnemyBehaviour : MonoBehaviour
 					{
 						if(GlobalVariables._yPosEnemy < 13)
 							GlobalVariables._yPosEnemy+=1;  
-						
-						// print("Abajo: " + GlobalVariables._yPosEnemy);
+
 						this._borisAnimator.SetFloat("movX",0);
 						this._borisAnimator.SetFloat("movY",-1);
 					}
@@ -134,7 +130,6 @@ public class EnemyBehaviour : MonoBehaviour
 		while(GlobalVariables._followPlayer)
 		{
 			this._currentNode = 0;
-			// _currentPath.Clear();
 			_currentPath = this._gestorBusqueda.encontrarCamino(new Vector2(GlobalVariables._xPosEnemy,GlobalVariables._yPosEnemy), new Vector2(GlobalVariables._xPosPlayer,GlobalVariables._yPosPlayer));
 			if(_currentPath!= null)
 			{

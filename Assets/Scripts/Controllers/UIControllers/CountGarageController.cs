@@ -15,9 +15,9 @@ public class CountGarageController : MonoBehaviour
 		// this._BC = StartCoroutine(beginCount());	
 	}
 
-	public IEnumerator beginCount()
+	public IEnumerator beginCount(int valor)
 	{
-		int contador = 30;
+		int contador = valor;
 		while(contador != 0)
 		{
 			this._beginCountGarage.text = contador.ToString();
@@ -33,8 +33,8 @@ public class CountGarageController : MonoBehaviour
 		StopCoroutine(this._BC);
     }
 
-    internal void resetCoroutine()
+    internal void resetCoroutine(int valor)
     {
-        this._BC = StartCoroutine(beginCount());
+        this._BC = StartCoroutine(beginCount(valor));
     }
 }

@@ -33,6 +33,20 @@ public class ViewController : MonoBehaviour
 	public Text _subTitleMissionText;
 	public Text _descriptionMissionText;
 	public Transform _iconStageGroup;
+	const int ICONGROUPSPACING = 70;
+
+	
+	[Header("MenuPausaGarage")]
+	public GameObject _menuPausaGarage;
+	public Sprite _noOptionImage; 
+	public Sprite _yesOptionImage; 
+	public Button _musicButtonMenuGarage;
+	public Button _soundButtonMenuGarage;
+
+	[Header("MenuPausaGarage")]
+	public GameObject _menuPausaGameScene;
+	public Button _musicButtonMenuGameScene;
+	public Button _soundButtonMenuGameScene;
 
 
 
@@ -70,11 +84,38 @@ public class ViewController : MonoBehaviour
 	public GameObject _gameOverSceneCanvas;
 
 	/// <summary>
+	/// Awake is called when the script instance is being loaded.
+	/// </summary>
+	// void Awake()
+	// {
+	// 	PlayerPrefs.DeleteAll();
+	// }
+
+	/// <summary>
 	/// Start is called on the frame when a script is enabled just before
 	/// any of the Update methods is called the first time.
 	/// </summary>
 	void Start()
 	{
+		//For Desktop
+		// print(PlayerPrefs.GetInt("lastStageCompleted"));
+		// if(PlayerPrefs.GetInt("GameComplete")==0)
+		// {
+		// 	GlobalVariables._currentLevel = PlayerPrefs.GetInt("lastStageCompleted");
+		// 	GlobalVariables._userLevel = PlayerPrefs.GetInt("lastStageCompleted");
+		// }
+
+		// else
+		// {
+		// 	GlobalVariables._currentLevel = 0;
+		// 	GlobalVariables._userLevel = 0;
+		// }
+
+		//For webgl
+		GlobalVariables._currentLevel = 0;
+		GlobalVariables._userLevel = 0;
+		
+	
 		this._canPressEnter = true;
 		ViewController._gameState = new GameState(GameState.States.MAINSCENE);
 	}
@@ -84,21 +125,16 @@ public class ViewController : MonoBehaviour
 	/// </summary>
 	void Update()
 	{
-		if(Input.GetButtonDown("Fire1"))
+		if(Input.GetButtonDown("Enter") || (Input.GetMouseButton(0) && !this._garageSceneCanvas.activeInHierarchy))
 		{
-			if(!_loadingSceneCanvas.activeInHierarchy && !this._gameSceneCanvas.activeInHierarchy)
+			if(!_loadingSceneCanvas.activeInHierarchy && !this._gameSceneCanvas.activeInHierarchy && !this._menuPausaGarage.activeInHierarchy)
 				pressEnter();
 		}
 
-		else if(Input.GetButtonDown("Fire2"))
+		else if(Input.GetButtonDown("Exit"))
 		{
 			Application.Quit();
 		}
-
-		// if(Input.GetKeyDown(KeyCode.Space))
-		// {
-		// 	pressSpace();
-		// }
 	}
 
     public void pressSpace()
@@ -119,7 +155,7 @@ public class ViewController : MonoBehaviour
 			ViewController._gameState._state = GameState.States.GARAGE;
 			this.GetComponent<AnimationController>().stopAnimations(GameState.States.MAINSCENE);
 			
-			if(!GlobalVariables._gameComplete && !GlobalVariables._iconStagesAdded)
+			if(PlayerPrefs.GetInt("GameComplete")==0 && !GlobalVariables._iconStagesAdded)
 			{
 				addIconStagesGroup();
 				GlobalVariables._iconStagesAdded= true;
@@ -146,10 +182,9 @@ public class ViewController : MonoBehaviour
 
 		else if(ViewController._gameState._state == GameState.States.GAMESCENE)
 		{
-			// this.gameObject.GetComponent<CountGarageController>().resetCoroutine();
-			// setColorIconStageGroup();
 			this._gameSceneCanvas.SetActive(false);
 			this._gameObjectsGameScene.SetActive(false);
+		
 			
 			if(GlobalVariables._currentLifes==0 && GlobalVariables._globalLifes==0)
 			{
@@ -159,17 +194,34 @@ public class ViewController : MonoBehaviour
 
 			else if(GlobalVariables._currentLifes==0 && GlobalVariables._globalLifes!=0)
 			{
+				
 				resetGameInstances();
 				ViewController._gameState._state = GameState.States.GARAGE;
 			}
 
 			else
 			{
-				GlobalVariables._currentLevel++;
+				//Jugador Logra completar la etapa seleccionada
+				if(GlobalVariables._userLevel == GlobalVariables._currentLevel && GlobalVariables._currentLevel != GlobalVariables._totallyStages)
+				{
+					GlobalVariables._currentLevel++;
+					if(GlobalVariables._currentLevel > PlayerPrefs.GetInt("lastStageCompleted") && GlobalVariables._currentLevel != GlobalVariables._totallyStages)
+					{
+						PlayerPrefs.SetInt("lastStageCompleted",GlobalVariables._currentLevel );
+						print(PlayerPrefs.GetInt("lastStageCompleted"));
+
+					}
+						
+				}
+				
 				if(GlobalVariables._currentLevel == GlobalVariables._totallyStages)
 				{
+					print("Aparecer escena final");
 					GlobalVariables._currentLevel = 0;
+					GlobalVariables._userLevel=0;
 					ViewController._gameState._state = GameState.States.FINALSCENE;
+					this._iconStageGroup.transform.GetChild(_iconStageGroup.transform.childCount-1).gameObject.GetComponent<Image>().color = this._stageCompleted;
+					this._iconStageGroup.GetChild(_iconStageGroup.transform.childCount-1).transform.localScale = new Vector2(1f,1f);
 				}
 
 				else
@@ -177,8 +229,9 @@ public class ViewController : MonoBehaviour
 					resetGameInstances();
 					ViewController._gameState._state = GameState.States.GARAGE;
 					updateIconStageGroup();
-
 				}
+
+				GlobalVariables._userLevel = GlobalVariables._currentLevel;
 			}
 
 			updateView();
@@ -189,24 +242,22 @@ public class ViewController : MonoBehaviour
 			this._soundController.GetComponent<AudioSource>().Stop();
 			this._finalSceneCanvas.SetActive(false);
 			this._gameObjectsFinalView.SetActive(false);
-			// this._camera.position = new Vector3(0,0,-10);
 
 			ViewController._gameState._state = GameState.States.MAINSCENE;
-			GlobalVariables._gameComplete = false;
-			// this._gameObjectsFinalView.GetComponent<Animator>().SetBool("fade",false); 
+			PlayerPrefs.SetInt("GameComplete", 1);
 			resetGame();
+			
 			updateView();
 		}
 
 		else if(ViewController._gameState._state == GameState.States.GAMEOVER)
-		{
-			// this.GetComponent<AudioSource>().enabled = false;
-			
+		{	
 			this._gameOverSceneCanvas.SetActive(false);
 			ViewController._gameState._state = GameState.States.MAINSCENE;
-			GlobalVariables._gameComplete = false;
+
+			// GlobalVariables._gameComplete = false;
 			resetGame();
-			// Invoke("updateView",f);
+			
 			updateView();
 
 		}
@@ -222,28 +273,20 @@ public class ViewController : MonoBehaviour
     }
 
     private void resetGame()
-    {
+    {	
 		GlobalVariables._currentLevel = 0;
+		GlobalVariables._userLevel = 0;
 		GlobalVariables._globalLifes = 3;
 		GlobalVariables._currentLifes = 3;
-		if(GlobalVariables._gameComplete)
-		{
-			for(int i = 0 ; i < GlobalVariables._totallyStages ; i++)
-			{
-				updateIcon(1,i+1,_iconStageGroup.GetChild(i).gameObject);
-				// this._iconStageGroup.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._stageCompleted;
-			}
-				
+	
+		// for(int i = 0 ; i < this._iconStageGroup.childCount;i++)
+		// {
+		// 	this._iconStageGroup.transform.GetChild(i).gameObject.GetComponent<Image>().color = this._stageNotComplete;
+		// 	this._iconStageGroup.transform.GetChild(i).gameObject.transform.localScale = new Vector2(1,1);
+		// }
 
-		}
-
-		else
-		{
-			//Mejor borrarlas y crearlas nuevamente hasta la etapa 5
-			for(int i = 0 ; i < GlobalVariables._totallyStages ; i++)
-				updateIcon(3,i+1,_iconStageGroup.GetChild(i).gameObject);
-		}
-
+		this._iconStageGroup.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._currentStageColor;	
+        
 		resetGameInstances();
     }
 
@@ -254,7 +297,6 @@ public class ViewController : MonoBehaviour
 		this.gameObject.GetComponent<BonusController>().stopCoroutine();
 		
 		this.gameObject.GetComponent<MechanicController>()._timeCountText.color = new Color32(0,255,0,255);
-		// GlobalVariables._playerVelocity = GlobalVariables._playerVelocity;
 		GlobalVariables._currentLifes = 3;
 		GlobalVariables._yellowBonus = false;
 		GlobalVariables._purpleBonus = false;
@@ -286,15 +328,10 @@ public class ViewController : MonoBehaviour
 		foreach(Transform tr in parent)
 				Destroy(tr.gameObject);
 	}
-
-	
-
     public void updateView()
     {
 		if(ViewController._gameState._state == GameState.States.GAMESCENE)
 		{
-			
-
 			this._canPressEnter = true;
 			this.gameObject.GetComponent<MechanicController>().initializatePortalCoroutine(20);
 			this.gameObject.GetComponent<MapGeneratorController>().drawMap();
@@ -313,13 +350,12 @@ public class ViewController : MonoBehaviour
 				this.GetComponent<AudioSource>().enabled = true;
 				
 			this._canPressEnter = true;
-			this.gameObject.GetComponent<CountGarageController>().resetCoroutine();
+			this.gameObject.GetComponent<CountGarageController>().resetCoroutine(30);
 			this._gameObjectsMainScene.SetActive(false);
 			this._mainSceneCanvas.SetActive(false);
-			updateGameModel();
+			updateGameModel(GlobalVariables._currentLevel);
 			updateIconStageGroup();
 			changeGarageTexts();
-			// setColorIconStageGroup();
 			this._garageSceneCanvas.SetActive(true);
 			
 		}
@@ -340,10 +376,6 @@ public class ViewController : MonoBehaviour
 			this._soundController.playSound(3);
 			this._gameObjectsFinalView.SetActive(true);
 			this._finalSceneCanvas.SetActive(true);
-		
-		
-			// StartCoroutine(waitThenCallback(2.45f, () => 
-        //  { this._gameObjectsFinalView.transform.GetChild(1).gameObject.GetComponent<Animator>().SetBool("fade",true); }));
 		}
 		
 		else if(ViewController._gameState._state == GameState.States.GAMEOVER)
@@ -357,7 +389,6 @@ public class ViewController : MonoBehaviour
 
     private void updateBrainZone()
     {
-
 		foreach(Transform tr in _brain)
 			tr.gameObject.SetActive(false);
 
@@ -378,12 +409,6 @@ public class ViewController : MonoBehaviour
 			{
 				_brain.GetChild(2).gameObject.SetActive(true);
 			}
-
-		}
-
-		else if(ViewController._currentGameModel._bonusList.Count==2)
-		{
-			
 
 		}
 
@@ -462,10 +487,7 @@ public class ViewController : MonoBehaviour
 		{
 			GlobalVariables._xPosPlayer = jReset;
 			GlobalVariables._yPosPlayer = iReset;
-			// GlobalVariables._xPosPlayer = 2;
-			// GlobalVariables._yPosPlayer = 2;
 			return new Vector2((GlobalVariables._xPosPlayer*GlobalVariables._widthTile), (GlobalVariables._yPosPlayer * -GlobalVariables._widthTile));
-			// return new Vector2((2*GlobalVariables._widthTile), (2 * -GlobalVariables._widthTile));
 		}
 			
     }
@@ -473,72 +495,41 @@ public class ViewController : MonoBehaviour
     private void addIconStagesGroup()
     {
 		GameObject iconStage;
-        for(int i = 0 ; i < GlobalVariables._totallyStages && i < 5 ; i++)
+        for(int i = 0 ; i < GlobalVariables._totallyStages; i++)
 		{
+			if(i%5 ==0 && i != 0)
+			{
+				//Add spacing to content
+				this._iconStageGroup.GetComponent<RectTransform>().sizeDelta += new Vector2(0,ICONGROUPSPACING);
+			}
+
 			iconStage = Instantiate(_iconStagePrefab, _iconStageGroup);
-			iconStage.transform.GetChild(1).gameObject.GetComponent<Text>().text = (i + 1).ToString();
+			iconStage.GetComponent<GarageButtonController>()._idStage = i;
+			iconStage.transform.GetChild(0).gameObject.GetComponent<Text>().text = (i + 1).ToString();
+			
 		}
     }
 
 	private void updateIconStageGroup()
 	{
-		if(GlobalVariables._totallyStages < 6)
+		for(int i = 0 ; i < GlobalVariables._currentLevel;i++)
 		{
-			for (int i = 0 ; i < GlobalVariables._currentLevel; i++)
-			{
-				
-				this._iconStageGroup.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._stageCompleted;
-			}
-
-			this._iconStageGroup.GetChild(GlobalVariables._currentLevel).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._currentStageColor;
+			this._iconStageGroup.GetChild(i).transform.localScale = new Vector2(1,1);
+			this._iconStageGroup.GetChild(i).gameObject.GetComponent<Image>().color = this._stageCompleted;
 		}
 
-		else if(GlobalVariables._totallyStages >= 6)
-		{
-			if(GlobalVariables._currentLevel<3)
-			{
-				for (int i = 0 ; i < GlobalVariables._currentLevel; i++)
-				{
-					updateIcon(1,i+1,_iconStageGroup.GetChild(i).gameObject);
-				}
+		this._iconStageGroup.GetChild(GlobalVariables._currentLevel).GetComponent<Image>().color = this._currentStageColor;
+		this._iconStageGroup.GetChild(GlobalVariables._currentLevel).gameObject.transform.localScale = new Vector2(1.2f, 1.2f);
+		
+	}
 
-				updateIcon(2,GlobalVariables._currentLevel+1,_iconStageGroup.GetChild(GlobalVariables._currentLevel).gameObject);
-			}
-
-			else if(GlobalVariables._currentLevel>=3 && GlobalVariables._currentLevel < GlobalVariables._totallyStages-2)
-			{
-				updateIcon(1,GlobalVariables._currentLevel-1,_iconStageGroup.GetChild(0).gameObject);
-				updateIcon(1,GlobalVariables._currentLevel,_iconStageGroup.GetChild(1).gameObject);
-				updateIcon(2,GlobalVariables._currentLevel+1,_iconStageGroup.GetChild(2).gameObject);
-				if(GlobalVariables._gameComplete)
-				{
-					updateIcon(1,GlobalVariables._currentLevel+2,_iconStageGroup.GetChild(3).gameObject);
-					updateIcon(1,GlobalVariables._currentLevel+3,_iconStageGroup.GetChild(4).gameObject);
-
-				}
-
-				else
-				{
-					updateIcon(3,GlobalVariables._currentLevel+2,_iconStageGroup.GetChild(3).gameObject);
-					updateIcon(3,GlobalVariables._currentLevel+3,_iconStageGroup.GetChild(4).gameObject);
-				}
-				
-			}
-
-			else if(GlobalVariables._currentLevel == GlobalVariables._totallyStages-2)
-			{
-				updateIcon(1,GlobalVariables._currentLevel,_iconStageGroup.GetChild(2).gameObject);
-				updateIcon(2,GlobalVariables._currentLevel+1,_iconStageGroup.GetChild(3).gameObject);
-			}
-
-			else if(GlobalVariables._currentLevel == GlobalVariables._totallyStages-1)
-			{
-				updateIcon(1,GlobalVariables._currentLevel,_iconStageGroup.GetChild(3).gameObject);
-				updateIcon(2,GlobalVariables._currentLevel+1,_iconStageGroup.GetChild(4).gameObject);
-			}
-
-		}
-
+	public void refreshContext(int idStage)
+	{
+		_iconStageGroup.GetChild(GlobalVariables._userLevel).gameObject.transform.localScale = new Vector2(1, 1);
+		_iconStageGroup.GetChild(idStage).gameObject.transform.localScale = new Vector2(1.2f, 1.2f);
+		GlobalVariables._userLevel = idStage;
+		updateGameModel(idStage);
+		changeGarageTexts();
 	}
 
 	public void updateIcon(int iconType,int stageNumber,GameObject go)
@@ -560,17 +551,6 @@ public class ViewController : MonoBehaviour
 		}
 	}
 
-	// private void setColorIconStageGroup()
-	// {
-	// 	//For stages Completed
-	// 	for (int i = 0 ; i < GlobalVariables._currentLevel; i++)
-	// 	{
-	// 		this._iconStageGroup.GetChild(i).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._stageCompleted;
-	// 	}
-
-	// 	this._iconStageGroup.GetChild(GlobalVariables._currentLevel).gameObject.transform.GetChild(0).gameObject.GetComponent<Image>().color = this._currentStageColor;
-	// }
-
     private void changeGarageTexts()
     {
 		this._lifesCountText.text = GlobalVariables._globalLifes.ToString();
@@ -578,28 +558,28 @@ public class ViewController : MonoBehaviour
 		this._descriptionMissionText.text = ViewController._currentGameModel._descriptionMission;
     }
 
-	private void updateGameModel()
+	private void updateGameModel(int level)
     {
-		string missionNumber = JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["missionNumber"].ToString();
-		string descriptionMission = JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["descriptionMission"].ToString();
-		int entryTime = (int)JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["entryTime"];
-		int postEntryTime = (int)JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["postEntryTime"];
-		List<string> _bonusList = addBonusToArray();
-		int[,] map = generateMap();
+		string missionNumber = JsonController.jsonDataStages["Stages"][level]["missionNumber"].ToString();
+		string descriptionMission = JsonController.jsonDataStages["Stages"][level]["descriptionMission"].ToString();
+		int entryTime = (int)JsonController.jsonDataStages["Stages"][level]["entryTime"];
+		int postEntryTime = (int)JsonController.jsonDataStages["Stages"][level]["postEntryTime"];
+		List<string> _bonusList = addBonusToArray(level);
+		int[,] map = generateMap(level);
 
         ViewController._currentGameModel = new Game(missionNumber, descriptionMission,entryTime, postEntryTime,_bonusList,map);
     }
 
-    private List<string> addBonusToArray()
+    private List<string> addBonusToArray(int level)
     {
 		List<String> _bonusList = new List<string>();
-		for(int i = 0 ; i < JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["bonus"].Count; i++)
-			_bonusList.Add(JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["bonus"][i].ToString());
+		for(int i = 0 ; i < JsonController.jsonDataStages["Stages"][level]["bonus"].Count; i++)
+			_bonusList.Add(JsonController.jsonDataStages["Stages"][level]["bonus"][i].ToString());
 
 		return _bonusList;
     }
 
-    private int[,] generateMap()
+    private int[,] generateMap(int level)
     {
 
 		int[,] map = new int[GlobalVariables._iMaxMatrix, GlobalVariables._jMaxMatrix];
@@ -608,7 +588,7 @@ public class ViewController : MonoBehaviour
         for(int i = 0 ; i < GlobalVariables._iMaxMatrix; i++)
 			for(int j = 0 ; j < GlobalVariables._jMaxMatrix; j++)
 			{
-				map[i,j] =  (int) JsonController.jsonDataStages["Stages"][GlobalVariables._currentLevel]["map"][contador];
+				map[i,j] =  (int) JsonController.jsonDataStages["Stages"][level]["map"][contador];
 				contador++;
 			}
 
@@ -638,12 +618,214 @@ public class ViewController : MonoBehaviour
         Destroy(this._playerInstance);
 		this._playerInstance = Instantiate(_player, this.getNewPosition(false)- MapGeneratorController._offsetMap, Quaternion.identity, this._gameObjectsGameScene.transform) as GameObject;
 		if(borisHit)
+		{
 			_playerInstance.transform.GetChild(0).gameObject.GetComponent<Animator>().SetBool("isDeath",true);
+			_playerInstance.GetComponent<PlayerBehaviour>()._sleep = true;
+
+		}
     }
 
 	private IEnumerator waitThenCallback(float time, Action callback)
 	{
-	yield return new WaitForSeconds(time);
-	callback();
+		yield return new WaitForSeconds(time);
+		callback();
 	}
+
+
+	#region "PauseMenu"
+	public void onPressMusicButton()
+	{
+		GlobalVariables._isMusicOn = !GlobalVariables._isMusicOn;
+		if(GlobalVariables._isMusicOn)
+		{
+			this.GetComponent<AudioSource>().volume = 1;
+			if(this._menuPausaGarage.activeInHierarchy)
+			{
+				changeImage(this._musicButtonMenuGarage, this._yesOptionImage);
+			}
+			else
+			{
+				changeImage(this._musicButtonMenuGameScene, this._yesOptionImage);
+			}
+		}
+
+		else
+		{
+			this.GetComponent<AudioSource>().volume = 0;
+			if(this._menuPausaGarage.activeInHierarchy)
+			{
+				changeImage(this._musicButtonMenuGarage, this._noOptionImage);
+			}
+			else
+			{
+				changeImage(this._musicButtonMenuGameScene, this._noOptionImage);
+			}
+		}
+	}
+
+	public void onPressSoundButton()
+	{
+		GlobalVariables._isSoundOn = !GlobalVariables._isSoundOn;
+		if(GlobalVariables._isSoundOn)
+		{
+			this._soundController.GetComponent<AudioSource>().volume =1;
+			if(this._menuPausaGarage.activeInHierarchy)
+			{
+				changeImage(this._soundButtonMenuGarage, this._yesOptionImage);
+			}
+			else
+			{
+				changeImage(this._soundButtonMenuGameScene, this._yesOptionImage);
+			}
+		}
+
+		else
+		{
+			this._soundController.GetComponent<AudioSource>().volume =0;
+
+			if(this._menuPausaGarage.activeInHierarchy)
+			{
+				changeImage(this._soundButtonMenuGarage, this._noOptionImage);
+			}
+			else
+			{
+				changeImage(this._soundButtonMenuGameScene, this._noOptionImage);
+			}
+			
+		}
+	}
+
+	public void changeOverColorText(Text text)
+	{
+		text.color = new Color(0,255,0,1);
+	}
+
+	public void changeExitColorText(Text text)
+	{
+		if(Time.timeScale == 0)
+			Time.timeScale = 1;
+		text.color = new Color(255,255,255,1);
+	}
+
+	
+
+	//Bool para diferenciar entre los canvas del menu pausa, int para saber a que boton pertenece
+	public void changeImage(Button button,Sprite image)
+	{
+		button.GetComponent<Image>().sprite = image;
+
+	}
+
+	public void closePanel(GameObject panel)
+	{
+		panel.SetActive(false);
+		Time.timeScale = 1;
+	}
+	
+	public void openPanel(GameObject panel)
+	{
+		
+		Time.timeScale = 0;
+		panel.SetActive(true);
+		updatePausePanel();
+	}
+
+	public void updatePausePanel()
+	{
+		if(GlobalVariables._isSoundOn)
+		{
+			if(this._menuPausaGarage.activeInHierarchy)
+			{	
+				changeImage(this._soundButtonMenuGarage, this._yesOptionImage);
+			}
+
+			else
+			{
+				changeImage(this._soundButtonMenuGameScene, this._yesOptionImage);
+			}
+			
+		}
+		
+		if(!GlobalVariables._isSoundOn)
+		{
+			if(this._menuPausaGarage.activeInHierarchy)
+			{	
+				changeImage(this._soundButtonMenuGarage, this._noOptionImage);
+			}
+
+			else
+			{
+				changeImage(this._soundButtonMenuGameScene, this._noOptionImage);
+			}	
+		}
+
+		if(GlobalVariables._isMusicOn)
+		{
+			if(this._menuPausaGarage.activeInHierarchy)
+			{	
+				changeImage(this._musicButtonMenuGarage, this._yesOptionImage);
+			}
+
+			else
+			{
+				changeImage(this._musicButtonMenuGameScene, this._yesOptionImage);
+			}
+			
+		}
+		
+		if(!GlobalVariables._isMusicOn)
+		{
+			if(this._menuPausaGarage.activeInHierarchy)
+			{	
+				changeImage(this._musicButtonMenuGarage, this._noOptionImage);
+			}
+
+			else
+			{
+				changeImage(this._musicButtonMenuGameScene, this._noOptionImage);
+			}	
+		}
+	}
+
+	public void returnToGarage( GameObject panel)
+	{
+		Time.timeScale = 1;
+		panel.SetActive(false);
+		this._gameSceneCanvas.SetActive(false);
+		this._gameObjectsGameScene.SetActive(false);
+		resetGameInstances();
+		ViewController._gameState._state = GameState.States.GARAGE;
+		GlobalVariables._currentLevel = PlayerPrefs.GetInt("lastStageCompleted");
+		GlobalVariables._userLevel = PlayerPrefs.GetInt("lastStageCompleted");
+		
+		updateView();
+	}
+
+	public void deleteProgress(GameObject panel)
+	{
+		PlayerPrefs.DeleteAll();
+		Time.timeScale = 1;
+		
+		GlobalVariables._currentLevel = PlayerPrefs.GetInt("lastStageCompleted");
+		GlobalVariables._userLevel = PlayerPrefs.GetInt("lastStageCompleted");
+		resetGame();
+		resetGameInstances();
+		
+		for(int i = 0 ; i < this._iconStageGroup.childCount;i++)
+		{
+			this._iconStageGroup.transform.GetChild(i).gameObject.GetComponent<Image>().color = this._stageNotComplete;
+			this._iconStageGroup.transform.GetChild(i).gameObject.transform.localScale = new Vector2(1,1);
+		}
+
+		
+		this._gameSceneCanvas.SetActive(false);
+		this._gameObjectsGameScene.SetActive(false);
+		panel.SetActive(false);
+		ViewController._gameState._state = GameState.States.MAINSCENE;
+		updateView();
+	}
+
+	
+
+	#endregion
 }

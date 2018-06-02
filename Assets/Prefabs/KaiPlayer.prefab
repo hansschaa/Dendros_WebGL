@@ -151,7 +151,7 @@ MonoBehaviour:
   playerPath: []
   currentMove: 4
   time: 0
-  speed: 0.8
+  speed: 0.9
   currentNode: 0
   _pixelsBeforeMove: 0.03
   _nextNodeCheckMove: {x: 0, y: 0}

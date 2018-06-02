@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class GlobalVariables 
 {
-	public static int _currentLevel = 0;
+	public static int _currentLevel;
+	
+	//Level choose for the user in the garage View
+	public static int _userLevel;
 	public static int _currentLifes = 3;
 	public static int _globalLifes = 3;
 	public static int _iMaxMatrix = 14;
@@ -20,15 +23,19 @@ public class GlobalVariables
 	public static bool _changeDirection = false;
 	public static bool _stageComplete = false;
 	internal static bool _allowPurpleBonus = false;
+	internal static bool _isSoundOn = true;
+	internal static bool _isMusicOn = true;
 
 	public static int _xPosEnemy;
 	public static int _yPosEnemy;
 	public static int _xPosPlayer;
 	public static int _yPosPlayer;
 
-	public static float _playerVelocity = 0.9f;
+	public static float _playerVelocity = 1f;
 	public static List<int> _walkablesTiles = new List<int>();
 	public static bool _followPlayer = true;
+		
+	public static GameObject _enemy;
 
 	// [arriba, derecha, abajo, izquierda] : 1 / 0 segun se permita, 1 para permitir, 0 para no permitir
 	public static int[,] _allowedMovements =   {{0,0,0,1},
@@ -138,13 +145,6 @@ public class GlobalVariables
 												{1,1,1,1}};
 
 
-	//Keys
-	public static KeyCode _enter = KeyCode.Return;
-	public static KeyCode _left = KeyCode.A;
-	public static KeyCode _right = KeyCode.D;
-	public static KeyCode _down = KeyCode.S;
-	public static KeyCode _up = KeyCode.W;
 
-	public static GameObject _enemy;
     
 }
