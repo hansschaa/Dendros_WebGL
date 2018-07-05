@@ -16,6 +16,7 @@ public class PlayerBehaviour : MonoBehaviour
 
 	//References
 	private GameObject _gameController;
+	private Transform _portalTransform;
 	// public GameObject _enemy;
 	float deltaTime;
 
@@ -514,7 +515,6 @@ public class PlayerBehaviour : MonoBehaviour
 			
 			if(Math.Abs(this.transform.position.x-_nextNodeCheckMove.x) <= this._pixelsBeforeMove)
 			{
-				print("Entro al de la X");
 				return true;
 			}
 		}
@@ -524,7 +524,6 @@ public class PlayerBehaviour : MonoBehaviour
 	
 			if(Math.Abs(this.transform.position.y-_nextNodeCheckMove.y) <= this._pixelsBeforeMove)
 			{
-				print("Entro al de la y");
 				return true;
 			}
 		}
@@ -533,7 +532,6 @@ public class PlayerBehaviour : MonoBehaviour
 		else if(currentMove == Moves.NOTHING || (currentMove == Moves.DOWN && mov == Moves.UP) || (currentMove == Moves.UP && mov == Moves.DOWN) ||
 		(currentMove == Moves.LEFT && mov == Moves.RIGHT) || (currentMove == Moves.RIGHT && mov == Moves.LEFT))
 		{
-			print("nothig");
 			return true;
 		}
 			
@@ -542,11 +540,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Sent when another object enters a trigger collider attached to this
-    /// object (2D physics only).
-    /// </summary>
-    /// <param name="other">The other Collider2D involved in this collision.</param>
     void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.gameObject.tag.Equals("Enemy"))
@@ -560,6 +553,17 @@ public class PlayerBehaviour : MonoBehaviour
 
 		if(other.gameObject.tag.Equals("Portal"))
 		{
+			other.gameObject.GetComponent<Collider2D>().enabled = false;
+			//GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(3);
+			//_gameController.GetComponent<AudioSource>().enabled = false;
+			_gameController.GetComponent<ViewController>()._questionsCanvas.SetActive(true);
+			_gameController.GetComponent<ViewController>()._gameSceneCanvas.SetActive(false);
+			_portalTransform = other.gameObject.transform;
+
+			Time.timeScale = 0;
+
+
+			/* 
 			_gameController.GetComponent<ViewController>()._leaveText.SetActive(true);
 			_kaiAnimator.SetBool("isWin",true);
 			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(3);
@@ -574,7 +578,8 @@ public class PlayerBehaviour : MonoBehaviour
 			GlobalVariables._followPlayer = false;
 			Destroy(other.gameObject,3.5f);
 			
-			 Invoke("stageCompleteEvent",3.5f);
+			Invoke("stageCompleteEvent",3.5f);
+			*/
 		}
 
 		else if(other.gameObject.tag.Equals("Bonus"))
@@ -582,8 +587,41 @@ public class PlayerBehaviour : MonoBehaviour
 			GlobalVariables._followPlayer = false;
 			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(1);
 			this._gameController.GetComponent<BonusController>().bonusCollision(other.GetComponent<Bonus>()._myType, other.GetComponent<Bonus>()._position);
-			Destroy(other.gameObject);
+			
+			if(other.gameObject.GetComponent<Bonus>()._myType != BonusTypes.Types.PORTAL && other.gameObject.GetComponent<Bonus>()._myType != BonusTypes.Types.TELEPORT)
+				other.GetComponent<QuadraticInterpolation>().GoToTarget();
+			
+			else
+				Destroy(other.gameObject);
 		}
+	}
+
+	public void receiveAnswer(bool answerBool)
+	{
+		print("Esto llego...:" + answerBool);
+		_gameController.GetComponent<ViewController>()._questionsCanvas.SetActive(false);
+		_gameController.GetComponent<ViewController>()._gameSceneCanvas.SetActive(true);
+		Time.timeScale = 1;
+
+		if(answerBool)
+		{
+			Destroy(_portalTransform.gameObject,3.5f);
+			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(3);
+			_gameController.GetComponent<AudioSource>().enabled = false;
+			_gameController.GetComponent<ViewController>()._leaveText.SetActive(true);
+			_kaiAnimator.SetBool("isWin",true);
+			GameObject.Find("exitDone").GetComponent<Text>().enabled = false;
+			GlobalVariables._stageComplete = true;
+			GlobalVariables._followPlayer = false;
+
+			Invoke("stageCompleteEvent",3.5f);
+		}
+
+		else
+		{
+			Destroy(_portalTransform.gameObject);
+		}
+
 	}
 
 	public void stageCompleteEvent()

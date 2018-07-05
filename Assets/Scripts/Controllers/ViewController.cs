@@ -9,12 +9,16 @@ public class ViewController : MonoBehaviour
 {
 	static public Game _currentGameModel;
 	static public GameState _gameState;
+	static public bool OverLeftAnswer = false;
 	public GameObject _iconStagePrefab;
 	public GameObject _portalPrefab;
 	public GameObject _player;
 	public GameObject _enemy;
 	public SoundController _soundController;
 	private bool _canPressEnter;
+
+	private float x;
+	private float y;
 
 	[Header("LoadingScene")]
 	public GameObject _loadingSceneCanvas;
@@ -65,6 +69,7 @@ public class ViewController : MonoBehaviour
 	public Material _lightSensitiveMaterial;
 	public Transform _bonusGroup;
 	public GameObject _leaveText;
+	public GameObject _questionsCanvas;
 
 	[HideInInspector]
 	public GameObject _playerInstance;
@@ -83,6 +88,8 @@ public class ViewController : MonoBehaviour
 	[Header("GameOverScene")]
 	public GameObject _gameOverSceneCanvas;
 
+	
+
 	/// <summary>
 	/// Awake is called when the script instance is being loaded.
 	/// </summary>
@@ -91,10 +98,7 @@ public class ViewController : MonoBehaviour
 	// 	PlayerPrefs.DeleteAll();
 	// }
 
-	/// <summary>
-	/// Start is called on the frame when a script is enabled just before
-	/// any of the Update methods is called the first time.
-	/// </summary>
+	
 	void Start()
 	{
 		//For Desktop
@@ -125,16 +129,40 @@ public class ViewController : MonoBehaviour
 	/// </summary>
 	void Update()
 	{
-		if(Input.GetButtonDown("Enter") || (Input.GetMouseButton(0) && !this._garageSceneCanvas.activeInHierarchy))
+		if(!this._questionsCanvas.activeInHierarchy && Input.GetButtonDown("Enter") || (Input.GetMouseButton(0) && !this._garageSceneCanvas.activeInHierarchy) )
 		{
-			if(!_loadingSceneCanvas.activeInHierarchy && !this._gameSceneCanvas.activeInHierarchy && !this._menuPausaGarage.activeInHierarchy)
+			if(!_loadingSceneCanvas.activeInHierarchy && !this._gameSceneCanvas.activeInHierarchy && !this._menuPausaGarage.activeInHierarchy )
 				pressEnter();
 		}
 
 		else if(Input.GetButtonDown("Exit"))
-		{
 			Application.Quit();
+
+		else if(this._questionsCanvas.activeInHierarchy)
+		{
+			if(Input.GetButtonDown("LeftArrow"))
+			{
+				OverLeftAnswer = true;
+				_questionsCanvas.GetComponent<QuestionCanvasController>().updateUI();
+
+			}
+
+			else if(Input.GetButtonDown("RightArrow"))
+			{
+				OverLeftAnswer = false;
+				_questionsCanvas.GetComponent<QuestionCanvasController>().updateUI();
+			}
+				
+
+			else if(Input.GetButtonDown("Enter"))
+			{
+				print("Aprietas enter");
+				_questionsCanvas.GetComponent<QuestionCanvasController>().checkAnswerKeyboard();
+
+			}
 		}
+
+		
 	}
 
     public void pressSpace()
@@ -439,9 +467,12 @@ public class ViewController : MonoBehaviour
 					this._bonusList.transform.GetChild(0).gameObject.SetActive(true);
 					this._bonusList.transform.GetChild(1).gameObject.SetActive(true);
 					this._bonusList.transform.GetChild(2).gameObject.SetActive(true);
+					this._bonusList.transform.GetChild(3).gameObject.SetActive(true);
+
 					GlobalVariables._yellowBonus = true;
 					GlobalVariables._purpleBonus = true;
 				break;
+
 				case "green":
 					this._bonusList.transform.GetChild(0).gameObject.SetActive(true);
 				break;
@@ -450,17 +481,23 @@ public class ViewController : MonoBehaviour
 					this._bonusList.transform.GetChild(1).gameObject.SetActive(true);
 				break;
 
-				case "purple":
-					GlobalVariables._purpleBonus = true;
-				break;
-
 				case "gray":
 					this._bonusList.transform.GetChild(2).gameObject.SetActive(true);
+				break;
+
+				case "blue":
+					this._bonusList.transform.GetChild(3).gameObject.SetActive(true);
+				break;
+
+				case "purple":
+					GlobalVariables._purpleBonus = true;
 				break;
 
 				case "yellow":
 					GlobalVariables._yellowBonus = true;
 				break;
+
+				
 			}
 		}
     }

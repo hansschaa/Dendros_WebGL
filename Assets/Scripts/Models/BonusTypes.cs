@@ -6,6 +6,6 @@ public class BonusTypes : MonoBehaviour {
 
 	public enum Types
 	{
-		LIGHT, VELOCITY, COORDINATION, PORTAL, TELEPORT
+		LIGHT, VELOCITY, COORDINATION, PORTAL, TELEPORT,HIPOCAMPO
 	}
 }

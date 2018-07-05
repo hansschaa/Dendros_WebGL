@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class BonusController : MonoBehaviour 
 {
 	Coroutine _changeParametersCoroutine;
 	Coroutine _bonusRespawnCoroutine;
 	SearchManager _searchManager;
-	public GameObject _shape;
+	//public GameObject _shape;
 	public List<Vector2> _portalPath;
 	public SoundController _soundController;
 
@@ -20,27 +21,47 @@ public class BonusController : MonoBehaviour
 	public Transform _lightBonus;
 	public Transform _velocityBonus;
 	public Transform _coordinationBonus;
-	public GameObject _bonusPrefab;
+	public Transform _hipocampoBonus;
+
+	//public GameObject _bonusPrefab;
+
+	[HideInInspector]
 	public GameObject _lightBonusInstance;
+
+	[HideInInspector]
 	public GameObject _velocityBonusInstance;
+
+	[HideInInspector]
 	public GameObject _coordinationBonusInstance;
+
+	[HideInInspector]
 	public GameObject _teleportBonusInstance;
+
+	[HideInInspector]
 	public GameObject _portalBonusInstance;
+
+	[HideInInspector]
+	public GameObject _hipocampoBonusInstance;
+
 	public Transform _portalGroupGameObject;
 
 	public GameObject[] _bonusList;
 
 	public GameObject[] _portalPathTiles;
-	public Material _material;
+	public Material _materialLightSensitive;
+	//public Material _materialHipocampo;
+	public Transform _map;
+	public int[] _tilesHipocampo;
+	private int _tileCountHipocampo;
 
 	[Header("Parameters")]
 	public float _decreaseValue;
 	public float _initializeChangeParametersDelay;
 	public float _respawnDelay;
 	
+	
 	[HideInInspector]
 	public Vector2 _bar;
-
 
 
 	//SEARCH FOR POSITION VARIABLES
@@ -53,6 +74,7 @@ public class BonusController : MonoBehaviour
 	public int _idActiveChildLight;
 	public int _idActiveChildVelocity;
 	public int _idActiveChildCoordination;
+	public int _idActiveChildHipocampo;
 
     internal void resetStats()
     {
@@ -62,7 +84,7 @@ public class BonusController : MonoBehaviour
 			for(int i = 0 ; i < 3;i++)
 				this._lightBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
 
-			_material.color = new Color32(255,255,255,255);
+			_materialLightSensitive.color = new Color32(255,255,255,255);
 			this._idActiveChildLight = 0;
 		}
 			
@@ -75,7 +97,6 @@ public class BonusController : MonoBehaviour
 			// this._playerVelocity = GlobalVariables._playerVelocity;
 			GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity;
 			this._idActiveChildVelocity = 0;
-
 		}
 		
 		if(this._coordinationBonus.gameObject.activeInHierarchy)
@@ -85,6 +106,23 @@ public class BonusController : MonoBehaviour
 				this._coordinationBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
 			
 			this._idActiveChildCoordination = 0;
+		}
+
+		if(this._hipocampoBonus.gameObject.activeInHierarchy)
+		{
+			for(int i = 0 ; i < 3;i++)
+				this._hipocampoBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
+			
+			for(int i = 0 ; i < _tileCountHipocampo ; i++)
+			{
+				_map.GetChild(this._tilesHipocampo[i]).gameObject.GetComponent<Renderer>().material = _materialLightSensitive;   
+				_map.GetChild(this._tilesHipocampo[i]).gameObject.GetComponent<SpriteRenderer>().color = new Color(255,255,255,255);   
+
+				_tilesHipocampo[i] = 0;
+			}
+
+			this._idActiveChildHipocampo = 0;
+			this._tileCountHipocampo = 0;
 		}
         
     }
@@ -97,10 +135,10 @@ public class BonusController : MonoBehaviour
 	{
 		this._portalPath = new List<Vector2>();
 		this._searchManager = new SearchManager();
+		this._tilesHipocampo = new int[27];
 		this._decreaseValue = this._lightBonus.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta.x/10;
 		this._bar = this._lightBonus.GetChild(0).gameObject.GetComponent<RectTransform>().sizeDelta;
-		// this._playerVelocity = GlobalVariables._playerVelocity;
-		this._material.color = new Color32(255,255,255,255);
+		this._materialLightSensitive.color = new Color32(255,255,255,255);
 	}
 
     private IEnumerator changeParametersBonus()
@@ -122,15 +160,16 @@ public class BonusController : MonoBehaviour
 					switch(this._idActiveChildLight)
 					{
 						case 2:
-						_material.color = new Color32(20,20,20,255);
+						_materialLightSensitive.color = new Color32(255,255,255,30);
+					
 						_reimiText.text = "KAI estás por perder tu visión ¡Busca el bonus VERDE!";
 						break;
 						case 1:
-						_material.color = new Color32(80,80,80,255);
+						_materialLightSensitive.color = new Color32(255,255,255,100);
 						_reimiText.text = "KAI estás por perder tu visión ¡Busca el bonus VERDE!";
 						break;
 						case 0:
-						_material.color = new Color32(172,172,172,255);
+						_materialLightSensitive.color = new Color32(255,255,255,160);
 						_reimiText.text = "KAI estás por perder tu visión ¡Busca el bonus VERDE!";
 						break;
 					}
@@ -195,13 +234,76 @@ public class BonusController : MonoBehaviour
 				}
 			}
 
+			if(this._hipocampoBonus.gameObject.activeInHierarchy && this._idActiveChildHipocampo!=3)
+			{
+				if(this._hipocampoBonus.transform.GetChild(this._idActiveChildHipocampo).gameObject.GetComponent<RectTransform>().sizeDelta.x - this._decreaseValue>=0)
+				{
+					this._hipocampoBonus.transform.GetChild(this._idActiveChildHipocampo).gameObject.GetComponent<RectTransform>().sizeDelta -= new Vector2(this._decreaseValue,0);
+				}
+
+				else
+				{
+					this._soundController.playSound(2);
+					
+
+					switch(this._idActiveChildHipocampo)
+					{
+						case 0:
+							searchForTiles(6);
+							StartCoroutine(paintTilesInCascade(0));
+							break;
+
+						case 1:
+							searchForTiles(15);
+							StartCoroutine(paintTilesInCascade(6));
+							break;
+
+						case 2:
+							searchForTiles(27);
+							StartCoroutine(paintTilesInCascade(15));
+							break;	
+					}
+
+					this._reimiText.text = "KAI cuidado con el bonus hipocampo";
+					this._idActiveChildHipocampo++;
+				}
+			}
+
+
 			yield return new WaitForSeconds(_initializeChangeParametersDelay);
 
-		}
-		
+		}	
     }
 
-	internal void stopCoroutine()
+	private void searchForTiles(int amount)
+	{
+		int i,j;
+
+		do
+		{
+			i = UnityEngine.Random.Range(0, GlobalVariables._iMaxMatrix); 
+			j = UnityEngine.Random.Range(0, GlobalVariables._jMaxMatrix);
+
+			this._tilesHipocampo[_tileCountHipocampo] = i*(GlobalVariables._iMaxMatrix-1) + j;
+			//print("Se oscurece el: " + (i*GlobalVariables._iMaxMatrix + j));
+			_tileCountHipocampo++;
+		}
+		while(ViewController._currentGameModel._map[iReset,jReset] != -1 && _tileCountHipocampo < amount);
+	}
+
+    IEnumerator paintTilesInCascade(int init)
+    {
+		
+		for(int i = init; i < this._tileCountHipocampo; i++)
+		{
+			//_map.GetChild(this._tilesHipocampo[i]).gameObject.GetComponent<Renderer>().material = this._materialHipocampo; 
+			_map.GetChild(this._tilesHipocampo[i]).gameObject.GetComponent<SpriteRenderer>().material.DOColor(new Color32(255,255,255,10),2f);
+			yield return new WaitForSeconds(0.6f);		
+		}
+			  
+    }
+
+    internal void stopCoroutine()
     {
 		StopCoroutine(_changeParametersCoroutine);
 		//Light Childs
@@ -213,11 +315,18 @@ public class BonusController : MonoBehaviour
 		
 		for(int i = 0 ; i < 3;i++)
 			this._coordinationBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
+
+		for(int i = 0 ; i < 3;i++)
+			this._hipocampoBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
 		
 		this._idActiveChildLight = 0;
 		this._idActiveChildVelocity = 0;
 		this._idActiveChildCoordination = 0;
-		_material.color = new Color32(255,255,255,255);
+		this._idActiveChildHipocampo = 0;
+		_materialLightSensitive.color = new Color32(255,255,255,255);
+		
+		for(int i = 0 ; i < this._tilesHipocampo.Length; i++)
+			_map.GetChild(_tilesHipocampo[i]).gameObject.GetComponent<Renderer>().material = _materialLightSensitive;
     }
 
 	internal void initializeCorroutines()
@@ -247,6 +356,11 @@ public class BonusController : MonoBehaviour
 				createBonus(BonusTypes.Types.COORDINATION);		
 			}
 
+			if(this._hipocampoBonus.gameObject.activeInHierarchy)
+			{
+				createBonus(BonusTypes.Types.HIPOCAMPO);
+			}
+
 			if(GlobalVariables._yellowBonus)
 			{
 				createBonus(BonusTypes.Types.TELEPORT);
@@ -256,6 +370,8 @@ public class BonusController : MonoBehaviour
 			{
 				createBonus(BonusTypes.Types.PORTAL);
 			}
+
+			
 
 			yield return new WaitForSeconds(_respawnDelay);
 
@@ -275,6 +391,8 @@ public class BonusController : MonoBehaviour
 		{
 			_lightBonusInstance = Instantiate(_bonusList[0],position, Quaternion.identity, this.gameObject.GetComponent<ViewController>()._bonusGroup.transform) as GameObject;
 			_lightBonusInstance.GetComponent<Bonus>()._position = position;
+			//_lightBonusInstance.GetComponent<QuadraticInterpolation>().target = _lightBonus.gameObject;
+
 		}
 
 		else if(type == BonusTypes.Types.VELOCITY && _velocityBonusInstance == null)
@@ -302,6 +420,16 @@ public class BonusController : MonoBehaviour
 			_reimiText.text = "KAI resuelve la salida ¡Busca el bonus MORADO!";
 			_portalBonusInstance = Instantiate(_bonusList[4], position, Quaternion.identity, this.gameObject.GetComponent<ViewController>()._bonusGroup) as GameObject;
 			_portalBonusInstance.GetComponent<Bonus>()._position = bonusMatrixPosition;
+		}
+
+		else if(type == BonusTypes.Types.HIPOCAMPO && _hipocampoBonusInstance == null)
+		{
+			_reimiText.text = "Te meo dijo el barsinzo";
+			_hipocampoBonusInstance = Instantiate(_bonusList[5], position, Quaternion.identity, this.gameObject.GetComponent<ViewController>()._bonusGroup) as GameObject;
+			_hipocampoBonusInstance.GetComponent<Bonus>()._position = position;
+			//_hipocampoBonusInstance.GetComponent<QuadraticInterpolation>().target = _hipocampoBonus.gameObject;
+			//_hipocampoBonusInstance.GetComponent<QuadraticInterpolation>().Setup();
+
 		}
 		
     }
@@ -336,6 +464,11 @@ public class BonusController : MonoBehaviour
 				min=90;
 				max=104;
 			break;
+
+			case BonusTypes.Types.HIPOCAMPO:
+				min=0;
+				max=14;
+			break;
 		}
 
 		do
@@ -361,22 +494,21 @@ public class BonusController : MonoBehaviour
 	{
 		if(type == BonusTypes.Types.LIGHT)
 		{
-			this._material.color = new Color32(255,255,255,255);
+			this._materialLightSensitive.color = new Color32(255,255,255,255);
 			
-		for(int i = 0 ; i < 3;i++)
-			this._lightBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
+			for(int i = 0 ; i < 3;i++)
+				this._lightBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
 
 			this._idActiveChildLight = 0;
 		}
 
 		else if(type == BonusTypes.Types.VELOCITY)
 		{
-			
-			
 			for(int i = 0 ; i < 3;i++)
 				this._velocityBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
-				GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity;
-				this._idActiveChildVelocity = 0;
+			
+			GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().speed = GlobalVariables._playerVelocity;
+			this._idActiveChildVelocity = 0;
 		}
 
 		else if(type == BonusTypes.Types.COORDINATION)
@@ -415,6 +547,23 @@ public class BonusController : MonoBehaviour
 			this._portalPath = _searchManager.encontrarCamino(position, portalPosition);
 			// imprimir();
 			drawShapePath();
+		}
+
+		else if(type == BonusTypes.Types.HIPOCAMPO)
+		{
+			for(int i = 0 ; i < 3;i++)
+				this._hipocampoBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
+
+			for(int i = 0 ; i < _tileCountHipocampo ; i++)
+			{
+				_map.GetChild(this._tilesHipocampo[i]).gameObject.GetComponent<Renderer>().material = _materialLightSensitive;   
+				_map.GetChild(this._tilesHipocampo[i]).gameObject.GetComponent<SpriteRenderer>().color = new Color(255,255,255,255);   
+
+				_tilesHipocampo[i] = 0;
+			}
+
+			this._tileCountHipocampo = 0;
+			this._idActiveChildHipocampo = 0;			
 		}
 
 	}

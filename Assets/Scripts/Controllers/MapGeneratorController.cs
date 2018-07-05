@@ -12,11 +12,6 @@ public class MapGeneratorController : MonoBehaviour
 	public float _marginLeft;
 
 
-
-	/// <summary>
-	/// Start is called on the frame when a script is enabled just before
-	/// any of the Update methods is called the first time.
-	/// </summary>
 	void Start()
 	{
 		MapGeneratorController._offsetMap = new Vector2((GlobalVariables._iMaxMatrix* GlobalVariables._widthTile)/2 + GlobalVariables._widthTile + _marginLeft,(GlobalVariables._jMaxMatrix*-GlobalVariables._widthTile)/2 + _marginBottom);
@@ -36,30 +31,9 @@ public class MapGeneratorController : MonoBehaviour
 				if(valor != -1)
 				{
 					currentTile = Instantiate(_tile,(new Vector2(j*GlobalVariables._widthTile, - i*GlobalVariables._widthTile)-MapGeneratorController._offsetMap), Quaternion.identity, _gameObjectMap) as GameObject;  
-
 					currentTile.GetComponent<SpriteRenderer>().sprite = tilesGameObjects[valor];
 				}
-				
-					
-
-				
-					// case 0: Instantiate(_tile,(new Vector2(j*0.64f, - i* 0.64f)-offsetMap + new Vector2(0.32f,0.32f)), Quaternion.identity); break;
-					// case 1: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[1]); break;
-					// case 2: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[2]); break;
-					// case 3: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[3]); break;
-					// case 4: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[4]); break;
-					// case 5: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[5]); break;
-					// case 6: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[6]); break;
-					// case 7: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[7]); break;
-					// case 8: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[8]); break;
-					// case 9: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[9]); break;
-					// case 10: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[10]); break;
-					// case 11: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[11]); break;
-					// case 12: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[12]); break;
-					// case 13: _tilemap.SetTile(_tilemap.WorldToCell(new Vector2(j*0.64f, - i* 0.64f)-offsetMap), tiles[13]); break;
 			}
-
-			
 		}
 
 	}
