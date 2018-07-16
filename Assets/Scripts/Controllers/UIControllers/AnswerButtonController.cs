@@ -1,20 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using TMPro;
 
 public class AnswerButtonController : MonoBehaviour, IPointerDownHandler
 {
     public void OnPointerDown(PointerEventData eventData)
     {
-		if(this.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>().text.Equals(QuestionCanvasController.answer))
+		if(this.gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text.Equals(QuestionCanvasController.answer))
 		{
-			GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().receiveAnswer(true);
+			GlobalVariables._answerGood = true;
+			GameObject.Find("GameController").GetComponent<ViewController>().answeredAnswer();
 		}
 
 		else
 		{
-			GameObject.Find("KaiPlayer(Clone)").gameObject.GetComponent<PlayerBehaviour>().receiveAnswer(false);
+			GlobalVariables._answerGood = false;
+			GameObject.Find("GameController").GetComponent<ViewController>().answeredAnswer();
 		}
+
+		GlobalVariables._answeredAnswer = true;
     }
+
+
+
 }

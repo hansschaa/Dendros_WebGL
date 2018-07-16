@@ -21,18 +21,23 @@ public class JsonController : MonoBehaviour
 	private WWW _wwwQuestionsUrl;
 	
 	
-	// //For Desktop
-	// void Start()
-	// {
-	// 	  jsonDataStages = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/GameData.txt").Trim());
-	// 	  loadGlobalVariablesFromJson();
-	// 	  this._mainSceneCanvas.SetActive(true);
-	// 	  this._gameObjectsMainScene.SetActive(true);
-	// 	  this.GetComponent<AnimationController>().playAnimations(GameState.States.MAINSCENE);
-	// 	  this._loadingSceneCanvas.SetActive(false);       
-	// }
+	#if UNITY_STANDALONE
+	void Start()
+	{
+	 	    jsonDataStages = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/GameData.txt").Trim());
+	 	    jsonDataQuestions = JsonMapper.ToObject(File.ReadAllText(Application.dataPath + "/QuestionsData.txt").Trim());
 
-	// //For web
+		    loadGlobalVariablesFromJson();
+	 	    this._mainSceneCanvas.SetActive(true);
+	 	    this._gameObjectsMainScene.SetActive(true);
+	 	    this.GetComponent<AnimationController>().playAnimations(GameState.States.MAINSCENE);
+	 	    this._loadingSceneCanvas.SetActive(false);       
+	}
+	#endif
+	
+
+
+	#if UNITY_WEBGL || UNITY_EDITOR
 	IEnumerator Start()
 	{
 		_wwwStageUrl = new WWW(_stageUrl);
@@ -61,12 +66,12 @@ public class JsonController : MonoBehaviour
 			Debug.Log("ERROR: " +  _wwwStageUrl.error);
 		}        
 	}
+	#endif
 
+	
 
     private void loadGlobalVariablesFromJson()
     {
-		print("Pregunta 1: " + jsonDataQuestions["stages"]["1"]["1"]["question"]);
-		print("Numero de preguntas: " + jsonDataQuestions["stages"]["1"][1]["question"].ToString());
         GlobalVariables._totallyStages = jsonDataStages["Stages"].Count;
     }
 }

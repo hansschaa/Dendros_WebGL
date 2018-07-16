@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Prime31.TransitionKit;
+using TMPro;
 
 public class ViewController : MonoBehaviour
 {
@@ -88,38 +89,47 @@ public class ViewController : MonoBehaviour
 	[Header("GameOverScene")]
 	public GameObject _gameOverSceneCanvas;
 
+	[Header("QuestionCanvas")]
+	public TextMeshProUGUI _questionText;
+	public TextMeshProUGUI _continueText;
+
+	[Header("ExitCanvas")]
+	public GameObject _exitCanvas;
+
 	
 
 	/// <summary>
 	/// Awake is called when the script instance is being loaded.
 	/// </summary>
-	// void Awake()
-	// {
-	// 	PlayerPrefs.DeleteAll();
-	// }
-
+	/* 
+	void Awake()
+	{
+	 	PlayerPrefs.DeleteAll();
+	}
+	*/
 	
 	void Start()
 	{
-		//For Desktop
-		// print(PlayerPrefs.GetInt("lastStageCompleted"));
-		// if(PlayerPrefs.GetInt("GameComplete")==0)
-		// {
-		// 	GlobalVariables._currentLevel = PlayerPrefs.GetInt("lastStageCompleted");
-		// 	GlobalVariables._userLevel = PlayerPrefs.GetInt("lastStageCompleted");
-		// }
+		#if UNITY_STANDALONE
+		print(PlayerPrefs.GetInt("lastStageCompleted"));
+		if(PlayerPrefs.GetInt("GameComplete")==0)
+		{
+		 	GlobalVariables._currentLevel = PlayerPrefs.GetInt("lastStageCompleted");
+		 	GlobalVariables._userLevel = PlayerPrefs.GetInt("lastStageCompleted");
+		}
 
-		// else
-		// {
-		// 	GlobalVariables._currentLevel = 0;
-		// 	GlobalVariables._userLevel = 0;
-		// }
+		else
+		{
+		 	GlobalVariables._currentLevel = 0;
+		 	GlobalVariables._userLevel = 0;
+		}
+		#endif
 
-		//For webgl
+		#if UNITY_WEBGL || UNITY_EDITOR
 		GlobalVariables._currentLevel = 0;
 		GlobalVariables._userLevel = 0;
+		#endif
 		
-	
 		this._canPressEnter = true;
 		ViewController._gameState = new GameState(GameState.States.MAINSCENE);
 	}
@@ -129,40 +139,64 @@ public class ViewController : MonoBehaviour
 	/// </summary>
 	void Update()
 	{
-		if(!this._questionsCanvas.activeInHierarchy && Input.GetButtonDown("Enter") || (Input.GetMouseButton(0) && !this._garageSceneCanvas.activeInHierarchy) )
+		if(!this._exitCanvas.activeInHierarchy && !this._questionsCanvas.activeInHierarchy && Input.GetButtonDown("Enter") || (Input.GetMouseButton(0) && !this._garageSceneCanvas.activeInHierarchy && !this._questionsCanvas.activeInHierarchy) )
 		{
 			if(!_loadingSceneCanvas.activeInHierarchy && !this._gameSceneCanvas.activeInHierarchy && !this._menuPausaGarage.activeInHierarchy )
 				pressEnter();
 		}
 
-		else if(Input.GetButtonDown("Exit"))
-			Application.Quit();
+		#if UNITY_STANDALONE || UNITY_EDITOR
+		else if(Input.GetButtonDown("Exit") && !_exitCanvas.activeInHierarchy)
+			this._exitCanvas.SetActive(true);
+		#endif
 
 		else if(this._questionsCanvas.activeInHierarchy)
 		{
-			if(Input.GetButtonDown("LeftArrow"))
+			if(Input.GetButtonDown("LeftArrow") && !GlobalVariables._answeredAnswer)
 			{
 				OverLeftAnswer = true;
 				_questionsCanvas.GetComponent<QuestionCanvasController>().updateUI();
+				this._soundController.playSound(6);
 
 			}
 
-			else if(Input.GetButtonDown("RightArrow"))
+			else if(Input.GetButtonDown("RightArrow") && !GlobalVariables._answeredAnswer)
 			{
 				OverLeftAnswer = false;
 				_questionsCanvas.GetComponent<QuestionCanvasController>().updateUI();
+				this._soundController.playSound(6);
 			}
 				
 
-			else if(Input.GetButtonDown("Enter"))
+			else if(Input.GetButtonDown("Enter") && !GlobalVariables._answeredAnswer)
 			{
-				print("Aprietas enter");
-				_questionsCanvas.GetComponent<QuestionCanvasController>().checkAnswerKeyboard();
+				answeredAnswer();
+			}
 
+			else if(Input.GetButtonDown("Enter") && GlobalVariables._answeredAnswer)
+			{
+				exitQuestionary();
 			}
 		}
+	}
 
-		
+	public void answeredAnswer()
+	{
+		print("Aprietas enter para averiguar respuesta");
+		GlobalVariables._answeredAnswer = true;
+		_questionsCanvas.GetComponent<QuestionCanvasController>().checkAnswer();
+		buttonsDisabled();
+		updateQuestionText();
+	}
+
+	public void exitQuestionary()
+	{
+		print("Aprietas enter para enviar respuesta a kai");
+		_questionsCanvas.SetActive(false);
+		this._continueText.gameObject.SetActive(false);
+		_gameSceneCanvas.SetActive(true);
+		this._playerInstance.GetComponent<PlayerBehaviour>().check();
+		playGame();
 	}
 
     public void pressSpace()
@@ -183,8 +217,8 @@ public class ViewController : MonoBehaviour
 			ViewController._gameState._state = GameState.States.GARAGE;
 			this.GetComponent<AnimationController>().stopAnimations(GameState.States.MAINSCENE);
 			
-			if(PlayerPrefs.GetInt("GameComplete")==0 && !GlobalVariables._iconStagesAdded)
-			{
+			if(PlayerPrefs.GetInt("GameComplete")==0 || !GlobalVariables._iconStagesAdded)
+			{		
 				addIconStagesGroup();
 				GlobalVariables._iconStagesAdded= true;
 			}
@@ -291,6 +325,11 @@ public class ViewController : MonoBehaviour
 		}
     }
 
+	public void exitGame()
+	{
+		Application.Quit();
+	}
+
     internal void createPortal(int iReset, int jReset)
     {
 		Vector2 vector = new Vector2(jReset,iReset);
@@ -361,7 +400,7 @@ public class ViewController : MonoBehaviour
 		if(ViewController._gameState._state == GameState.States.GAMESCENE)
 		{
 			this._canPressEnter = true;
-			this.gameObject.GetComponent<MechanicController>().initializatePortalCoroutine(20);
+			this.gameObject.GetComponent<MechanicController>().startInitTime();
 			this.gameObject.GetComponent<MapGeneratorController>().drawMap();
 			this._gameSceneCanvas.SetActive(true);
 			this._gameObjectsGameScene.SetActive(true);
@@ -496,11 +535,29 @@ public class ViewController : MonoBehaviour
 				case "yellow":
 					GlobalVariables._yellowBonus = true;
 				break;
-
-				
 			}
 		}
     }
+
+    internal void stopGame()
+    {	
+		GlobalVariables._enemy.GetComponent<EnemyBehaviour>()._currentPath.Clear();
+		GlobalVariables._runUpdateEnemy = false;
+		
+		GlobalVariables._runUpdatePlayer = false;
+
+		this.GetComponent<BonusController>().pauseCoroutines();
+		this.GetComponent<MechanicController>().stopOnlyPortal();
+	}
+
+	public void playGame()
+	{
+		GlobalVariables._runUpdateEnemy = true;
+		GlobalVariables._runUpdatePlayer = true;
+		
+		this.GetComponent<BonusController>().initializeCorroutines();
+		this.GetComponent<MechanicController>().startPortalCoroutine(10);
+	}
 
     public Vector2 getNewPosition(bool isForEnemy)
     {
@@ -529,6 +586,13 @@ public class ViewController : MonoBehaviour
 			
     }
 
+    internal void buttonsDisabled()
+    {
+        this._questionsCanvas.transform.Find("Answers").transform.GetChild(0).gameObject.SetActive(false);
+		this._questionsCanvas.transform.Find("Answers").transform.GetChild(1).gameObject.SetActive(false);
+		this._continueText.gameObject.SetActive(true);
+    }
+
     private void addIconStagesGroup()
     {
 		GameObject iconStage;
@@ -543,17 +607,44 @@ public class ViewController : MonoBehaviour
 			iconStage = Instantiate(_iconStagePrefab, _iconStageGroup);
 			iconStage.GetComponent<GarageButtonController>()._idStage = i;
 			iconStage.transform.GetChild(0).gameObject.GetComponent<Text>().text = (i + 1).ToString();
-			
 		}
     }
 
-	private void updateIconStageGroup()
+    internal void updateQuestionText()
+    {
+        if(GlobalVariables._answerGood)
+		{
+			this._soundController.playSound(8);
+			this._questionText.text = "<color=#00ff00ff><b>Excelente Kay, logré hacer la conexión</b>, te paso al siguiente nivel";
+		}
+			
+
+		else
+		{
+			this._soundController.playSound(7);
+			this._questionText.text = "<color=#ff0000ff><b>Kay lo que me dijiste es incorrecto!</b>, abro otro portal en 10 sgs";
+		}
+		
+    }
+
+    private void updateIconStageGroup()
 	{
-		for(int i = 0 ; i < GlobalVariables._currentLevel;i++)
+
+		#if UNITY_EDITOR || UNITY_STANDALONE
+		for(int i = 0 ; i < PlayerPrefs.GetInt("lastStageCompleted") ;i++)
 		{
 			this._iconStageGroup.GetChild(i).transform.localScale = new Vector2(1,1);
 			this._iconStageGroup.GetChild(i).gameObject.GetComponent<Image>().color = this._stageCompleted;
 		}
+		#endif
+
+		#if UNITY_WEBGL
+		for(int i = 0 ; i < GlobalVariables._currentLevel ;i++)
+		{
+			this._iconStageGroup.GetChild(i).transform.localScale = new Vector2(1,1);
+			this._iconStageGroup.GetChild(i).gameObject.GetComponent<Image>().color = this._stageCompleted;
+		}
+		#endif
 
 		this._iconStageGroup.GetChild(GlobalVariables._currentLevel).GetComponent<Image>().color = this._currentStageColor;
 		this._iconStageGroup.GetChild(GlobalVariables._currentLevel).gameObject.transform.localScale = new Vector2(1.2f, 1.2f);
@@ -850,8 +941,7 @@ public class ViewController : MonoBehaviour
 		
 		for(int i = 0 ; i < this._iconStageGroup.childCount;i++)
 		{
-			this._iconStageGroup.transform.GetChild(i).gameObject.GetComponent<Image>().color = this._stageNotComplete;
-			this._iconStageGroup.transform.GetChild(i).gameObject.transform.localScale = new Vector2(1,1);
+			Destroy(_iconStageGroup.GetChild(i).gameObject);
 		}
 
 		
@@ -861,8 +951,6 @@ public class ViewController : MonoBehaviour
 		ViewController._gameState._state = GameState.States.MAINSCENE;
 		updateView();
 	}
-
-	
 
 	#endregion
 }

@@ -12,6 +12,8 @@ public class GlobalVariables
 	public static int _iMaxMatrix = 14;
 	public static int _jMaxMatrix =14;
 	public static float _widthTile = 0.3f;
+	public static bool _answeredAnswer = false;
+	public static bool _answerGood = false;
 
 	#endregion
 
@@ -30,6 +32,9 @@ public class GlobalVariables
 
 
 	#region Global Player Game Variables
+
+	public static bool _runUpdatePlayer = true;
+	public static bool _runUpdateEnemy = true;
 
 	public static int _xPosPlayer;
 	public static int _yPosPlayer;

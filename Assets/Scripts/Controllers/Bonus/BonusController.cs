@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class BonusController : MonoBehaviour 
 {
@@ -15,7 +16,7 @@ public class BonusController : MonoBehaviour
 	public SoundController _soundController;
 
 	[Header("Reimi")]
-	public Text _reimiText;
+	public TextMeshProUGUI _reimiText;
 
 	[Header("Bonus GameObjects")]
 	public Transform _lightBonus;
@@ -281,19 +282,17 @@ public class BonusController : MonoBehaviour
 
 		do
 		{
-			i = UnityEngine.Random.Range(0, GlobalVariables._iMaxMatrix); 
-			j = UnityEngine.Random.Range(0, GlobalVariables._jMaxMatrix);
+			i = UnityEngine.Random.Range(0, _map.childCount); 
+			
 
-			this._tilesHipocampo[_tileCountHipocampo] = i*(GlobalVariables._iMaxMatrix-1) + j;
-			//print("Se oscurece el: " + (i*GlobalVariables._iMaxMatrix + j));
+			this._tilesHipocampo[_tileCountHipocampo] = i;
 			_tileCountHipocampo++;
 		}
-		while(ViewController._currentGameModel._map[iReset,jReset] != -1 && _tileCountHipocampo < amount);
+		while(_tileCountHipocampo < amount);
 	}
 
     IEnumerator paintTilesInCascade(int init)
     {
-		
 		for(int i = init; i < this._tileCountHipocampo; i++)
 		{
 			//_map.GetChild(this._tilesHipocampo[i]).gameObject.GetComponent<Renderer>().material = this._materialHipocampo; 
@@ -325,9 +324,22 @@ public class BonusController : MonoBehaviour
 		this._idActiveChildHipocampo = 0;
 		_materialLightSensitive.color = new Color32(255,255,255,255);
 		
-		for(int i = 0 ; i < this._tilesHipocampo.Length; i++)
-			_map.GetChild(_tilesHipocampo[i]).gameObject.GetComponent<Renderer>().material = _materialLightSensitive;
+		for(int i = 0 ; i < _tileCountHipocampo ; i++)
+		{
+			_map.GetChild(this._tilesHipocampo[i]).gameObject.GetComponent<Renderer>().material = _materialLightSensitive;   
+			_map.GetChild(this._tilesHipocampo[i]).gameObject.GetComponent<SpriteRenderer>().color = new Color(255,255,255,255);   
+
+			_tilesHipocampo[i] = 0;
+		}
+
+		_tileCountHipocampo = 0;
     }
+
+	public void pauseCoroutines()
+	{
+		StopCoroutine(_changeParametersCoroutine);
+		StopCoroutine(_bonusRespawnCoroutine);
+	}
 
 	internal void initializeCorroutines()
     {
@@ -424,14 +436,10 @@ public class BonusController : MonoBehaviour
 
 		else if(type == BonusTypes.Types.HIPOCAMPO && _hipocampoBonusInstance == null)
 		{
-			_reimiText.text = "Te meo dijo el barsinzo";
+			_reimiText.text = "KAI hay zonas oscuras !Busca el bonus AZUL!";
 			_hipocampoBonusInstance = Instantiate(_bonusList[5], position, Quaternion.identity, this.gameObject.GetComponent<ViewController>()._bonusGroup) as GameObject;
 			_hipocampoBonusInstance.GetComponent<Bonus>()._position = position;
-			//_hipocampoBonusInstance.GetComponent<QuadraticInterpolation>().target = _hipocampoBonus.gameObject;
-			//_hipocampoBonusInstance.GetComponent<QuadraticInterpolation>().Setup();
-
-		}
-		
+		}	
     }
 
     private Vector2 searchForPosition(BonusTypes.Types type)
@@ -466,8 +474,8 @@ public class BonusController : MonoBehaviour
 			break;
 
 			case BonusTypes.Types.HIPOCAMPO:
-				min=0;
-				max=14;
+				min=45;
+				max=59;
 			break;
 		}
 
@@ -475,10 +483,22 @@ public class BonusController : MonoBehaviour
 		{
 			iReset = UnityEngine.Random.Range(0, GlobalVariables._iMaxMatrix); 
 			jReset = UnityEngine.Random.Range(0, GlobalVariables._jMaxMatrix); 
-		} while(ViewController._currentGameModel._map[iReset,jReset] < min || ViewController._currentGameModel._map[iReset,jReset] > max);
+		} while((ViewController._currentGameModel._map[iReset,jReset] < min || ViewController._currentGameModel._map[iReset,jReset] > max) && checkPortalPosition(iReset,jReset));
 
 		return new Vector2(jReset,iReset);
     }
+
+	public bool checkPortalPosition(int i, int j)
+	{
+		if(this.gameObject.GetComponent<ViewController>()._portalInstance != null)
+		{
+			float x = this.gameObject.GetComponent<ViewController>()._portalInstance.GetComponent<Bonus>()._position.x;
+			if(j == x)
+				return false;
+		}
+
+		return true;
+	}
 
     public void resetBonusInstances()
 	{
@@ -487,6 +507,8 @@ public class BonusController : MonoBehaviour
 		_coordinationBonusInstance = null;
 		_teleportBonusInstance = null;
 		_portalBonusInstance = null;
+		_hipocampoBonusInstance = null;
+
 		// GlobalVariables._playerVelocity = this._playerVelocity;
 	}
 
@@ -554,6 +576,7 @@ public class BonusController : MonoBehaviour
 			for(int i = 0 ; i < 3;i++)
 				this._hipocampoBonus.transform.GetChild(i).gameObject.GetComponent<RectTransform>().sizeDelta = this._bar;
 
+			print("TilesCountHipocampo: " + _tileCountHipocampo);
 			for(int i = 0 ; i < _tileCountHipocampo ; i++)
 			{
 				_map.GetChild(this._tilesHipocampo[i]).gameObject.GetComponent<Renderer>().material = _materialLightSensitive;   

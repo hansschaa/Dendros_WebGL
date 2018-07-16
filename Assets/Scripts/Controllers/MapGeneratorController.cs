@@ -33,8 +33,11 @@ public class MapGeneratorController : MonoBehaviour
 					currentTile = Instantiate(_tile,(new Vector2(j*GlobalVariables._widthTile, - i*GlobalVariables._widthTile)-MapGeneratorController._offsetMap), Quaternion.identity, _gameObjectMap) as GameObject;  
 					currentTile.GetComponent<SpriteRenderer>().sprite = tilesGameObjects[valor];
 				}
+
 			}
 		}
+
+		print("Cantidad de go: " + _gameObjectMap.transform.childCount);
 
 	}
 }

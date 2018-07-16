@@ -32,6 +32,7 @@ public class EnemyBehaviour : MonoBehaviour
 		GlobalVariables._enemy = this.gameObject;
 	}
 	
+	
 
 	void Start()
 	{
@@ -42,87 +43,91 @@ public class EnemyBehaviour : MonoBehaviour
 
 	void Update()
 	{
-
-		this._time = Time.deltaTime * this._speed;
-		if(_currentPath!=null && GlobalVariables._followPlayer)
+		if(GlobalVariables._runUpdateEnemy)
 		{
-			if((Vector2)this.transform.position != _currentPositionHolder)
+			this._time = Time.deltaTime * this._speed;
+			if(_currentPath!=null && GlobalVariables._followPlayer)
 			{
-				this.transform.position = Vector2.MoveTowards(this.transform.position, _currentPositionHolder, this._time);
-			}
-
-			else
-			{
-				this._currentNode++;
-				if(this._currentNode == _currentPath.Count)
+				if((Vector2)this.transform.position != _currentPositionHolder)
 				{
-					this._currentNode = 0;
+					this.transform.position = Vector2.MoveTowards(this.transform.position, _currentPositionHolder, this._time);
 				}
 
 				else
 				{
-					this._time = 0;
-					if(this._currentPath.Count>0)
-						_currentPositionHolder = new Vector2( _currentPath[this._currentNode].x*GlobalVariables._widthTile,_currentPath[this._currentNode].y*-GlobalVariables._widthTile) - MapGeneratorController._offsetMap;
+					this._currentNode++;
+					if(this._currentNode == _currentPath.Count)
+					{
+						this._currentNode = 0;
+					}
 
 					else
-						return;
+					{
+						this._time = 0;
+						if(this._currentPath.Count>0)
+							_currentPositionHolder = new Vector2( _currentPath[this._currentNode].x*GlobalVariables._widthTile,_currentPath[this._currentNode].y*-GlobalVariables._widthTile) - MapGeneratorController._offsetMap;
+
+						else
+							return;
+						
 					
-				
-					//Izquierda
-					if  (_currentPath[_currentNode-1].x> _currentPath[_currentNode].x)
-					{
-						if(GlobalVariables._xPosEnemy > 0)
-							GlobalVariables._xPosEnemy-=1;
-				
-						this._borisAnimator.SetFloat("movX",-1);
-						this._borisAnimator.SetFloat("movY",0);
-					}
+						//Izquierda
+						if  (_currentPath[_currentNode-1].x> _currentPath[_currentNode].x)
+						{
+							if(GlobalVariables._xPosEnemy > 0)
+								GlobalVariables._xPosEnemy-=1;
+					
+							this._borisAnimator.SetFloat("movX",-1);
+							this._borisAnimator.SetFloat("movY",0);
+						}
 
-					//Derecha
-					else if  (_currentPath[_currentNode-1].x< _currentPath[_currentNode].x)
-					{
-						
-						if(GlobalVariables._xPosEnemy < 13)
-							GlobalVariables._xPosEnemy+=1;
-						
-						this._borisAnimator.SetFloat("movX",1);
-						this._borisAnimator.SetFloat("movY",0);
-					}
-
-					//ARRIBA
-					else if  (_currentPath[_currentNode-1].y > _currentPath[_currentNode].y)
-					{
-						if(GlobalVariables._yPosEnemy > 0)
-							GlobalVariables._yPosEnemy-=1; 
+						//Derecha
+						else if  (_currentPath[_currentNode-1].x< _currentPath[_currentNode].x)
+						{
 							
-						this._borisAnimator.SetFloat("movX",0);
-						this._borisAnimator.SetFloat("movY",1);
-					}
+							if(GlobalVariables._xPosEnemy < 13)
+								GlobalVariables._xPosEnemy+=1;
+							
+							this._borisAnimator.SetFloat("movX",1);
+							this._borisAnimator.SetFloat("movY",0);
+						}
 
-					//ABAJO
-					else if  (_currentPath[_currentNode-1].y< _currentPath[_currentNode].y)
-					{
-						if(GlobalVariables._yPosEnemy < 13)
-							GlobalVariables._yPosEnemy+=1;  
+						//ARRIBA
+						else if  (_currentPath[_currentNode-1].y > _currentPath[_currentNode].y)
+						{
+							if(GlobalVariables._yPosEnemy > 0)
+								GlobalVariables._yPosEnemy-=1; 
+								
+							this._borisAnimator.SetFloat("movX",0);
+							this._borisAnimator.SetFloat("movY",1);
+						}
 
-						this._borisAnimator.SetFloat("movX",0);
-						this._borisAnimator.SetFloat("movY",-1);
+						//ABAJO
+						else if  (_currentPath[_currentNode-1].y< _currentPath[_currentNode].y)
+						{
+							if(GlobalVariables._yPosEnemy < 13)
+								GlobalVariables._yPosEnemy+=1;  
+
+							this._borisAnimator.SetFloat("movX",0);
+							this._borisAnimator.SetFloat("movY",-1);
+						}
 					}
 				}
 			}
-		}
-	
-		else if(!GlobalVariables._followPlayer && !GlobalVariables._stageComplete)
-		{
-			this._currentPath.Clear();
-			GlobalVariables._followPlayer = true;
-		}
+		
+			else if(!GlobalVariables._followPlayer && !GlobalVariables._stageComplete)
+			{
+				this._currentPath.Clear();
+				GlobalVariables._followPlayer = true;
+			}
 
-		else if(!GlobalVariables._followPlayer && GlobalVariables._stageComplete)
-		{
-			this._currentPath.Clear();
+			else if(!GlobalVariables._followPlayer && GlobalVariables._stageComplete)
+			{
+				this._currentPath.Clear();
+			}
+
 		}
+		
 	}
 
 	IEnumerator search()

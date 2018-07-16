@@ -59,136 +59,141 @@ public class PlayerBehaviour : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		deltaTime += Time.deltaTime;
-		if(deltaTime>2)
+		if(GlobalVariables._runUpdatePlayer)
 		{
-			if(this.transform.position.y > GlobalVariables._enemy.transform.position.y)
+			deltaTime += Time.deltaTime;
+			if(deltaTime>2)
 			{
-				this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -2;
-				GlobalVariables._enemy.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
+				if(this.transform.position.y > GlobalVariables._enemy.transform.position.y)
+				{
+					this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -2;
+					GlobalVariables._enemy.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
+				}
+
+				else
+				{
+					this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
+					GlobalVariables._enemy.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -2;
+					
+
+				}
+				
+				deltaTime = 0;
 			}
 
-			else
+			#region Controls 
+			if(!GlobalVariables._stageComplete && !_sleep)
 			{
-				this.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -1;
-				GlobalVariables._enemy.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sortingOrder = -2;
-				
+				x = Input.GetAxis("Horizontal");
+				y = Input.GetAxis("Vertical");
 
+				if(y > 0 && !GlobalVariables._changeDirection || y < 0 && GlobalVariables._changeDirection)
+				{
+					if(canMove(1,0,Moves.DOWN))
+					{
+						_kaiAnimator.SetBool("walk",true);
+						_kaiAnimator.SetBool("isDeath", false);
+						_kaiAnimator.SetFloat("movX",0);
+						_kaiAnimator.SetFloat("movY",-1);
+						resetValues();
+
+						generatePlayerPath(Moves.DOWN);
+
+						updateValues(1,0,Moves.DOWN);
+						
+					}
+				}
+
+				else if(y < 0  && !GlobalVariables._changeDirection || y > 0  && GlobalVariables._changeDirection)
+				{
+					if(canMove(-1,0,Moves.UP))
+					{
+						_kaiAnimator.SetBool("walk",true);
+						_kaiAnimator.SetBool("isDeath", false);
+						_kaiAnimator.SetFloat("movX",0);
+						_kaiAnimator.SetFloat("movY",1);
+
+						resetValues();
+
+						generatePlayerPath(Moves.UP);
+
+						updateValues(-1,0,Moves.UP);
+						
+					}	
+				}
+
+				else if(x < 0  && !GlobalVariables._changeDirection || x > 0  && GlobalVariables._changeDirection)
+				{
+					if(canMove(0,-1,Moves.LEFT))
+					{
+						_kaiAnimator.SetBool("walk",true);
+						_kaiAnimator.SetBool("isDeath", false);
+						_kaiAnimator.SetFloat("movX",-1);
+						_kaiAnimator.SetFloat("movY",0);
+						resetValues();
+
+						generatePlayerPath(Moves.LEFT);
+
+						updateValues(0,-1,Moves.LEFT);
+					}	
+				}
+
+				else if(x >0  && !GlobalVariables._changeDirection || x < 0  && GlobalVariables._changeDirection)
+				{
+					if(canMove(0,1,Moves.RIGHT))
+					{
+						_kaiAnimator.SetBool("walk",true);
+						_kaiAnimator.SetBool("isDeath", false);
+						_kaiAnimator.SetFloat("movX",1);
+						_kaiAnimator.SetFloat("movY",0);
+						resetValues();
+
+						generatePlayerPath(Moves.RIGHT);
+
+						updateValues(0,1,Moves.RIGHT);
+						
+					}
+				}
+
+				#endregion
+				#region Move
+				switch(currentMove)
+				{
+					case Moves.DOWN:
+						time = Time.deltaTime * speed;
+						moveGameObject(1,0);
+						break;
+					
+					case Moves.UP:
+						time = Time.deltaTime * speed;
+						moveGameObject(-1,0);
+						break;
+					
+					case Moves.RIGHT:
+						time = Time.deltaTime * speed;
+						moveGameObject(0, 1);
+						break;
+					
+					case Moves.LEFT:
+						time = Time.deltaTime * speed;
+						moveGameObject(0,-1);
+						break;
+
+				}
+				#endregion moving
+
+				x= 0;
+				y = 0;
+			}
+
+
+			else if(_sleep)
+			{
+				checkCurrentInput();
 			}
 			
-			deltaTime = 0;
 		}
-
-		#region Controls 
-		if(!GlobalVariables._stageComplete && !_sleep)
-		{
-			x = Input.GetAxis("Horizontal");
-			y = Input.GetAxis("Vertical");
-
-			if(y > 0 && !GlobalVariables._changeDirection || y < 0 && GlobalVariables._changeDirection)
-			{
-				if(canMove(1,0,Moves.DOWN))
-				{
-					_kaiAnimator.SetBool("walk",true);
-					_kaiAnimator.SetBool("isDeath", false);
-					_kaiAnimator.SetFloat("movX",0);
-					_kaiAnimator.SetFloat("movY",-1);
-					resetValues();
-
-					generatePlayerPath(Moves.DOWN);
-
-					updateValues(1,0,Moves.DOWN);
-					
-				}
-			}
-
-			else if(y < 0  && !GlobalVariables._changeDirection || y > 0  && GlobalVariables._changeDirection)
-			{
-				if(canMove(-1,0,Moves.UP))
-				{
-					_kaiAnimator.SetBool("walk",true);
-					_kaiAnimator.SetBool("isDeath", false);
-					_kaiAnimator.SetFloat("movX",0);
-					_kaiAnimator.SetFloat("movY",1);
-
-					resetValues();
-
-					generatePlayerPath(Moves.UP);
-
-					updateValues(-1,0,Moves.UP);
-					
-				}	
-			}
-
-			else if(x < 0  && !GlobalVariables._changeDirection || x > 0  && GlobalVariables._changeDirection)
-			{
-				if(canMove(0,-1,Moves.LEFT))
-				{
-					_kaiAnimator.SetBool("walk",true);
-					_kaiAnimator.SetBool("isDeath", false);
-					_kaiAnimator.SetFloat("movX",-1);
-					_kaiAnimator.SetFloat("movY",0);
-					resetValues();
-
-					generatePlayerPath(Moves.LEFT);
-
-					updateValues(0,-1,Moves.LEFT);
-				}	
-			}
-
-			else if(x >0  && !GlobalVariables._changeDirection || x < 0  && GlobalVariables._changeDirection)
-			{
-				if(canMove(0,1,Moves.RIGHT))
-				{
-					_kaiAnimator.SetBool("walk",true);
-					_kaiAnimator.SetBool("isDeath", false);
-					_kaiAnimator.SetFloat("movX",1);
-					_kaiAnimator.SetFloat("movY",0);
-					resetValues();
-
-					generatePlayerPath(Moves.RIGHT);
-
-					updateValues(0,1,Moves.RIGHT);
-					
-				}
-			}
-
-			#endregion
-			#region Move
-			switch(currentMove)
-			{
-				case Moves.DOWN:
-					time = Time.deltaTime * speed;
-					moveGameObject(1,0);
-					break;
-				
-				case Moves.UP:
-					time = Time.deltaTime * speed;
-					moveGameObject(-1,0);
-					break;
-				
-				case Moves.RIGHT:
-					time = Time.deltaTime * speed;
-					moveGameObject(0, 1);
-					break;
-				
-				case Moves.LEFT:
-					time = Time.deltaTime * speed;
-					moveGameObject(0,-1);
-					break;
-
-			}
-			#endregion moving
-
-			x= 0;
-			y = 0;
-		}
-
-
-		else if(_sleep)
-		{
-			checkCurrentInput();
-		}
+		
 	}
 
 	public void checkCurrentInput()
@@ -554,32 +559,30 @@ public class PlayerBehaviour : MonoBehaviour
 		if(other.gameObject.tag.Equals("Portal"))
 		{
 			other.gameObject.GetComponent<Collider2D>().enabled = false;
-			//GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(3);
-			//_gameController.GetComponent<AudioSource>().enabled = false;
-			_gameController.GetComponent<ViewController>()._questionsCanvas.SetActive(true);
-			_gameController.GetComponent<ViewController>()._gameSceneCanvas.SetActive(false);
-			_portalTransform = other.gameObject.transform;
-
-			Time.timeScale = 0;
-
-
-			/* 
-			_gameController.GetComponent<ViewController>()._leaveText.SetActive(true);
-			_kaiAnimator.SetBool("isWin",true);
-			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(3);
-			_gameController.GetComponent<AudioSource>().enabled = false;
-			GameObject.Find("exitDone").GetComponent<Text>().enabled = false;
-
 			
-			other.gameObject.GetComponent<Collider2D>().enabled = false;
-			GameObject.Find("Fade").GetComponent<SpriteRenderer>().enabled = true;
-			
-			GlobalVariables._stageComplete = true;
-			GlobalVariables._followPlayer = false;
-			Destroy(other.gameObject,3.5f);
-			
-			Invoke("stageCompleteEvent",3.5f);
-			*/
+
+			if((int) JsonController.jsonDataQuestions["show"]==1)
+			{
+				_portalTransform = other.gameObject.transform;
+				_gameController.GetComponent<ViewController>()._questionsCanvas.SetActive(true);
+				_gameController.GetComponent<ViewController>()._gameSceneCanvas.SetActive(false);
+
+				_gameController.GetComponent<ViewController>().stopGame();
+
+			}
+
+			else
+			{
+				Destroy(_portalTransform.gameObject,3.5f);
+				GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(3);
+				_gameController.GetComponent<AudioSource>().enabled = false;
+				_gameController.GetComponent<ViewController>()._leaveText.SetActive(true);
+				_kaiAnimator.SetBool("isWin",true);
+				GameObject.Find("exitDone").GetComponent<Text>().enabled = false;
+				GlobalVariables._stageComplete = true;
+				GlobalVariables._followPlayer = false;
+				Invoke("stageCompleteEvent",3.5f);
+			}
 		}
 
 		else if(other.gameObject.tag.Equals("Bonus"))
@@ -596,16 +599,16 @@ public class PlayerBehaviour : MonoBehaviour
 		}
 	}
 
-	public void receiveAnswer(bool answerBool)
-	{
-		print("Esto llego...:" + answerBool);
-		_gameController.GetComponent<ViewController>()._questionsCanvas.SetActive(false);
-		_gameController.GetComponent<ViewController>()._gameSceneCanvas.SetActive(true);
-		Time.timeScale = 1;
+	
 
-		if(answerBool)
+	public void check()
+	{
+		if(GlobalVariables._answerGood)
 		{
-			Destroy(_portalTransform.gameObject,3.5f);
+			if(_portalTransform!= null)
+				Destroy(_portalTransform.gameObject,3.5f);
+
+
 			GameObject.Find("SoundController").gameObject.GetComponent<SoundController>().playSound(3);
 			_gameController.GetComponent<AudioSource>().enabled = false;
 			_gameController.GetComponent<ViewController>()._leaveText.SetActive(true);
@@ -619,7 +622,8 @@ public class PlayerBehaviour : MonoBehaviour
 
 		else
 		{
-			Destroy(_portalTransform.gameObject);
+			if(_portalTransform!= null)
+				Destroy(_portalTransform.gameObject);
 		}
 
 	}
@@ -634,6 +638,12 @@ public class PlayerBehaviour : MonoBehaviour
 		GlobalVariables._stageComplete = false;
 		GlobalVariables._followPlayer = true;
 		this._gameController.GetComponent<ViewController>().pressEnter();
+	}
+
+	public IEnumerator waitThenCallback(float time, Action callback)
+	{
+		yield return new WaitForSeconds(time);
+		callback();
 	}
 
 	
